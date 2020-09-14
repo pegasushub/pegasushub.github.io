@@ -1,0 +1,11 @@
+- organization: pegasushub
+  repo_name: demo-workflow
+
+- organization: pegasus-isi
+  repo_name: sra-search-pegasus-workflow
+
+- organization: pegasus-isi
+  repo_name: montage-workflow-v3
+
+- organization: pegasus-isi
+  repo_name: freesurfer-osg-workflow

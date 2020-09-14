@@ -1,0 +1,63 @@
+---
+layout: default
+permalink: /workflow
+---
+
+<article class="box post post-excerpt">
+    <header>
+        <h2 id="wf-title"></h2>
+        <p id="wf-subtitle"></p>
+    </header>
+    <div class="info">
+        <span class="date">
+            <span class="month" id="wf-month"></span>
+            <span class="day" id="wf-day"></span>
+            <span class="year" id="wf-year"></span>
+        </span>
+        <ul class="stats">
+            <li id="wf-releases"></li>
+            <li><a href="#" target="_blank" class="fas fa-bug" id="wf-issues"></a></li>
+            <li><a href="#" target="_blank" class="fas fa-code-branch" id="wf-forks"></a></li>
+            <li><a href="https://github.com/{{ wf.organization }}/{{ wf.repo_name}}/stargazers" target="_blank"
+                   class="fas fa-star" id="wf-stargazers"></a></li>
+            <li><a href="#" target="_blank" class="fas fa-users" id="wf-contributors"></a></li>
+        </ul>
+    </div>
+    <div>
+        <table style="border: 1px solid #ccc; box-shadow: #ccc 3px 3px 3px">
+            <tbody>
+            <tr id="wf-release-tr">
+                <td class="td-header">Latest Release</td>
+                <td id="wf-release"></td>
+            </tr>
+            <tr id="wf-pegasus-version-tr">
+                <td class="td-header">Pegasus Version</td>
+                <td id="wf-pegasus-version"></td>
+            </tr>
+            <tr id="wf-dependencies-tr">
+                <td class="td-header">Dependencies</td>
+                <td id="wf-dependencies"></td>
+            </tr>
+            <tr id="wf-license-tr">
+                <td class="td-header">License</td>
+                <td id="wf-license"></td>
+            </tr>
+            <tr>
+                <td class="td-header">GitHub Repository</td>
+                <td id="wf-repo"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="readme" id="wf-readme"></div>
+
+    <div class="contributors">
+        <h3>Contributors</h3>
+        <div id="wf-contributors-list"></div>
+    </div>
+</article>
+
+<script type="text/javascript">
+    getRepoInfo('{{ wf.organization }}', '{{ wf.repo_name }}')
+</script>

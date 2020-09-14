@@ -1,0 +1,25 @@
+---
+layout: default
+---
+
+{% for wf in site.data.workflows %}
+
+<article class="box post post-excerpt">
+    <div class="readme">
+        <div class="date-list">
+            <span class="month" id="{{ wf.organization }}-{{ wf.repo_name }}-wf-month"></span>
+            <span class="day" id="{{ wf.organization }}-{{ wf.repo_name }}-wf-day"></span>
+            <span class="year" id="{{ wf.organization }}-{{ wf.repo_name }}-wf-year"></span>
+        </div>
+        <a href="/workflow/{{ wf.organization }}/{{ wf.repo_name }}">
+            <strong id="{{ wf.organization }}-{{ wf.repo_name }}-wf-title"></strong>
+        </a>
+        <p id="{{ wf.organization }}-{{ wf.repo_name }}-wf-subtitle"></p>
+    </div>
+</article>
+
+<script type="text/javascript">
+    getOverallRepoInfo('{{ wf.organization }}', '{{ wf.repo_name }}')
+</script>
+
+{% endfor %}
