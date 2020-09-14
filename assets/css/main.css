@@ -2966,7 +2966,7 @@ ol li {
     max-width: 6em;
 }
 
-.readme, .contributors {
+.readme, .contributors, .listing {
     margin-top: 2em;
     border: 1px solid #ccc;
     box-shadow: #ccc 3px 3px 3px;
@@ -3012,4 +3012,25 @@ pre {
     border-bottom-left-radius: 0.5em;
     top: 0;
     position: relative;
+}
+
+.topic {
+    font-size: 0.7em;
+    background-color: #303b48;
+    color: #fff;
+    border-radius: 0.5em;
+    padding: 0.2em 0.5em;
+}
+
+.listing {
+    width: 45%;
+    float: left;
+    margin-right: 2em;
+    min-height: 10em;
+}
+
+.listing a {
+    font-size: 1.4em;
+    font-weight: bold;
+    text-decoration: none;
 }

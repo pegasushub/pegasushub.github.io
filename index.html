@@ -2,21 +2,26 @@
 layout: default
 ---
 
+<div style="width: 100%; min-height: 4em; line-height: 1em">
+    <h2 style="font-size: 2.5em">PegasusHub</h2><br/>
+    <h3 style="color: #999">A Community-enabled Workflows Repository for Pegasus</h3>
+</div>
+
 {% for wf in site.data.workflows %}
 
-<article class="box post post-excerpt">
-    <div class="readme">
-        <div class="date-list">
-            <span class="month" id="{{ wf.organization }}-{{ wf.repo_name }}-wf-month"></span>
-            <span class="day" id="{{ wf.organization }}-{{ wf.repo_name }}-wf-day"></span>
-            <span class="year" id="{{ wf.organization }}-{{ wf.repo_name }}-wf-year"></span>
-        </div>
-        <a href="/workflow/{{ wf.organization }}/{{ wf.repo_name }}">
-            <strong id="{{ wf.organization }}-{{ wf.repo_name }}-wf-title"></strong>
-        </a>
-        <p id="{{ wf.organization }}-{{ wf.repo_name }}-wf-subtitle"></p>
+<div class="listing">
+    <div class="date-list">
+        <span class="month" id="{{ wf.organization }}-{{ wf.repo_name }}-wf-month"></span>
+        <span class="day" id="{{ wf.organization }}-{{ wf.repo_name }}-wf-day"></span>
+        <span class="year" id="{{ wf.organization }}-{{ wf.repo_name }}-wf-year"></span>
     </div>
-</article>
+    <a href="/workflow/{{ wf.organization }}/{{ wf.repo_name }}">
+        <h1 id="{{ wf.organization }}-{{ wf.repo_name }}-wf-title"></h1>
+    </a>
+    <p id="{{ wf.organization }}-{{ wf.repo_name }}-wf-subtitle"></p>
+
+    <div id="{{ wf.organization }}-{{ wf.repo_name }}-wf-topics"></div>
+</div>
 
 <script type="text/javascript">
     getOverallRepoInfo('{{ wf.organization }}', '{{ wf.repo_name }}')
