@@ -3,6 +3,9 @@ layout: default
 organization: $organization
 repo_name: $repo_name
 last_update: $day $month $year
+date_sort: $year$monthn$day
+description: $subtitle
+tags: $tags
 ---
 
 <article class="box post post-excerpt">
@@ -38,11 +41,11 @@ last_update: $day $month $year
             </tr>
             <tr id="wf-pegasus-version-tr">
                 <td class="td-header">Pegasus Version</td>
-                <td id="wf-pegasus-version"></td>
+                <td id="wf-pegasus-version">$pegasus_version</td>
             </tr>
             <tr id="wf-dependencies-tr">
                 <td class="td-header">Dependencies</td>
-                <td id="wf-dependencies"></td>
+                <td id="wf-dependencies">$dependencies</td>
             </tr>
             <tr id="wf-license-tr">
                 <td class="td-header">License</td>

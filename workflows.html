@@ -1,0 +1,47 @@
+---
+layout: default
+---
+
+<div style="width: 100%; min-height: 4em; line-height: 1em">
+    <h2 style="font-size: 2.5em">PegasusHub</h2><br/>
+    <h3 style="color: #999">A Community-enabled Workflows Repository for Pegasus</h3>
+</div>
+
+<p>&nbsp;</p>
+<h2>Workflows</h2>
+
+<div class="listing-workflows">
+    {% assign workflows = site.workflows | sort: "date_sort" | reverse %}
+    {% for wf in workflows %}
+
+    <div class="listing-table">
+        <div>
+            <div>
+                <strong><a href="{{ wf.url }}">{{ wf.repo_name }}</a></strong>
+                <span style="font-size: 0.8em; color: #999">&nbsp;&nbsp;({{ wf.last_update }})</span>
+            </div>
+            <div>{{ wf.description }}</div>
+            <div>
+                {% for t in wf.tags %}
+                <span class="topic">{{ t }}</span>&nbsp;&nbsp;
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="listing">-->
+    <!--    <div class="date-list">-->
+    <!--        {{ wf.last_update }}-->
+    <!--    </div>-->
+    <!--    <a href="{{ wf.url }}"><h1>{{ wf.repo_name }}</h1></a>-->
+    <!--    <p>{{ wf.description }}</p>-->
+
+    <!--    <div>-->
+    <!--        {% for t in wf.tags %}-->
+    <!--        <span class="topic">{{ t }}</span>&nbsp;&nbsp;-->
+    <!--        {% endfor %}-->
+    <!--    </div>-->
+    <!--</div>-->
+
+    {% endfor %}
+</div>

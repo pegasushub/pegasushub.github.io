@@ -7,24 +7,21 @@ layout: default
     <h3 style="color: #999">A Community-enabled Workflows Repository for Pegasus</h3>
 </div>
 
-{% for wf in site.data.workflows %}
+{% assign workflows =  site.workflows | sort: "date_sort" | reverse %}
+{% for wf in workflows limit: 6 %}
 
 <div class="listing">
     <div class="date-list">
-        <span class="month" id="{{ wf.organization }}-{{ wf.repo_name }}-wf-month"></span>
-        <span class="day" id="{{ wf.organization }}-{{ wf.repo_name }}-wf-day"></span>
-        <span class="year" id="{{ wf.organization }}-{{ wf.repo_name }}-wf-year"></span>
+        {{ wf.last_update }}
     </div>
-    <a href="/workflow/{{ wf.organization }}/{{ wf.repo_name }}">
-        <h1 id="{{ wf.organization }}-{{ wf.repo_name }}-wf-title"></h1>
-    </a>
-    <p id="{{ wf.organization }}-{{ wf.repo_name }}-wf-subtitle"></p>
+    <a href="{{ wf.url }}"><h1>{{ wf.repo_name }}</h1></a>
+    <p>{{ wf.description }}</p>
 
-    <div id="{{ wf.organization }}-{{ wf.repo_name }}-wf-topics"></div>
+    <div>
+        {% for t in wf.tags %}
+        <span class="topic">{{ t }}</span>&nbsp;&nbsp;
+        {% endfor %}
+    </div>
 </div>
-
-<script type="text/javascript">
-    getOverallRepoInfo('{{ wf.organization }}', '{{ wf.repo_name }}')
-</script>
 
 {% endfor %}

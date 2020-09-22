@@ -26,7 +26,7 @@ for w in workflows:
     r = requests.get(url, headers=headers)
     response = r.json()
 
-    print(response)
+    #print(response)
 
     # repo general information
     w['title'] = response['name']
@@ -40,14 +40,18 @@ for w in workflows:
     date = datetime.datetime.strptime(response['updated_at'], '%Y-%m-%dT%H:%M:%SZ')
     w['year'] = date.strftime('%Y')
     w['month'] = date.strftime('%b')
+    w['monthn'] = date.strftime('%m')
     w['day'] = date.strftime('%d')
 
     # topics
-    w['topics'] = ''
+    w['topics'] = 'No topics available'
+    w['tags'] = ''
     topics = response['topics']
     if len(topics) > 0:
+        w['topics'] = ''
         for topic in topics:
             w['topics'] += '<span class="topic">{}</span>&nbsp;&nbsp;'.format(topic);
+            w['tags'] += '{} '.format(topic)
 
     # releases
     url = response['releases_url']
@@ -69,8 +73,18 @@ for w in workflows:
         w['contributors_list'] += '<a href="{}" target="_blank"><img src="{}" width="32" height="32"/></a>&nbsp;&nbsp;'.format(c['html_url'], c['avatar_url']);
 
     # metadata file
-
-    print(w)
+    r = requests.get('https://raw.githubusercontent.com/{}/{}/master/.pegasushub.yml'.format(w['organization'], w['repo_name']))
+    w['pegasus_version'] = 'No version information available'
+    w['dependencies'] = 'No dependencies information available'
+    if r.ok:
+        data = yaml.load(r.text, Loader=yaml.FullLoader)
+        print(data)
+        w['pegasus_version'] = data['pegasus']['version']['min'] if data['pegasus']['version']['min'] == data['pegasus']['version']['max'] else '[{}, {}]'.format(data['pegasus']['version']['min'], data['pegasus']['version']['max'])
+        w['dependencies'] = ''
+        for dep in data['dependencies']:
+            if w['dependencies']:
+                w['dependencies'] += ', '
+            w['dependencies'] += dep
 
     with open('scripts/workflow.html.in') as f:
         template = Template(f.read())

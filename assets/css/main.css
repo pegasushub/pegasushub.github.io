@@ -3034,3 +3034,14 @@ pre {
     font-weight: bold;
     text-decoration: none;
 }
+
+.listing-workflows {
+    margin-top: 2em;
+}
+
+.listing-table {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 0.5em;
+    padding-top: 0.5em;
+    padding-left: 1em;
+}
