@@ -1,6 +1,3 @@
-- organization: pegasushub
-  repo_name: demo-workflow
-
 - organization: pegasus-isi
   repo_name: sra-search-pegasus-workflow
 
