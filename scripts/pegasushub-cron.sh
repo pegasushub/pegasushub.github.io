@@ -12,5 +12,5 @@ python3 scripts/process.py
 git add _workflows/*.html
 
 NOW=`date +"%Y-%m-%dT%H-%M-%S"`
-git commit -m "[cron] updating workflows $NOW"
+git commit -am "[cron] updating workflows $NOW"
 git push
