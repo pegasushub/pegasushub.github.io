@@ -1,2 +1,10 @@
 title: PegasusHub
 tagline: The Community Together
+
+collections:
+  workflows:
+    output: true
+    permalink: /:collection/:name
+
+exclude:
+  - scripts

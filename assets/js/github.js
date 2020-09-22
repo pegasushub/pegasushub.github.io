@@ -1,3 +1,10 @@
+function getREADME(organization, repo_name) {
+    $.get('https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/master/README.md', function (data) {
+        let converter = window.markdownit();
+        $('#wf-readme').html(converter.render(data));
+    });
+}
+
 function getOverallRepoInfo(organization, repo_name) {
     $.ajax({
         url: 'https://api.github.com/repos/' + organization + '/' + repo_name,
@@ -27,6 +34,8 @@ function getOverallRepoInfo(organization, repo_name) {
         }
     });
 }
+
+
 
 function getRepoInfo() {
     let pathname = window.location.pathname.split('/');
