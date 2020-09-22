@@ -9,3 +9,7 @@
 
 - organization: pegasus-isi
   repo_name: freesurfer-osg-workflow
+
+- organization: pegasus-isi
+  repo_name: pegasus-fb-nlp
+
