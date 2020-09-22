@@ -5,6 +5,7 @@ export PEGASUSHUB_TOKEN=`cat $HOME/.pegasushub.token`
 cd $1 # folder for pegasushub project
 
 git pull
+rm -rf _workflows/*.html
 
 python3 scripts/process.py
 
