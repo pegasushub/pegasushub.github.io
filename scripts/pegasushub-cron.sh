@@ -9,7 +9,7 @@ rm -rf _workflows/*.html
 
 python3 scripts/process.py
 
-git add -u _workflows/*.html
+git add _workflows/*.html
 
 NOW=`date +"%Y-%m-%dT%H-%M-%S"`
 git commit -am "[cron] updating workflows $NOW"
