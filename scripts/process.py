@@ -70,7 +70,7 @@ for w in workflows:
     w['contributors'] = len(data)
     w['contributors_list'] = ''
     for c in data:
-        w['contributors_list'] += '<a href="{}" target="_blank"><img src="{}" width="32" height="32"/></a>&nbsp;&nbsp;'.format(c['html_url'], c['avatar_url']);
+        w['contributors_list'] += '<a href="{}" target="_blank"><img src="{}" width="32" height="32"/></a>&nbsp;&nbsp;'.format(c['html_url'], c['avatar_url'])
 
     # metadata file
     r = requests.get('https://raw.githubusercontent.com/{}/{}/master/.pegasushub.yml'.format(w['organization'], w['repo_name']))
