@@ -10,6 +10,7 @@
       "repo_name"    : "{{ workflow.repo_name }}",
       "last_update"  : "{{ workflow.last_update }}",
       "tags"         : "{{ workflow.tags | join: ', ' }}",
+      "description"  : "{{ workflow.description }}",
       "date"         : "{{ workflow.date }}"
 
     } {% unless forloop.last %},{% endunless %}

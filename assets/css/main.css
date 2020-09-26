@@ -3079,6 +3079,12 @@ pre {
     margin: 0 !important;
 }
 
+.search-item .desc {
+    color: #666;
+    font-size: 0.9em;
+    font-style: italic;
+}
+
 .search-item .topic {
     margin: 0;
 }

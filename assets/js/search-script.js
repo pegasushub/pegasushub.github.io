@@ -25,7 +25,8 @@ $(function () {
             let addEntry = true;
             terms.forEach(function (term) {
                 if (!entry.title.toLowerCase().includes(term) &&
-                    !entry.tags.toLowerCase().includes(term)) {
+                    !entry.tags.toLowerCase().includes(term) &&
+                    !entry.description.toLowerCase().includes(term)) {
                     addEntry = false;
                 }
             });
@@ -34,16 +35,17 @@ $(function () {
                     resultsContainer.css('visibility', 'visible').html('');
                     first = false;
                 }
-                let tagsList = entry.tags.split(" ").filter(function (tag) {
+                let tagsList = entry.tags.split(", ").filter(function (tag) {
                     return tag != null && tag.length > 0;
                 });
                 let tags = '';
                 tagsList.forEach(function (tag) {
-                    tags += '<span class="topic">' + tag + '</span>';
+                    tags += '<span class="topic">' + tag + '</span>&nbsp;';
                 });
                 $("#results-container").append(
                     '<div class="search-item"><a href="' + entry.url + '"><h1><i class="fab fa-github"></i> ' +
-                    entry.repo_name + '</h1></a>' + tags + '</div>'
+                    entry.repo_name + '</h1></a><span class="desc">' + entry.description + '</span><br/>' +
+                    tags + '</div>'
                 );
             }
         });
