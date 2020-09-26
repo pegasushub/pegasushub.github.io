@@ -7,7 +7,7 @@ $(function () {
 
     $("#search-input").on("keyup", function () {
         let resultsContainer = $("#results-container");
-        resultsContainer.css('visibility', 'visible').html('');
+        resultsContainer.css('visibility', 'visible').html('<div class="search-item"><h1>No results.</h1></div>');
         let input_value = $(this).val();
 
         if (input_value.length === 0) {
@@ -20,6 +20,7 @@ $(function () {
             return el != null && el.length > 0;
         });
 
+        let first = true;
         searchJSON.forEach(function (entry) {
             let addEntry = true;
             terms.forEach(function (term) {
@@ -29,6 +30,10 @@ $(function () {
                 }
             });
             if (addEntry) {
+                if (first) {
+                    resultsContainer.css('visibility', 'visible').html('');
+                    first = false;
+                }
                 let tagsList = entry.tags.split(" ").filter(function (tag) {
                     return tag != null && tag.length > 0;
                 });
