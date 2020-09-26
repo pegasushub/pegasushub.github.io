@@ -3045,3 +3045,40 @@ pre {
     padding-top: 0.5em;
     padding-left: 1em;
 }
+
+#results-container {
+    visibility: hidden;
+    border: 1px solid #999;
+    border-radius: 0.3em;
+    background-color: #fff;
+    box-shadow: #000 2px 2px 2px;
+    color: #000;
+    text-shadow: none;
+    padding: 0.5em;
+    margin-top: 0.5em;
+    max-height: 20em;
+    overflow: auto;
+}
+
+#results-container a {
+    color: #000;
+    text-decoration: none;
+    text-shadow: none;
+}
+
+.search-item {
+    /*border-bottom: 1px #ccc solid;*/
+    line-height: 1.4em;
+    margin-bottom: 0.5em;
+    padding: 0.5em;
+    font-size: 0.9em;
+}
+
+.search-item h1 {
+    color: #303b48;
+    margin: 0 !important;
+}
+
+.search-item .topic {
+    margin: 0;
+}
