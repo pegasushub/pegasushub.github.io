@@ -21,22 +21,26 @@ $(function () {
         });
 
         searchJSON.forEach(function (entry) {
+            let addEntry = true;
             terms.forEach(function (term) {
-                if (entry.title.toLowerCase().includes(term) ||
-                    entry.tags.toLowerCase().includes(term)) {
-                    let tagsList = entry.tags.split(" ").filter(function (tag) {
-                        return tag != null && tag.length > 0;
-                    });
-                    let tags = '';
-                    tagsList.forEach(function (tag) {
-                        tags += '<span class="topic">' + tag + '</span>';
-                    });
-                    $("#results-container").append(
-                        '<div class="search-item"><a href="' + entry.url + '"><h1><i class="fab fa-github"></i> ' +
-                        entry.repo_name + '</h1></a>' + tags + '</div>'
-                    );
+                if (!entry.title.toLowerCase().includes(term) &&
+                    !entry.tags.toLowerCase().includes(term)) {
+                    addEntry = false;
                 }
             });
+            if (addEntry) {
+                let tagsList = entry.tags.split(" ").filter(function (tag) {
+                    return tag != null && tag.length > 0;
+                });
+                let tags = '';
+                tagsList.forEach(function (tag) {
+                    tags += '<span class="topic">' + tag + '</span>';
+                });
+                $("#results-container").append(
+                    '<div class="search-item"><a href="' + entry.url + '"><h1><i class="fab fa-github"></i> ' +
+                    entry.repo_name + '</h1></a>' + tags + '</div>'
+                );
+            }
         });
     });
 });
