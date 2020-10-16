@@ -9,3 +9,16 @@
 
 - organization: pegasus-isi
   repo_name: pegasus-fb-nlp
+
+- organization: pegasus-isi
+  repo_name: diamond-workflow
+  training: true
+  execution_sites:
+    - LOCAL
+    - USC_HPCC
+    - OSG_ISI
+    - XSEDE_BOSCO
+    - BLUEWATERS_GLITE
+    - WRANGLER_GLITE
+    - SUMMIT_GLITE
+    - SUMMIT_KUBERNETES
