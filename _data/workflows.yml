@@ -17,8 +17,45 @@
     - LOCAL
     - USC_HPCC
     - OSG_ISI
-    - XSEDE_BOSCO
-    - BLUEWATERS_GLITE
-    - WRANGLER_GLITE
+    - SUMMIT_GLITE
+    - SUMMIT_KUBERNETES
+
+- organization: pegasus-isi
+  repo_name: merge-workflow
+  training: true
+  execution_sites:
+    - LOCAL
+    - USC_HPCC
+    - OSG_ISI
+    - SUMMIT_GLITE
+    - SUMMIT_KUBERNETES
+
+- organization: pegasus-isi
+  repo_name: split-workflow
+  training: true
+  execution_sites:
+    - LOCAL
+    - USC_HPCC
+    - OSG_ISI
+    - SUMMIT_GLITE
+    - SUMMIT_KUBERNETES
+
+- organization: pegasus-isi
+  repo_name: pipeline-workflow
+  training: true
+  execution_sites:
+    - LOCAL
+    - USC_HPCC
+    - OSG_ISI
+    - SUMMIT_GLITE
+    - SUMMIT_KUBERNETES
+
+- organization: pegasus-isi
+  repo_name: process-workflow
+  training: true
+  execution_sites:
+    - LOCAL
+    - USC_HPCC
+    - OSG_ISI
     - SUMMIT_GLITE
     - SUMMIT_KUBERNETES
