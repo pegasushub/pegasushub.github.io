@@ -17,6 +17,8 @@
     - LOCAL
     - USC_HPCC
     - OSG_ISI
+    - SLURM_DEFAULT
+    - LSF_DEFAULT
     - SUMMIT_GLITE
     - SUMMIT_KUBERNETES
 
@@ -27,6 +29,8 @@
     - LOCAL
     - USC_HPCC
     - OSG_ISI
+    - SLURM_DEFAULT
+    - LSF_DEFAULT
     - SUMMIT_GLITE
     - SUMMIT_KUBERNETES
 
@@ -37,6 +41,8 @@
     - LOCAL
     - USC_HPCC
     - OSG_ISI
+    - SLURM_DEFAULT
+    - LSF_DEFAULT
     - SUMMIT_GLITE
     - SUMMIT_KUBERNETES
 
@@ -47,6 +53,8 @@
     - LOCAL
     - USC_HPCC
     - OSG_ISI
+    - SLURM_DEFAULT
+    - LSF_DEFAULT
     - SUMMIT_GLITE
     - SUMMIT_KUBERNETES
 
@@ -57,5 +65,7 @@
     - LOCAL
     - USC_HPCC
     - OSG_ISI
+    - SLURM_DEFAULT
+    - LSF_DEFAULT
     - SUMMIT_GLITE
     - SUMMIT_KUBERNETES
