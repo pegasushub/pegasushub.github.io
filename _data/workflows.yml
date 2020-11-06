@@ -14,11 +14,9 @@
   repo_name: diamond-workflow
   training: true
   execution_sites:
-    - LOCAL
-    - USC_HPCC
-    - OSG_ISI
-    - SLURM_DEFAULT
-    - LSF_DEFAULT
+    - LOCAL_CONDOR
+    - SLURM
+    - LSF
     - SUMMIT_GLITE
     - SUMMIT_KUBERNETES
 
@@ -26,11 +24,9 @@
   repo_name: merge-workflow
   training: true
   execution_sites:
-    - LOCAL
-    - USC_HPCC
-    - OSG_ISI
-    - SLURM_DEFAULT
-    - LSF_DEFAULT
+    - LOCAL_CONDOR
+    - SLURM
+    - LSF
     - SUMMIT_GLITE
     - SUMMIT_KUBERNETES
 
@@ -38,11 +34,9 @@
   repo_name: split-workflow
   training: true
   execution_sites:
-    - LOCAL
-    - USC_HPCC
-    - OSG_ISI
-    - SLURM_DEFAULT
-    - LSF_DEFAULT
+    - LOCAL_CONDOR
+    - SLURM
+    - LSF
     - SUMMIT_GLITE
     - SUMMIT_KUBERNETES
 
@@ -50,11 +44,9 @@
   repo_name: pipeline-workflow
   training: true
   execution_sites:
-    - LOCAL
-    - USC_HPCC
-    - OSG_ISI
-    - SLURM_DEFAULT
-    - LSF_DEFAULT
+    - LOCAL_CONDOR
+    - SLURM
+    - LSF
     - SUMMIT_GLITE
     - SUMMIT_KUBERNETES
 
@@ -62,10 +54,8 @@
   repo_name: process-workflow
   training: true
   execution_sites:
-    - LOCAL
-    - USC_HPCC
-    - OSG_ISI
-    - SLURM_DEFAULT
-    - LSF_DEFAULT
+    - LOCAL_CONDOR
+    - SLURM
+    - LSF
     - SUMMIT_GLITE
     - SUMMIT_KUBERNETES
