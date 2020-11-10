@@ -14,7 +14,7 @@
   repo_name: diamond-workflow
   training: true
   execution_sites:
-    - LOCAL_CONDOR
+    - CONDORPOOL
     - SLURM
     - LSF
     - SUMMIT_GLITE
@@ -24,7 +24,7 @@
   repo_name: merge-workflow
   training: true
   execution_sites:
-    - LOCAL_CONDOR
+    - CONDORPOOL
     - SLURM
     - LSF
     - SUMMIT_GLITE
@@ -34,7 +34,7 @@
   repo_name: split-workflow
   training: true
   execution_sites:
-    - LOCAL_CONDOR
+    - CONDORPOOL
     - SLURM
     - LSF
     - SUMMIT_GLITE
@@ -44,7 +44,7 @@
   repo_name: pipeline-workflow
   training: true
   execution_sites:
-    - LOCAL_CONDOR
+    - CONDORPOOL
     - SLURM
     - LSF
     - SUMMIT_GLITE
@@ -54,7 +54,7 @@
   repo_name: process-workflow
   training: true
   execution_sites:
-    - LOCAL_CONDOR
+    - CONDORPOOL
     - SLURM
     - LSF
     - SUMMIT_GLITE
