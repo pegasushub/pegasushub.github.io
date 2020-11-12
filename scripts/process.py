@@ -13,7 +13,8 @@ from string import Template
 
 workflows = []
 headers = {
-    'Accept': 'application/vnd.github.mercy-preview+json'
+    'Accept': 'application/vnd.github.mercy-preview+json',
+    'Authorization': 'token {}'.format(os.environ['PEGASUSHUB_TOKEN'])
 }
 
 # read list of workflow repositories
@@ -21,12 +22,11 @@ with open('_data/workflows.yml') as f:
     workflows = yaml.load(f, Loader=yaml.FullLoader)
 
 for w in workflows:
-    print(w)
     url = 'https://api.github.com/repos/{}/{}'.format(w['organization'], w['repo_name'])
     r = requests.get(url, headers=headers)
     response = r.json()
 
-    print(response)
+    #print(response)
 
     # repo general information
     w['title'] = response['name']
