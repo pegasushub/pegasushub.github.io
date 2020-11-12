@@ -13,8 +13,7 @@ from string import Template
 
 workflows = []
 headers = {
-    'Accept': 'application/vnd.github.mercy-preview+json',
-    'Authorization': 'token {}'.format(os.environ['PEGASUSHUB_TOKEN'])
+    'Accept': 'application/vnd.github.mercy-preview+json'
 }
 
 # read list of workflow repositories
