@@ -1,6 +1,7 @@
 #!/bin/bash
 
-export PEGASUSHUB_TOKEN=`cat $HOME/.pegasushub.token`
+#export PEGASUSHUB_TOKEN=`cat $HOME/.pegasushub.token`
+export PEGASUSHUB_TOKEN=""
 
 cd $1 # folder for pegasushub project
 
