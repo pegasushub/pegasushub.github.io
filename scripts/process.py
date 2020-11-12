@@ -26,7 +26,7 @@ for w in workflows:
     r = requests.get(url, headers=headers)
     response = r.json()
 
-    #print(response)
+    print(response)
 
     # repo general information
     w['title'] = response['name']
