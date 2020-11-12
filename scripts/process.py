@@ -81,7 +81,7 @@ for w in workflows:
         print(data)
         try:
             w['pegasus_version'] = data['pegasus']['version']['min'] 
-            if data['pegasus']['version']['min'] ! data['pegasus']['version']['max']:
+            if data['pegasus']['version']['min'] != data['pegasus']['version']['max']:
                 w['pegasus_version'] = '[{}, {}]'.format(data['pegasus']['version']['min'], data['pegasus']['version']['max'])
         except:
             pass
