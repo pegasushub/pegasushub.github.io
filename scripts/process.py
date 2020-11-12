@@ -21,6 +21,7 @@ with open('_data/workflows.yml') as f:
     workflows = yaml.load(f, Loader=yaml.FullLoader)
 
 for w in workflows:
+    print(w)
     url = 'https://api.github.com/repos/{}/{}'.format(w['organization'], w['repo_name'])
     r = requests.get(url, headers=headers)
     response = r.json()
