@@ -79,12 +79,21 @@ for w in workflows:
     if r.ok:
         data = yaml.load(r.text, Loader=yaml.FullLoader)
         print(data)
-        w['pegasus_version'] = data['pegasus']['version']['min'] if data['pegasus']['version']['min'] == data['pegasus']['version']['max'] else '[{}, {}]'.format(data['pegasus']['version']['min'], data['pegasus']['version']['max'])
-        w['dependencies'] = ''
-        for dep in data['dependencies']:
-            if w['dependencies']:
-                w['dependencies'] += ', '
-            w['dependencies'] += dep
+        try:
+            w['pegasus_version'] = data['pegasus']['version']['min'] 
+            if data['pegasus']['version']['min'] ! data['pegasus']['version']['max']:
+                w['pegasus_version'] = '[{}, {}]'.format(data['pegasus']['version']['min'], data['pegasus']['version']['max'])
+        except:
+            pass
+
+        try:
+            w['dependencies'] = ''
+            for dep in data['dependencies']:
+                if w['dependencies']:
+                    w['dependencies'] += ', '
+                w['dependencies'] += dep
+        except:
+            pass
 
     with open('scripts/workflow.html.in') as f:
         template = Template(f.read())
