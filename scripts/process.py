@@ -94,7 +94,7 @@ for w in workflows:
                     w['dependencies'] += ', '
                 w['dependencies'] += dep
         except:
-            pass
+            w['dependencies'] = 'No dependencies information available'
 
     with open('scripts/workflow.html.in') as f:
         template = Template(f.read())
