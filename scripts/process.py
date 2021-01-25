@@ -78,7 +78,7 @@ for w in workflows:
     w['pegasus_version'] = 'No version information available'
     w['dependencies'] = 'No dependencies information available'
     if r.ok:
-        data = yaml.load(r.text, Loader=yaml.FullLoader)
+        data = yaml.safe_load(r.text)
         print(data)
         try:
             w['pegasus_version'] = data['pegasus']['version']['min'] 
