@@ -10,7 +10,7 @@ tags: $tags
 
 <article class="box post post-excerpt">
     <header>
-        <h2 id="wf-title">$title</h2>
+        <h1 id="wf-title">$title</h1>
         <p id="wf-subtitle">$subtitle</p>
     </header>
     <div class="info">
