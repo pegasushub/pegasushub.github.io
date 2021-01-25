@@ -1,0 +1,24 @@
+name: Build and deploy PegasusHub Jekyll site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  github-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Generate workflows pages
+        env:
+          PEGASUSHUB_TOKEN: ${{ secrets.JEKYLL_PAT }}
+        run: |
+          rm -rf _workflows/*.html
+          python3 scripts/process.py
+
+      - uses: helaili/jekyll-action@2.0.1
+        env:
+          JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
+        with:
+          target_branch: 'gh-pages'
