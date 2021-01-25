@@ -1,6 +1,8 @@
 name: Build and deploy PegasusHub Jekyll site to GitHub Pages
 
 on:
+  schedule:
+    - cron: "0 0,6,12,18 * * *"
   push:
     branches:
       - master

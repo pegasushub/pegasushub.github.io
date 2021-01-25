@@ -35,6 +35,19 @@ body {
     line-height: 1;
 }
 
+h1 {
+    font-size: 2.5em;
+    color: #000;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+h2 {
+    font-size: 1.5em !important;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
+}
+
 ol, ul {
     list-style: none;
 }
@@ -119,7 +132,7 @@ strong, b {
     color: #232323;
 }
 
-h2, h3, h4, h5, h6 {
+h1, h2, h3, h4, h5, h6 {
     font-family: 'Open Sans Condensed', sans-serif;
     font-weight: 700;
     color: #232323;
@@ -2973,6 +2986,10 @@ ol li {
     padding: 1em;
 }
 
+.listing h1 {
+    font-size: 1em;
+}
+
 .readme h1 {
     font-weight: bold;
     font-size: 2em;
@@ -2988,6 +3005,15 @@ ol li {
 }
 
 pre {
+    background-color: #f2f2f2;
+    padding: 0.2em 0.2em 0.2em 1em;
+    margin-bottom: 1em;
+    font-family: "Courier New", serif;
+    border-radius: 0.3em;
+    overflow: auto;
+}
+
+code {
     background-color: #f2f2f2;
     padding: 0.2em 0.2em 0.2em 1em;
     margin-bottom: 1em;

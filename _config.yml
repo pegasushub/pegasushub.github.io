@@ -6,6 +6,8 @@ collections:
     output: true
     permalink: /:collection/:name
 
+markdown: kramdown
+
 exclude:
   - scripts
 
