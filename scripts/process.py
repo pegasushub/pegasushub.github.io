@@ -19,7 +19,7 @@ headers = {
 
 # read list of workflow repositories
 with open('_data/workflows.yml') as f:
-    workflows = yaml.load(f, Loader=yaml.FullLoader)
+    workflows = yaml.safe_load(f)
 
 for w in workflows:
     print(w)

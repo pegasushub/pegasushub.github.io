@@ -15,7 +15,6 @@ jobs:
           PEGASUSHUB_TOKEN: ${{ secrets.JEKYLL_PAT }}
         run: |
           rm -rf _workflows/*.html
-          pip install -U PyYAML
           python3 scripts/process.py
 
       - uses: helaili/jekyll-action@2.0.1
