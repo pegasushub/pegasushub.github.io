@@ -1,7 +1,11 @@
 function getREADME(organization, repo_name) {
     $.get('https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/master/README.md', function (data) {
         let converter = window.markdownit();
-        $('#wf-readme').html(converter.render(data));
+        let base_url = 'https://github.com/' + organization + '/' + repo_name + '/raw/master/';
+        let readme = converter.render(data).replaceAll('src="/', 'src="' + base_url);
+        readme = readme.replaceAll('src="', 'src="' + base_url);
+        console.log(readme);
+        $('#wf-readme').html(readme);
     });
 }
 
@@ -34,7 +38,6 @@ function getOverallRepoInfo(organization, repo_name) {
         }
     });
 }
-
 
 
 function getRepoInfo() {
@@ -107,7 +110,10 @@ function getRepoInfo() {
             // readme file
             $.get('https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/master/README.md', function (data) {
                 let converter = window.markdownit();
-                $('#wf-readme').html(converter.render(data));
+                let readme = converter.render(data).replaceAll('src="/', 'src="' + 'https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/');
+                console.log('===================================');
+                console.log(readme);
+                $('#wf-readme').html(readme);
             });
 
             // contributors

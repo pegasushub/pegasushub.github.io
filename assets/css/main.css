@@ -3114,3 +3114,7 @@ code {
 .search-item .topic {
     margin: 0;
 }
+
+.readme img {
+    max-width: 90%;
+}
