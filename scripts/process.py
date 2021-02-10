@@ -31,6 +31,7 @@ for w in workflows:
 
     # repo general information
     w['title'] = response['name']
+    w['default_branch'] = response['default_branch']
     w['subtitle'] = response['description']
     w['license'] = response['license']['name'] if response['license'] else 'No licence available'
     w['issues'] = response['open_issues']

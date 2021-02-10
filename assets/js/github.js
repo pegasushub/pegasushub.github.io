@@ -1,15 +1,14 @@
-function getREADME(organization, repo_name) {
-    $.get('https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/master/README.md', function (data) {
+function getREADME(organization, repo_name, default_branch) {
+    $.get('https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/' + default_branch + '/README.md', function (data) {
         let converter = window.markdownit();
-        let base_url = 'https://github.com/' + organization + '/' + repo_name + '/raw/master/';
-        let readme = converter.render(data).replaceAll('src="/', 'src="' + base_url);
-        readme = readme.replaceAll('src="', 'src="' + base_url);
+        let base_url = 'https://github.com/' + organization + '/' + repo_name + '/raw/' + default_branch + '/';
+        let readme = converter.render(data).replaceAll('src="\/|src="(?!.*(http:\/\/|https:\/\/))', 'src="' + base_url);
         console.log(readme);
         $('#wf-readme').html(readme);
     });
 }
 
-function getOverallRepoInfo(organization, repo_name) {
+function getOverallRepoInfo(organization, repo_name, default_branch) {
     $.ajax({
         url: 'https://api.github.com/repos/' + organization + '/' + repo_name,
         type: 'GET',
@@ -44,6 +43,7 @@ function getRepoInfo() {
     let pathname = window.location.pathname.split('/');
     let organization = pathname[2];
     let repo_name = pathname[3];
+    let default_branch = ""; //this should be populated but this funtion is not in use
 
     $.ajax({
         url: 'https://api.github.com/repos/' + organization + '/' + repo_name,
@@ -53,7 +53,7 @@ function getRepoInfo() {
             console.log(content);
 
             // metadata file
-            $.get('https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/master/.pegasushub.yml', function (data) {
+            $.get('https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/' + default_branch + '/.pegasushub.yml', function (data) {
                 let content = jsyaml.load(data);
                 let version = content.pegasus.version.min === content.pegasus.version.max ? content.pegasus.version.min : '[' + content.pegasus.version.min + ', ' + content.pegasus.version.max + ']';
                 $('#wf-pegasus-version').html(version);
@@ -108,7 +108,7 @@ function getRepoInfo() {
             });
 
             // readme file
-            $.get('https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/master/README.md', function (data) {
+            $.get('https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/' + default_branch + '/README.md', function (data) {
                 let converter = window.markdownit();
                 let readme = converter.render(data).replaceAll('src="/', 'src="' + 'https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/');
                 console.log('===================================');

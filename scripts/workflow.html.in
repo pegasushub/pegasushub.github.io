@@ -75,5 +75,5 @@ tags: $tags
 </article>
 
 <script type="text/javascript">
-    getREADME('$organization', '$repo_name')
+    getREADME('$organization', '$repo_name', '$default_branch')
 </script>
