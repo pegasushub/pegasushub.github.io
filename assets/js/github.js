@@ -2,7 +2,7 @@ function getREADME(organization, repo_name, default_branch) {
     $.get('https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/' + default_branch + '/README.md', function (data) {
         let converter = window.markdownit();
         let base_url = 'https://github.com/' + organization + '/' + repo_name + '/raw/' + default_branch + '/';
-        let readme = converter.render(data).replace('src="\/|src="(?!.*(http:\/\/|https:\/\/))/gm', 'src="' + base_url);
+        let readme = converter.render(data).replaceAll(/<img src="\/|<img src="(?!.*(http:\/\/|https:\/\/))/g, '<img src="' + base_url);
         console.log(readme);
         $('#wf-readme').html(readme);
     });
