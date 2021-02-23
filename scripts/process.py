@@ -27,8 +27,6 @@ for w in workflows:
     r = requests.get(url, headers=headers)
     response = r.json()
 
-    #print(response)
-
     # repo general information
     w['title'] = response['name']
     w['default_branch'] = response['default_branch']
@@ -96,6 +94,12 @@ for w in workflows:
                 w['dependencies'] += dep
         except:
             w['dependencies'] = 'No dependencies information available'
+
+    # metadata information
+    if 'training' not in w:
+        w['training'] = 'False'
+    if 'execution_sites' not in w:
+        w['execution_sites'] = []
 
     with open('scripts/workflow.html.in') as f:
         template = Template(f.read())

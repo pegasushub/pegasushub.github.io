@@ -43,9 +43,9 @@ $(function () {
                     tags += '<span class="topic">' + tag + '</span>&nbsp;';
                 });
                 $("#results-container").append(
-                    '<div class="search-item"><a href="' + entry.url + '"><h1><i class="fab fa-github"></i> ' +
-                    entry.repo_name + '</h1></a><span class="desc">' + entry.description + '</span><br/>' +
-                    tags + '</div>'
+                    '<a class="search-item" href="' + entry.url + '"><h1><i class="fab fa-github"></i> ' +
+                    entry.repo_name + '</h1><span class="desc">' + entry.description + '</span><br/>' +
+                    tags + '</a>'
                 );
             }
         });

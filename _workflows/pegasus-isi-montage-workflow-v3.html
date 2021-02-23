@@ -6,11 +6,13 @@ last_update: 14 Sep 2020
 date_sort: 20200914
 description: A Montage workflow for Pegasus 5.0
 tags: astronomy 
+training: False
+execution_sites: []
 ---
 
 <article class="box post post-excerpt">
     <header>
-        <h2 id="wf-title">montage-workflow-v3</h2>
+        <h1 id="wf-title">montage-workflow-v3</h1>
         <p id="wf-subtitle">A Montage workflow for Pegasus 5.0</p>
     </header>
     <div class="info">
@@ -31,6 +33,12 @@ tags: astronomy
             <li><a href="https://github.com/pegasus-isi/montage-workflow-v3/graphs/contributors" target="_blank"
                    class="fas fa-users" id="wf-contributors">2</a></li>
         </ul>
+        {% if page.training %}
+        <span class="training">
+            <i class="fas fa-chalkboard-teacher"></i><br/>
+            Training Workflow
+        </span>
+        {% endif %}
     </div>
     <div>
         <table style="border: 1px solid #ccc; box-shadow: #ccc 3px 3px 3px">
@@ -75,5 +83,5 @@ tags: astronomy
 </article>
 
 <script type="text/javascript">
-    getREADME('pegasus-isi', 'montage-workflow-v3')
+    getREADME('pegasus-isi', 'montage-workflow-v3', 'master')
 </script>

@@ -23,6 +23,12 @@ layout: default
             </div>
             <div>{{ wf.description }}</div>
             <div>
+                {% if wf.training %}
+                <span class="training-topic">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    &nbsp;training workflow
+                </span>
+                {% endif %}
                 {% for t in wf.tags %}
                 <span class="topic">{{ t }}</span>&nbsp;&nbsp;
                 {% endfor %}

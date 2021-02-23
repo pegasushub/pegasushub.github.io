@@ -6,11 +6,13 @@ last_update: 18 Dec 2020
 date_sort: 20201218
 description: A Pegasus workflow for running FreeSurfer on the Open Science Grid
 tags: 
+training: False
+execution_sites: []
 ---
 
 <article class="box post post-excerpt">
     <header>
-        <h2 id="wf-title">freesurfer-osg-workflow</h2>
+        <h1 id="wf-title">freesurfer-osg-workflow</h1>
         <p id="wf-subtitle">A Pegasus workflow for running FreeSurfer on the Open Science Grid</p>
     </header>
     <div class="info">
@@ -31,6 +33,12 @@ tags:
             <li><a href="https://github.com/pegasus-isi/freesurfer-osg-workflow/graphs/contributors" target="_blank"
                    class="fas fa-users" id="wf-contributors">1</a></li>
         </ul>
+        {% if page.training %}
+        <span class="training">
+            <i class="fas fa-chalkboard-teacher"></i><br/>
+            Training Workflow
+        </span>
+        {% endif %}
     </div>
     <div>
         <table style="border: 1px solid #ccc; box-shadow: #ccc 3px 3px 3px">
@@ -75,5 +83,5 @@ tags:
 </article>
 
 <script type="text/javascript">
-    getREADME('pegasus-isi', 'freesurfer-osg-workflow')
+    getREADME('pegasus-isi', 'freesurfer-osg-workflow', 'master')
 </script>

@@ -6,11 +6,13 @@ last_update: 12 Nov 2020
 date_sort: 20201112
 description: Process workflow example
 tags: 
+training: True
+execution_sites: ['CONDORPOOL', 'SLURM', 'LSF', 'SUMMIT_GLITE', 'SUMMIT_KUBERNETES']
 ---
 
 <article class="box post post-excerpt">
     <header>
-        <h2 id="wf-title">process-workflow</h2>
+        <h1 id="wf-title">process-workflow</h1>
         <p id="wf-subtitle">Process workflow example</p>
     </header>
     <div class="info">
@@ -31,6 +33,12 @@ tags:
             <li><a href="https://github.com/pegasus-isi/process-workflow/graphs/contributors" target="_blank"
                    class="fas fa-users" id="wf-contributors">2</a></li>
         </ul>
+        {% if page.training %}
+        <span class="training">
+            <i class="fas fa-chalkboard-teacher"></i><br/>
+            Training Workflow
+        </span>
+        {% endif %}
     </div>
     <div>
         <table style="border: 1px solid #ccc; box-shadow: #ccc 3px 3px 3px">
@@ -75,5 +83,5 @@ tags:
 </article>
 
 <script type="text/javascript">
-    getREADME('pegasus-isi', 'process-workflow')
+    getREADME('pegasus-isi', 'process-workflow', 'master')
 </script>

@@ -6,11 +6,13 @@ last_update: 10 Jul 2020
 date_sort: 20200710
 description: Pegasus workflow which downloads and aligns SRA data, using SRA Toolkit, Samtools and Bowtie2
 tags: 
+training: False
+execution_sites: []
 ---
 
 <article class="box post post-excerpt">
     <header>
-        <h2 id="wf-title">sra-search-pegasus-workflow</h2>
+        <h1 id="wf-title">sra-search-pegasus-workflow</h1>
         <p id="wf-subtitle">Pegasus workflow which downloads and aligns SRA data, using SRA Toolkit, Samtools and Bowtie2</p>
     </header>
     <div class="info">
@@ -31,6 +33,12 @@ tags:
             <li><a href="https://github.com/pegasus-isi/sra-search-pegasus-workflow/graphs/contributors" target="_blank"
                    class="fas fa-users" id="wf-contributors">1</a></li>
         </ul>
+        {% if page.training %}
+        <span class="training">
+            <i class="fas fa-chalkboard-teacher"></i><br/>
+            Training Workflow
+        </span>
+        {% endif %}
     </div>
     <div>
         <table style="border: 1px solid #ccc; box-shadow: #ccc 3px 3px 3px">
@@ -75,5 +83,5 @@ tags:
 </article>
 
 <script type="text/javascript">
-    getREADME('pegasus-isi', 'sra-search-pegasus-workflow')
+    getREADME('pegasus-isi', 'sra-search-pegasus-workflow', 'master')
 </script>

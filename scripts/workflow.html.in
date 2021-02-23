@@ -6,6 +6,8 @@ last_update: $day $month $year
 date_sort: $year$monthn$day
 description: $subtitle
 tags: $tags
+training: $training
+execution_sites: $execution_sites
 ---
 
 <article class="box post post-excerpt">
@@ -31,6 +33,12 @@ tags: $tags
             <li><a href="https://github.com/$organization/$repo_name/graphs/contributors" target="_blank"
                    class="fas fa-users" id="wf-contributors">$contributors</a></li>
         </ul>
+        {% if page.training %}
+        <span class="training">
+            <i class="fas fa-chalkboard-teacher"></i><br/>
+            Training Workflow
+        </span>
+        {% endif %}
     </div>
     <div>
         <table style="border: 1px solid #ccc; box-shadow: #ccc 3px 3px 3px">
