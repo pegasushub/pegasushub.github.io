@@ -3052,10 +3052,17 @@ code {
     width: 100%;
     float: left;
     margin-right: 2em;
-    min-height: 10em;
+    min-height: 4em;
+    text-decoration: none !important;
+    line-height: 1.1em;
 }
 
-.listing a {
+.listing:hover {
+    box-shadow: #666 3px 3px 3px;
+    background-color: #fff;
+}
+
+.listing h1 {
     font-size: 1.4em;
     font-weight: bold;
     text-decoration: none;
