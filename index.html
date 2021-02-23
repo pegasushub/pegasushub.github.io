@@ -8,13 +8,23 @@ layout: default
 </div>
 
 {% assign workflows =  site.workflows | sort: "date_sort" | reverse %}
-{% for wf in workflows limit: 8 %}
+<p style="margin-top: 2em">
+    PegasusHub provides a <strong>curated</strong> collection of open source
+    <a href="https://pegasus.isi.edu" target="_blank">Pegasus</a> workflow repositories hosted at
+    <a href="https://github.com" target="_blank">GitHub</a>. Currently, the hub hosts
+    <strong>{{ workflows.size }}</strong> workflow repositories.
+</p>
 
-<div class="listing">
+<hr/>
+<h2 style="margin-top: 0">Recent Repositories</h2>
+
+{% for wf in workflows limit: 6 %}
+
+<a class="listing" href="{{ wf.url }}">
     <div class="date-list">
         {{ wf.last_update }}
     </div>
-    <a href="{{ wf.url }}"><h1>{{ wf.repo_name }}</h1></a>
+    <h1>{{ wf.repo_name }}</h1>
     <p>{{ wf.description }}</p>
 
     <div>
@@ -28,6 +38,8 @@ layout: default
         <span class="topic">{{ t }}</span>&nbsp;
         {% endfor %}
     </div>
-</div>
+</a>
 
 {% endfor %}
+
+<a href="/workflows" class="button" style="margin-top: 2em">See all workflow repositories</a>

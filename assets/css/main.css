@@ -3049,7 +3049,7 @@ code {
 }
 
 .listing {
-    width: 45%;
+    width: 100%;
     float: left;
     margin-right: 2em;
     min-height: 10em;
