@@ -62,3 +62,6 @@
 
 - organization: pegasus-isi
   repo_name: lung-instance-segmentation-workflow
+
+- organization: pegasus-isi
+  repo_name: mask-detection-workflow
