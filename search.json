@@ -1,0 +1,146 @@
+[
+  
+    {
+
+      "title"        : "Pegasus Isi Diamond Workflow",
+      "url"          : "/workflows/pegasus-isi-diamond-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "diamond-workflow",
+      "last_update"  : "23 Feb 2021",
+      "tags"         : "example-workflow, diamond-workflow",
+      "description"  : "Pegasus Diamond Workflow",
+      "date"         : "2021-05-08 00:30:54 +0000"
+
+    } ,
+  
+    {
+
+      "title"        : "Pegasus Isi Freesurfer Osg Workflow",
+      "url"          : "/workflows/pegasus-isi-freesurfer-osg-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "freesurfer-osg-workflow",
+      "last_update"  : "23 Feb 2021",
+      "tags"         : "brain-imaging, freesurfer",
+      "description"  : "A Pegasus workflow for running FreeSurfer on the Open Science Grid",
+      "date"         : "2021-05-08 00:30:54 +0000"
+
+    } ,
+  
+    {
+
+      "title"        : "Pegasus Isi Lung Instance Segmentation Workflow",
+      "url"          : "/workflows/pegasus-isi-lung-instance-segmentation-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "lung-instance-segmentation-workflow",
+      "last_update"  : "04 May 2021",
+      "tags"         : "machine-learning, cnn-keras, ray-tune",
+      "description"  : "Instance segmentation with U-Net/Mask R-CNN workflow using Keras & Ray Tune",
+      "date"         : "2021-05-08 00:30:54 +0000"
+
+    } ,
+  
+    {
+
+      "title"        : "Pegasus Isi Mask Detection Workflow",
+      "url"          : "/workflows/pegasus-isi-mask-detection-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "mask-detection-workflow",
+      "last_update"  : "23 Apr 2021",
+      "tags"         : "machine-learning, transfer-learning, pytorch-cnn, optuna",
+      "description"  : "Mask Detection and Classification with pre-trained FastRCNN model using PyTorch & Optuna",
+      "date"         : "2021-05-08 00:30:54 +0000"
+
+    } ,
+  
+    {
+
+      "title"        : "Pegasus Isi Merge Workflow",
+      "url"          : "/workflows/pegasus-isi-merge-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "merge-workflow",
+      "last_update"  : "12 Nov 2020",
+      "tags"         : "",
+      "description"  : "Merge workflow example",
+      "date"         : "2021-05-08 00:30:54 +0000"
+
+    } ,
+  
+    {
+
+      "title"        : "Pegasus Isi Montage Workflow V3",
+      "url"          : "/workflows/pegasus-isi-montage-workflow-v3",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "montage-workflow-v3",
+      "last_update"  : "26 Mar 2021",
+      "tags"         : "astronomy",
+      "description"  : "A Montage workflow for Pegasus 5.0",
+      "date"         : "2021-05-08 00:30:54 +0000"
+
+    } ,
+  
+    {
+
+      "title"        : "Pegasus Isi Pegasus Fb Nlp",
+      "url"          : "/workflows/pegasus-isi-pegasus-fb-nlp",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "pegasus-fb-nlp",
+      "last_update"  : "12 Nov 2020",
+      "tags"         : "nlp, machine-learning",
+      "description"  : "Example of a Facebook NLP pipeline",
+      "date"         : "2021-05-08 00:30:54 +0000"
+
+    } ,
+  
+    {
+
+      "title"        : "Pegasus Isi Pipeline Workflow",
+      "url"          : "/workflows/pegasus-isi-pipeline-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "pipeline-workflow",
+      "last_update"  : "23 Feb 2021",
+      "tags"         : "pipeline, example-workflow",
+      "description"  : "Pipeline workflow example",
+      "date"         : "2021-05-08 00:30:54 +0000"
+
+    } ,
+  
+    {
+
+      "title"        : "Pegasus Isi Process Workflow",
+      "url"          : "/workflows/pegasus-isi-process-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "process-workflow",
+      "last_update"  : "12 Nov 2020",
+      "tags"         : "",
+      "description"  : "Process workflow example",
+      "date"         : "2021-05-08 00:30:54 +0000"
+
+    } ,
+  
+    {
+
+      "title"        : "Pegasus Isi Split Workflow",
+      "url"          : "/workflows/pegasus-isi-split-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "split-workflow",
+      "last_update"  : "12 Nov 2020",
+      "tags"         : "",
+      "description"  : "Split workflow example",
+      "date"         : "2021-05-08 00:30:54 +0000"
+
+    } ,
+  
+    {
+
+      "title"        : "Pegasus Isi Sra Search Pegasus Workflow",
+      "url"          : "/workflows/pegasus-isi-sra-search-pegasus-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "sra-search-pegasus-workflow",
+      "last_update"  : "10 Jul 2020",
+      "tags"         : "",
+      "description"  : "Pegasus workflow which downloads and aligns SRA data, using SRA Toolkit, Samtools and Bowtie2",
+      "date"         : "2021-05-08 00:30:54 +0000"
+
+    } 
+  
+]
