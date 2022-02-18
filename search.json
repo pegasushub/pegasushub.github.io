@@ -2,6 +2,11 @@
 ---
 [
   {% for workflow in site.workflows %}
+    {% if workflow.training %}
+    {% assign extras=", training-workflow"%}
+    {% else %}
+    {% assign extras=""%}
+    {% endif %}
     {
 
       "title"        : "{{ workflow.title | escape }}",
@@ -9,10 +14,10 @@
       "organization" : "{{ workflow.organization }}",
       "repo_name"    : "{{ workflow.repo_name }}",
       "last_update"  : "{{ workflow.last_update }}",
-      "tags"         : "{{ workflow.tags | join: ', ' }}",
+      "tags"         : "{{ workflow.tags | join: ', ' }}{{extras}}",
       "description"  : "{{ workflow.description }}",
-      "date"         : "{{ workflow.date }}"
-
-    } {% unless forloop.last %},{% endunless %}
+      "date"         : "{{ workflow.date }}" 
+    } 
+    {% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]

@@ -40,7 +40,10 @@ $(function () {
                 });
                 let tags = '';
                 tagsList.forEach(function (tag) {
-                    tags += '<span class="topic">' + tag + '</span>&nbsp;';
+                    if(tag == "training-workflow")
+                        tags += '<span class="topic training-topic"><nobr><i class="fas fa-chalkboard-teacher"></i>' + tag + '</nobr></span>&nbsp;';
+                    else
+                        tags += '<span class="topic"><nobr>' + tag + '</nobr></span>&nbsp;';
                 });
                 $("#results-container").append(
                     '<a class="search-item" href="' + entry.url + '"><h1><i class="fab fa-github"></i> ' +

@@ -18,8 +18,8 @@ layout: default
 <hr/>
 <h2 style="margin-top: 0">Recent Repositories</h2>
 
+<br>
 {% for wf in workflows limit: 6 %}
-
 <a class="listing" href="{{ wf.url }}">
     <div class="date-list">
         {{ wf.last_update }}
@@ -35,7 +35,7 @@ layout: default
         </span>&nbsp;
         {% endif %}
         {% for t in wf.tags %}
-        <span class="topic">{{ t }}</span>&nbsp;
+        <span class="topic"><nobr>{{ t }}</nobr></span>&nbsp;
         {% endfor %}
     </div>
 </a>
