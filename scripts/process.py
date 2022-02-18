@@ -9,24 +9,57 @@ import requests
 import yaml
 
 from string import Template
+import logging
+import logging.config
 
+
+logging.basicConfig(filename="logs.log", format="%(asctime)s %(levelname)s %(message)s")
+logger = logging.getLogger(__name__)
 
 workflows = []
-headers = {
-    'Accept': 'application/vnd.github.mercy-preview+json',
-    'Authorization': 'token {}'.format(os.environ['PEGASUSHUB_TOKEN'])
-}
+# headers = {
+#     'Accept': 'application/vnd.github.mercy-preview+json',
+#     'Authorization': 'token {}'.format(os.environ['PEGASUSHUB_TOKEN'])
+# }
+headers = {}
 
 # read list of workflow repositories
 with open('_data/workflows.yml') as f:
     workflows = yaml.safe_load(f)
+if not os.path.exists('./logs'):
+    os.makedirs('./logs')
+with open("logs/logs.txt", 'w') as f:
+    f.write("")
+
 
 for w in workflows:
-    print(w)
+    # try:
+    #     # url = 'https://api.github.com/repos/{}/{}'.format(w['organization'], w['repo_name'])
+    #     url = 'https://api.github.com/repos/{}/{}'.format('pegasus-isi', 'molecular-transformer-workflow')
+    #     r = requests.get(url, headers=headers)
+    #     r.raise_for_status()
+    # except HTTPError as e:
+    #     print('Error')
+    #     if r.status_code == 404:
+    #         #repo has been deleted / not found / is private
+    #         print(e.response.text)
+    #         with open("logs/logs.txt", 'wa') as f:
+    #             f.write(f"{w['repo_name']} has been deleted from {w['organization']}")
+    #         print('Deleted ', w)
+    #         continue
+    
     url = 'https://api.github.com/repos/{}/{}'.format(w['organization'], w['repo_name'])
+    # url = 'https://api.github.com/repos/{}/{}'.format('pegasus-isi', 'molecular-transformer-workflow')
     r = requests.get(url, headers=headers)
-    response = r.json()
+    if r.status_code == 404:
+        #repo has been deleted / not found / is private
+        dt = datetime.datetime.now()
+        curr_time = dt.strftime("%d/%m/%Y %H:%M:%S")
+        logger.warning(f"{w['repo_name']} has been deleted or made private from {w['organization']}")
+        continue
 
+    response = r.json()
+    logger.info(f"{w['repo_name']} is being populated\n")
     # repo general information
     w['title'] = response['name']
     w['default_branch'] = response['default_branch']
@@ -78,7 +111,6 @@ for w in workflows:
     w['dependencies'] = 'No dependencies information available'
     if r.ok:
         data = yaml.safe_load(r.text)
-        print(data)
         try:
             w['pegasus_version'] = data['pegasus']['version']['min'] 
             if data['pegasus']['version']['min'] != data['pegasus']['version']['max']:
