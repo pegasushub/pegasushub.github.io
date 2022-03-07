@@ -3040,12 +3040,20 @@ code {
     position: relative;
 }
 
-.topic, .training-topic {
+.topic, .training-topic, .filter-tag{
     font-size: 0.7em;
     background-color: #1261a0;
     color: #fff;
     border-radius: 0.5em;
     padding: 0.2em 0.5em;
+}
+
+.training-topic {
+    background-color: #0e6b0e;
+}
+
+.filter-tag {
+    background-color: #8b8b8b;
 }
 
 .listing {
@@ -3145,6 +3153,4 @@ code {
     line-height: 1.3em;
 }
 
-.training-topic {
-    background-color: #0e6b0e;
-}
+
