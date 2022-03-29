@@ -1870,9 +1870,9 @@ ul {
     padding-left: 1em;
 }
 
-ul li {
+/* ul li {
     padding-left: 0.5em;
-}
+} */
 
 ol {
     list-style: decimal;
@@ -2164,13 +2164,13 @@ ol li {
 #nav li {
     border-top: solid 1px rgba(0, 0, 0, 0.25);
     box-shadow: inset 0px 1px 0px 0px rgba(255, 255, 255, 0.075);
-    padding: 0.5em 0 0.5em 0;
+    margin: 0.5em 0.5em 0.5em 0;
 }
 
 #nav li:first-child {
     border: 0;
     box-shadow: none;
-    padding-top: 0;
+    /* padding-top: 0; */
 }
 
 #nav li:last-child {
@@ -2196,9 +2196,11 @@ ol li {
     color: #fff;
 }
 
-#nav li:hover a {
+#nav li:hover a, #nav li.active2 {
     background-color: rgba(255, 255, 255, 0.1);
     color: #fff;
+    border-radius: 0.4em;
+    font-weight: 500;
 }
 
 /* Sidebar */
@@ -3046,6 +3048,10 @@ code {
     color: #fff;
     border-radius: 0.5em;
     padding: 0.2em 0.5em;
+}
+
+.topic, .training-topic {
+    margin-left: 0.2em;
 }
 
 .training-topic {

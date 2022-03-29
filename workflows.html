@@ -1,14 +1,13 @@
 ---
 layout: default
 ---
-
 <div style="width: 100%; line-height: 1em">
-    <h1 style="margin-bottom: 0">PegasusHub</h1><br/>
-    <span style="color: #999">A Community-enabled Workflows Repository for Pegasus</span>
+    <h1 style="margin-bottom: 0">Workflows</h1><br/>
+    <!-- <span style="color: #999">A Community-enabled Workflows Repository for Pegasus</span> -->
 </div>
 
-<p>&nbsp;</p>
-<h2>Workflows</h2>
+<!-- <p>&nbsp;</p>
+<h2>Workflows</h2> -->
 
 <div class="listing-workflows">
     <div id="selected-workflows"></div>
@@ -21,8 +20,7 @@ layout: default
     <span id="top-tag0">
         <span class="filter-tag" id="design-btn0">
             <nobr><i class="fas fa-chalkboard-teacher"></i>
-            &nbsp;training-workflow ({{workflows | where: "training", "true" | size}})</nobr>
-        </span>
+            &nbsp;training-workflow ({{workflows | where: "training", "true" | size}})</nobr></span>
     </span>
 
     {% for currentTag in tag_dict %}
