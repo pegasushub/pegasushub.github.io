@@ -26,11 +26,6 @@ headers = {
 }
 # headers = {}
 
-
-# organization: pegasus-isi
-#   repo_name: split-workflow
-#   training: true
-#   execution_sites:
 config_schema = Schema({
     "organization": str,
     "repo_name": str,
@@ -46,7 +41,7 @@ schema = {
         "organization": { "type": "string" },
         "highlight": { "type": "boolean" },
         "training": { "type": "boolean" },
-        "priority": {"type": "number" },
+        "priority": {"type": "number", "minimum": 0, "maximum": 5 },
         "execution_sites": { 
             "type": "array",
             "items": {
@@ -87,8 +82,8 @@ if not os.path.exists('./logs/logs.txt'):
 validator = Draft7Validator(schema)
 errors = sorted(validator.iter_errors(workflows), key=lambda e: e.path)
 for error in errors:
-    if error.validator == "type":
-        print(error.message, " in ", error.schema_path)
+    if error.validator in ["type", "maximum", "minimum"] :
+        print(error.message, " in ", error.schema_path[-2])
     else:
         print(error.message)
 
