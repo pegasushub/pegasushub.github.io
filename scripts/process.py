@@ -11,45 +11,89 @@ import yaml
 from string import Template
 import logging
 import logging.config
+from schema import Schema, SchemaError
 
+from jsonschema import validate, Draft7Validator
+from jsonschema.exceptions import ValidationError
 
-logging.basicConfig(filename="logs.log", format="%(asctime)s %(levelname)s %(message)s")
+logging.basicConfig(filename="logs/logs.txt", format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
 
 workflows = []
-# headers = {
-#     'Accept': 'application/vnd.github.mercy-preview+json',
-#     'Authorization': 'token {}'.format(os.environ['PEGASUSHUB_TOKEN'])
-# }
-headers = {}
+headers = {
+    'Accept': 'application/vnd.github.mercy-preview+json',
+    'Authorization': 'token {}'.format(os.environ['PEGASUSHUB_TOKEN'])
+}
+# headers = {}
+
+
+# organization: pegasus-isi
+#   repo_name: split-workflow
+#   training: true
+#   execution_sites:
+config_schema = Schema({
+    "organization": str,
+    "repo_name": str,
+    # "training": bool
+})
+
+schema = {
+  "type": "array",
+  "items": {
+    "type" : "object",
+    "properties": {
+        "repo_name": { "type": "string" },
+        "organization": { "type": "string" },
+        "highlight": { "type": "boolean" },
+        "training": { "type": "boolean" },
+        "priority": {"type": "number" },
+        "execution_sites": { 
+            "type": "array",
+            "items": {
+                "type": "string",
+                "enum": ["CONDORPOOL", "SLURM", "SUMMIT_GLITE", "LSF", "SUMMIT_KUBERNETES"] 
+            }
+        }
+    },
+    "additionalProperties": False,
+    "required": ["repo_name", "organization"],
+    "if": {
+        "properties": {"highlight": {"const": True}}
+    }, 
+    "then": {"required": ["priority"]}, 
+    # "anyOf": [
+    #     {
+    #         "not": {
+    #             "properties": { "highlight": { "const": True }},
+    #             "required": ["highlight"]
+    #         }
+    #     },
+    #     { "required": ["priority"] }
+    # ]
+  }
+}
 
 # read list of workflow repositories
 with open('_data/workflows.yml') as f:
     workflows = yaml.safe_load(f)
+
 if not os.path.exists('./logs'):
     os.makedirs('./logs')
-with open("logs/logs.txt", 'w') as f:
-    f.write("")
+if not os.path.exists('./logs/logs.txt'):
+    with open("logs/logs.txt", 'w') as f:
+        f.write("")
 
 
-for w in workflows:
-    # try:
-    #     # url = 'https://api.github.com/repos/{}/{}'.format(w['organization'], w['repo_name'])
-    #     url = 'https://api.github.com/repos/{}/{}'.format('pegasus-isi', 'molecular-transformer-workflow')
-    #     r = requests.get(url, headers=headers)
-    #     r.raise_for_status()
-    # except HTTPError as e:
-    #     print('Error')
-    #     if r.status_code == 404:
-    #         #repo has been deleted / not found / is private
-    #         print(e.response.text)
-    #         with open("logs/logs.txt", 'wa') as f:
-    #             f.write(f"{w['repo_name']} has been deleted from {w['organization']}")
-    #         print('Deleted ', w)
-    #         continue
-    
+validator = Draft7Validator(schema)
+errors = sorted(validator.iter_errors(workflows), key=lambda e: e.path)
+for error in errors:
+    if error.validator == "type":
+        print(error.message, " in ", error.schema_path)
+    else:
+        print(error.message)
+
+for w in workflows:    
     url = 'https://api.github.com/repos/{}/{}'.format(w['organization'], w['repo_name'])
-    # url = 'https://api.github.com/repos/{}/{}'.format('pegasus-isi', 'molecular-transformer-workflow')
     r = requests.get(url, headers=headers)
     if r.status_code == 404:
         #repo has been deleted / not found / is private
@@ -130,6 +174,10 @@ for w in workflows:
     # metadata information
     if 'training' not in w:
         w['training'] = 'False'
+    if 'highlight' not in w:
+        w['highlight'] = 'False'
+    if 'priority' not in w:
+        w['priority'] = 0
     if 'execution_sites' not in w:
         w['execution_sites'] = []
 
