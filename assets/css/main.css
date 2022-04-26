@@ -99,7 +99,7 @@ html {
 
 body {
     background-color: #e8e8e8;
-    background-image: url("images/bg02.png");
+    /* background-image: url("images/bg02.png"); */
     display: -moz-flex;
     display: -webkit-flex;
     display: -ms-flex;
@@ -1795,7 +1795,7 @@ button,
 .button {
     cursor: pointer;
     background-color: #c94663;
-    background-image: url("images/bg01.png");
+    /* background-image: url("images/bg01.png"); */
     border-radius: 0.4em;
     text-align: center;
     box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.15);
@@ -1905,7 +1905,7 @@ ol li {
     text-decoration: none;
     color: inherit;
     background-color: #e8e8e8;
-    background-image: url("images/bg02.png");
+    /* background-image: url("images/bg02.png"); */
     color: #565656;
     margin: 0 0.4em 0 0;
     border-radius: 0.4em;
@@ -1996,7 +1996,7 @@ ol li {
 
 .box.calendar td.today a {
     background-color: #c94663;
-    background-image: url("images/bg01.png");
+    /* background-image: url("images/bg01.png"); */
     box-shadow: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.15), 0 0.025em 0.15em 0em rgba(0, 0, 0, 0.25);
     color: #fff !important;
 }
@@ -2221,7 +2221,8 @@ ol li {
     top: 0;
     width: 100%;
     z-index: 10001;
-    background: #364050 url("images/bg01.png");
+    background: #364050;
+     /* url("images/bg01.png"); */
 }
 
 #titleBar .title {
@@ -2274,7 +2275,8 @@ ol li {
     width: 50px;
     height: 30px;
     line-height: 30px;
-    background: #c94663 url("images/bg01.png");
+    background: #c94663;
+     /* url("images/bg01.png"); */
     border-radius: 5px;
     color: #fff;
     text-align: center;
@@ -2292,7 +2294,8 @@ ol li {
     text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.5);
     width: 20em;
     padding: 3em 1.35em 1em 1.15em;
-    background: #364050 url("images/bg01.png");
+    background: #364050;
+     /* url("images/bg01.png"); */
     overflow-y: auto;
     left: 0;
     box-shadow: inset -0.1em 0em 0.35em 0em rgba(0, 0, 0, 0.15);
@@ -2352,7 +2355,7 @@ ol li {
 #content {
     position: relative;
     background-color: #fff;
-    background-image: url("images/bg02.png");
+    /* background-image: url("images/bg02.png"); */
     width: 100%;
     -moz-flex-grow: 1;
     -webkit-flex-grow: 1;
@@ -2589,7 +2592,7 @@ ol li {
         width: 5.5em;
         overflow: hidden;
         background-color: #fff;
-        background-image: url("images/bg02.png");
+        /* background-image: url("images/bg02.png"); */
         left: -10.5em;
         top: 0;
         padding: 1.5em 1em 1.5em 1em;
