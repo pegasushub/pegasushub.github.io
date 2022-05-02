@@ -39,11 +39,11 @@ function getOverallRepoInfo(organization, repo_name, default_branch) {
 }
 
 
-function getRepoInfo() {
-    let pathname = window.location.pathname.split('/');
-    let organization = pathname[2];
-    let repo_name = pathname[3];
-    let default_branch = ""; //this should be populated but this funtion is not in use
+function getRepoInfo(organization, repo_name, default_branch) {
+    // let pathname = window.location.pathname.split('/');
+    // let organization = pathname[2];
+    // let repo_name = pathname[3];
+    // let default_branch = ""; //this should be populated but this funtion is not in use
 
     $.ajax({
         url: 'https://api.github.com/repos/' + organization + '/' + repo_name,
