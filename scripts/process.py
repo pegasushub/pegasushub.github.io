@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
 # Copyright (c) 2020 The Pegasus Team.
@@ -80,8 +80,8 @@ def get_repo_info(w, response):
     w['title'] = response['name']
     w['stargazers'] = response['stargazers_count']
     w['default_branch'] = response['default_branch']
-    w['subtitle'] = response['description']
-    w['license'] = response['license']['name'] if response['license'] else 'No licence available'
+    w['subtitle'] = response['description'] if response['description'] else "No description provided"
+    w['license'] = response['license']['name'] if response['license'] else 'No license available'
     w['issues'] = response['open_issues']
     w['forks'] = response['forks']
 
