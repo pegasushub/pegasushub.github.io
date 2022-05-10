@@ -49,6 +49,12 @@ function getRepoInfo(organization, repo_name, default_branch) {
         url: 'https://api.github.com/repos/' + organization + '/' + repo_name,
         type: 'GET',
         dataType: 'json',
+        cache: true,
+        // headers: {
+        //     "cache-control": "public, max-age=600",
+        //     "access-control-allow-origin": "*",
+        //     "access-control-expose-headers": "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset"
+        // },
         success: function (content) {
             console.log(content);
 

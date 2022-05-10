@@ -53,7 +53,27 @@ layout: default
     
     {% for wf in workflows %}
         {% assign curr_tag = wf.tags %}
-        <div class="listing-table" id="workflow{{forloop.index0}}">
+        <a class="listing" href="{{ wf.url }}" id="workflow{{forloop.index0}}">
+            <div class="date-list">
+                {{ wf.last_update }}
+            </div>
+            <h1>{{ wf.repo_name }}</h1>
+            <p>{{ wf.description }}</p>
+        
+            <div>
+                {% if wf.training %}
+                <span class="training-topic" id="workflow{{forloop.index0}}-training">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                    &nbsp;training workflow
+                </span>&nbsp;
+                {% assign curr_tag = curr_tag | push: "training-workflow" %}
+                {% endif %}
+                {% for t in wf.tags %}
+                <span class="topic"><nobr>{{ t }}</nobr></span>&nbsp;
+                {% endfor %}
+            </div>
+        </a>
+        <!-- <div class="listing-table" id="workflow{{forloop.index0}}">
             <div>
                 <div>
                     <strong><a href="{{ wf.url }}">{{ wf.repo_name }}</a></strong>
@@ -73,7 +93,7 @@ layout: default
                     {% endfor %}
                 </div>
             </div>
-        </div>
+        </div> -->
         {% assign wf_tags = wf_tags | push: curr_tag %}
     {% endfor %}
     <!-- {% assign wf_tags = wf_tags | split: ';' %} -->
