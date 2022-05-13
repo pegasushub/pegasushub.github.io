@@ -40,28 +40,21 @@ function getOverallRepoInfo(organization, repo_name, default_branch) {
 
 
 function getRepoInfo(organization, repo_name, default_branch) {
-    // let pathname = window.location.pathname.split('/');
-    // let organization = pathname[2];
-    // let repo_name = pathname[3];
-    // let default_branch = ""; //this should be populated but this funtion is not in use
 
     $.ajax({
         url: 'https://api.github.com/repos/' + organization + '/' + repo_name,
         type: 'GET',
         dataType: 'json',
-        cache: true,
-        // headers: {
-        //     "cache-control": "public, max-age=600",
-        //     "access-control-allow-origin": "*",
-        //     "access-control-expose-headers": "ETag, Link, Location, Retry-After, X-GitHub-OTP, X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Used, X-RateLimit-Resource, X-RateLimit-Reset, X-OAuth-Scopes, X-Accepted-OAuth-Scopes, X-Poll-Interval, X-GitHub-Media-Type, X-GitHub-SSO, X-GitHub-Request-Id, Deprecation, Sunset"
-        // },
         success: function (content) {
             console.log(content);
 
             // metadata file
             $.get('https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/' + default_branch + '/.pegasushub.yml', function (data) {
                 let content = jsyaml.load(data);
-                let version = content.pegasus.version.min === content.pegasus.version.max ? content.pegasus.version.min : '[' + content.pegasus.version.min + ', ' + content.pegasus.version.max + ']';
+                let version = ">=" + content.pegasus.version.min 
+                if (content.pegasus.version.min !== content.pegasus.version.max && content.pegasus.version.max){
+                    version = '[' + content.pegasus.version.min + ', ' + content.pegasus.version.max + ']';
+                }
                 $('#wf-pegasus-version').html(version);
                 let dependencies = '';
                 for (let dependency in content.dependencies) {
@@ -133,6 +126,15 @@ function getRepoInfo(organization, repo_name, default_branch) {
             });
 
         },
+        error: function (jqXHR) {
+            try{
+                var err = JSON.parse(jqXHR.responseText);
+                console.log(jqXHR.status, " : ", err.message);
+            }
+            catch(err){
+                console.log(jqXHR.status, err);
+            }
+          },
         beforeSend: function (request) {
             request.setRequestHeader("Accept", 'application/vnd.github.mercy-preview+json');
         }
