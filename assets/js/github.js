@@ -51,8 +51,11 @@ function getRepoInfo(organization, repo_name, default_branch) {
             // metadata file
             $.get('https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/' + default_branch + '/.pegasushub.yml', function (data) {
                 let content = jsyaml.load(data);
-                let version = ">=" + content.pegasus.version.min 
-                if (content.pegasus.version.min !== content.pegasus.version.max && content.pegasus.version.max){
+                let version = ">= " + content.pegasus.version.min ;
+                if(!content.pegasus.version.min && content.pegasus.version.max){
+                    version = "<= " + content.pegasus.version.max ;
+                }
+                else if (content.pegasus.version.min !== content.pegasus.version.max && content.pegasus.version.max){
                     version = '[' + content.pegasus.version.min + ', ' + content.pegasus.version.max + ']';
                 }
                 $('#wf-pegasus-version').html(version);
@@ -127,13 +130,8 @@ function getRepoInfo(organization, repo_name, default_branch) {
 
         },
         error: function (jqXHR) {
-            try{
-                var err = JSON.parse(jqXHR.responseText);
-                console.log(jqXHR.status, " : ", err.message);
-            }
-            catch(err){
-                console.log(jqXHR.status, err);
-            }
+            if(jqXHR.status == 403)
+                console.warn(jqXHR.status + " Rate limit exceeded, skipping for now");
           },
         beforeSend: function (request) {
             request.setRequestHeader("Accept", 'application/vnd.github.mercy-preview+json');
