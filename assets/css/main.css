@@ -2537,6 +2537,14 @@ ol li {
         max-width: 1038px;
     }
 
+    #content > .inner > h1, h2, h3, h4, h5, h6 {
+        color: #000;
+    }
+
+    #content > .inner > div > h1, h2, h3, h4, h5, h6 {
+        color: #000;
+    }
+
     /* Copyright */
     #copyright {
         margin: 2em 0 0 0;
