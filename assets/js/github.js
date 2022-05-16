@@ -39,11 +39,7 @@ function getOverallRepoInfo(organization, repo_name, default_branch) {
 }
 
 
-function getRepoInfo() {
-    let pathname = window.location.pathname.split('/');
-    let organization = pathname[2];
-    let repo_name = pathname[3];
-    let default_branch = ""; //this should be populated but this funtion is not in use
+function getRepoInfo(organization, repo_name, default_branch) {
 
     $.ajax({
         url: 'https://api.github.com/repos/' + organization + '/' + repo_name,
@@ -55,7 +51,13 @@ function getRepoInfo() {
             // metadata file
             $.get('https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/' + default_branch + '/.pegasushub.yml', function (data) {
                 let content = jsyaml.load(data);
-                let version = content.pegasus.version.min === content.pegasus.version.max ? content.pegasus.version.min : '[' + content.pegasus.version.min + ', ' + content.pegasus.version.max + ']';
+                let version = ">= " + content.pegasus.version.min ;
+                if(!content.pegasus.version.min && content.pegasus.version.max){
+                    version = "<= " + content.pegasus.version.max ;
+                }
+                else if (content.pegasus.version.min !== content.pegasus.version.max && content.pegasus.version.max){
+                    version = '[' + content.pegasus.version.min + ', ' + content.pegasus.version.max + ']';
+                }
                 $('#wf-pegasus-version').html(version);
                 let dependencies = '';
                 for (let dependency in content.dependencies) {
@@ -127,6 +129,10 @@ function getRepoInfo() {
             });
 
         },
+        error: function (jqXHR) {
+            if(jqXHR.status == 403)
+                console.warn(jqXHR.status + " Rate limit exceeded, skipping for now");
+          },
         beforeSend: function (request) {
             request.setRequestHeader("Accept", 'application/vnd.github.mercy-preview+json');
         }

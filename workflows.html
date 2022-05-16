@@ -1,54 +1,182 @@
 ---
 layout: default
 ---
-
 <div style="width: 100%; line-height: 1em">
-    <h1 style="margin-bottom: 0">PegasusHub</h1><br/>
-    <span style="color: #999">A Community-enabled Workflows Repository for Pegasus</span>
+    <h1 style="margin-bottom: 0">Workflows</h1><br/>
+    <!-- <span style="color: #999">A Community-enabled Workflows Repository for Pegasus</span> -->
 </div>
 
-
-<p>&nbsp;</p>
-<h2>Workflows</h2>
+<!-- <p>&nbsp;</p>
+<h2>Workflows</h2> -->
 
 <div class="listing-workflows">
+    <div id="selected-workflows"></div>
     {% assign workflows = site.workflows | sort: "date_sort" | reverse %}
-    {% for wf in workflows %}
+    {% assign tag_dict = workflows | map: 'tags' | join: ','  | split: ',' | sort %}
+    {% assign idx = 1 %}
+    {% assign SIZE = workflows.size %}
+    {% assign wf_tags = "" | split: "," %}
 
-    <div class="listing-table">
-        <div>
-            <div>
-                <strong><a href="{{ wf.url }}">{{ wf.repo_name }}</a></strong>
-                <span style="font-size: 0.8em; color: #999">&nbsp;&nbsp;({{ wf.last_update }})</span>
+    <span id="top-tag0">
+        <span class="filter-tag" id="design-btn0">
+            <nobr><i class="fas fa-chalkboard-teacher"></i>
+            &nbsp;training-workflow ({{workflows | where: "training", "true" | size}})</nobr></span>
+    </span>
+
+    {% for currentTag in tag_dict %}
+        {% if previousTag == "" %}
+            {% assign previousTag = currentTag %}
+            {% assign idx = idx | plus: 1 %}
+        {% endif %}
+
+        {% if forloop.index0 == 0 or currentTag == previousTag %}
+            {% assign counter = counter | plus: 1 %}
+        {% else %}
+            <span id="top-tag{{idx}}">
+                <span class="filter-tag" id="design-btn{{idx}}"><nobr>{{ previousTag }} ({{ counter }})</nobr></span>
+            </span>
+            {% assign counter = 1 %}
+            {% assign idx = idx | plus: 1 %}
+        {% endif %}
+
+        {% if forloop.last %}
+            <span id="top-tag{{idx}}">
+                <span class="filter-tag" id="design-btn{{idx}}"><nobr>{{ currentTag }} ({{ counter }})</nobr></span>
+            </span>
+            {% assign tag_index_dict[wf.repo_name] = wf.tags %}
+            {% assign idx = idx | plus: 1%}
+        {% endif %}
+
+        {% assign previousTag = currentTag %}
+
+    {% endfor %}
+    
+    {% for wf in workflows %}
+        {% assign curr_tag = wf.tags %}
+        <a class="listing" href="{{ wf.url }}" id="workflow{{forloop.index0}}">
+            <div class="date-list">
+                {{ wf.last_update }}
             </div>
-            <div>{{ wf.description }}</div>
+            <h1>{{ wf.repo_name }}</h1>
+            <p>{{ wf.description }}</p>
+        
             <div>
                 {% if wf.training %}
-                <span class="training-topic">
+                <span class="training-topic" id="workflow{{forloop.index0}}-training">
                     <i class="fas fa-chalkboard-teacher"></i>
                     &nbsp;training workflow
                 </span>&nbsp;
+                {% assign curr_tag = curr_tag | push: "training-workflow" %}
                 {% endif %}
                 {% for t in wf.tags %}
-                <span class="topic">{{ t }}</span>&nbsp;
+                <span class="topic"><nobr>{{ t }}</nobr></span>&nbsp;
                 {% endfor %}
             </div>
-        </div>
-    </div>
-
-    <!--<div class="listing">-->
-    <!--    <div class="date-list">-->
-    <!--        {{ wf.last_update }}-->
-    <!--    </div>-->
-    <!--    <a href="{{ wf.url }}"><h1>{{ wf.repo_name }}</h1></a>-->
-    <!--    <p>{{ wf.description }}</p>-->
-
-    <!--    <div>-->
-    <!--        {% for t in wf.tags %}-->
-    <!--        <span class="topic">{{ t }}</span>&nbsp;&nbsp;-->
-    <!--        {% endfor %}-->
-    <!--    </div>-->
-    <!--</div>-->
-
+        </a>
+        <!-- <div class="listing-table" id="workflow{{forloop.index0}}">
+            <div>
+                <div>
+                    <strong><a href="{{ wf.url }}">{{ wf.repo_name }}</a></strong>
+                    <span style="font-size: 0.8em; color: #999">&nbsp;&nbsp;({{ wf.last_update }})</span>
+                </div>
+                <div>{{ wf.description }}</div>
+                <div>
+                    {% if wf.training %}
+                    <span class="training-topic" id="workflow{{forloop.index0}}-training">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                        &nbsp;training-workflow
+                    </span>&nbsp;
+                    {% assign curr_tag = curr_tag | push: "training-workflow" %}
+                    {% endif %}
+                    {% for t in wf.tags %}
+                    <span class="topic"><nobr>{{ t }}</nobr></span>&nbsp;
+                    {% endfor %}
+                </div>
+            </div>
+        </div> -->
+        {% assign wf_tags = wf_tags | push: curr_tag %}
     {% endfor %}
+    <!-- {% assign wf_tags = wf_tags | split: ';' %} -->
 </div>
+<script>
+    var wf = {{wf_tags}}; 
+    var tag_map = new Map();
+    var selected_tags = new Set();
+    let TAG = "filter-tag";
+    let TRAINING_TAG_HIGHLIGHT = "training-topic";
+    let TAG_HIGHLIGHT = "topic";
+
+    init = () => {
+        for(let i = 0; i < {{SIZE}}; i++){
+            for(var tag of wf[i]){
+                if(tag_map.has(tag)){
+                    tag_map.get(tag).push(i);
+                }
+                else{
+                    var curr = [];
+                    curr.push(i);
+                    if(tag != "") tag_map.set(tag, curr);
+                }
+            }
+        }
+    }
+
+    init();
+
+    // getRecentSelectedIndexes = (curr_tag) => {
+    //     return new Set(tag_map.get(curr_tag));
+    // }
+
+    insertAfter = (referenceNode, newNode) => {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    }
+
+    getWorkflowsBasedOnSelectedTags = () => {
+        var selected_idx = new Set();
+        for(var tag of selected_tags){
+            console.log(tag, selected_idx, tag_map.get(tag))
+            for(var i of tag_map.get(tag))
+                selected_idx.add(i);
+        }
+        return selected_idx;
+    };
+
+    displayWorkflows = () => {
+        var all_selected_idexes = getWorkflowsBasedOnSelectedTags();
+        var is_empty = all_selected_idexes.size == 0;
+        for(let i = 0; i < {{SIZE}}; i++){
+            var curr_block = document.getElementById("workflow"+i);
+            if(is_empty || all_selected_idexes.has(i)){
+                curr_block.style.display = "block";
+            }
+            else{
+                curr_block.style.display = "none";
+            }
+        }
+    };
+
+    showTag = (event, tag, curr_idx) => {
+        var curr_btn = document.getElementById("design-btn"+curr_idx);
+        var sel_div = document.getElementById("selected-workflows");
+        if(curr_btn.className == TAG){
+            if(curr_btn.id.endsWith("0"))
+                curr_btn.className = TRAINING_TAG_HIGHLIGHT;
+            else
+                curr_btn.className = TAG_HIGHLIGHT;
+            sel_div.appendChild(curr_btn);
+            selected_tags.add(tag);
+        }
+        else{
+            curr_btn.className = TAG;
+            // insertAfter(document.getElementById("design-btn"+(curr_idx-1)), curr_btn);
+            document.getElementById("top-tag"+curr_idx).appendChild(curr_btn);
+            selected_tags.delete(tag);
+        }
+        displayWorkflows();
+    };
+    for(let i = 0; i < {{idx}}; i++){
+        let curr_ele = document.getElementById("design-btn"+i);
+        let curr_tag = curr_ele.innerText.split("(")[0].trim();
+        curr_ele.addEventListener("click", (event) => showTag(event, curr_tag, i));
+    }
+</script>

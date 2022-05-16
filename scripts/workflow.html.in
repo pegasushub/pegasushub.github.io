@@ -7,6 +7,8 @@ date_sort: $year$monthn$day
 description: $subtitle
 tags: $tags
 training: $training
+highlight: $highlight
+priority: $priority
 execution_sites: $execution_sites
 ---
 
@@ -83,5 +85,8 @@ execution_sites: $execution_sites
 </article>
 
 <script type="text/javascript">
-    getREADME('$organization', '$repo_name', '$default_branch')
+    $$(function() {
+        getRepoInfo('$organization', '$repo_name', '$default_branch');
+        getREADME('$organization', '$repo_name', '$default_branch');
+    });
 </script>

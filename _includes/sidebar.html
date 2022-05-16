@@ -2,62 +2,26 @@
 
     <!-- Logo -->
     <div id="logo">
-        <img src="/images/pegasushub-logo.png" style="width: 90%">
+        <a href="/"><img src="/images/pegasushub-logo.png" style="width: 90%"></a>
     </div>
 
+
+    <!-- Search -->
+    <section class="box search">
+        <form>
+            <input type="text" class="text" name="search" placeholder="Search for workflows..." id="search-input" autocomplete="off"/>
+        </form>
+        <div id="results-container"></div>
+    </section>
+    
     <!-- Nav -->
     <nav id="nav">
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/workflows">Workflows</a></li>
+            <li><a href="/workflows/">Workflows</a></li>
             <li><a href="/contribute">How to Contribute</a></li>
         </ul>
     </nav>
-
-    <!-- Search -->
-    <section class="box search">
-        <form method="post" action="#">
-            <input type="text" class="text" name="search" placeholder="Search for workflows..." id="search-input"/>
-        </form>
-        <div id="results-container"></div>
-    </section>
-
-    <!-- Text -->
-    <!--    <section class="box text-style1">-->
-    <!--        <div class="inner">-->
-    <!--            <p>-->
-    <!--                <strong>Striped:</strong> A free and fully responsive HTML5 site-->
-    <!--                template designed by <a href="http://twitter.com/ajlkn">AJ</a> for <a href="http://html5up.net/">HTML5-->
-    <!--                UP</a>-->
-    <!--            </p>-->
-    <!--        </div>-->
-    <!--    </section>-->
-
-    <!-- Recent Posts -->
-    <!--    <section class="box recent-posts">-->
-    <!--        <header>-->
-    <!--            <h2>Recent Posts</h2>-->
-    <!--        </header>-->
-    <!--        <ul>-->
-    <!--            <li><a href="#">Lorem ipsum dolor</a></li>-->
-    <!--            <li><a href="#">Feugiat nisl aliquam</a></li>-->
-    <!--            <li><a href="#">Sed dolore magna</a></li>-->
-    <!--            <li><a href="#">Malesuada commodo</a></li>-->
-    <!--            <li><a href="#">Ipsum metus nullam</a></li>-->
-    <!--        </ul>-->
-    <!--    </section>-->
-
-    <!-- Recent Comments -->
-    <!--    <section class="box recent-comments">-->
-    <!--        <header>-->
-    <!--            <h2>Recent Comments</h2>-->
-    <!--        </header>-->
-    <!--        <ul>-->
-    <!--            <li>case on <a href="#">Lorem ipsum dolor</a></li>-->
-    <!--            <li>molly on <a href="#">Sed dolore magna</a></li>-->
-    <!--            <li>case on <a href="#">Sed dolore magna</a></li>-->
-    <!--        </ul>-->
-    <!--    </section>-->
 
 
     <!-- Copyright -->
@@ -73,5 +37,10 @@
             </p>
         </div>
     </ul>
-
+    <script>
+        var exactMatch = $('#nav > ul > li > a[href="' + window.location.pathname + '"]'); 
+        if (exactMatch.length) { 
+            exactMatch.parents('li').addClass('active2'); 
+        }
+    </script>
 </div>

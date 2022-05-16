@@ -5,16 +5,20 @@ $(function () {
         searchJSON = json;
     });
 
-    $("#search-input").on("keyup", function () {
+    $("#results-container").hide();
+    
+    $("#search-input").on("keyup", function (e) {
         let resultsContainer = $("#results-container");
-        resultsContainer.css('visibility', 'visible').html('<div class="search-item"><h1>No results.</h1></div>');
+        resultsContainer.show().html('<div class="search-item"><h1>No results.</h1></div>');
+        // resultsContainer.css('visibility', 'visible').html('<div class="search-item"><h1>No results.</h1></div>');
         let input_value = $(this).val();
 
         if (input_value.length === 0) {
-            resultsContainer.css('visibility', 'hidden');
+            resultsContainer.hide();
+            // resultsContainer.css('visibility', 'hidden');
             return;
         }
-
+        
         let termsList = input_value.toLowerCase().split(" ");
         let terms = termsList.filter(function (el) {
             return el != null && el.length > 0;
@@ -45,6 +49,7 @@ $(function () {
                     else
                         tags += '<span class="topic"><nobr>' + tag + '</nobr></span>&nbsp;';
                 });
+                
                 $("#results-container").append(
                     '<a class="search-item" href="' + entry.url + '"><h1><i class="fab fa-github"></i> ' +
                     entry.repo_name + '</h1><span class="desc">' + entry.description + '</span><br/>' +

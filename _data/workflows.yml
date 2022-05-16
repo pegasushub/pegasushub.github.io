@@ -13,6 +13,8 @@
 - organization: pegasus-isi
   repo_name: diamond-workflow
   training: true
+  highlight: true
+  priority: 4
   execution_sites:
     - CONDORPOOL
     - SLURM
@@ -23,6 +25,8 @@
 - organization: pegasus-isi
   repo_name: merge-workflow
   training: true
+  highlight: true
+  priority: 1
   execution_sites:
     - CONDORPOOL
     - SLURM
@@ -33,6 +37,8 @@
 - organization: pegasus-isi
   repo_name: split-workflow
   training: true
+  highlight: true
+  priority: 2
   execution_sites:
     - CONDORPOOL
     - SLURM
@@ -43,6 +49,8 @@
 - organization: pegasus-isi
   repo_name: pipeline-workflow
   training: true
+  highlight: true
+  priority: 3
   execution_sites:
     - CONDORPOOL
     - SLURM
@@ -65,3 +73,7 @@
 
 - organization: pegasus-isi
   repo_name: mask-detection-workflow
+  highlight: false
+
+- organization: pegasus-isi
+  repo_name: molecular-transformer-workflow
