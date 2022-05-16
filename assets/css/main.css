@@ -2545,6 +2545,10 @@ ol li {
         color: #000;
     }
 
+    a > p {
+        color: #565656;
+    }
+
     /* Copyright */
     #copyright {
         margin: 2em 0 0 0;
