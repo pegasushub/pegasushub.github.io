@@ -20,7 +20,6 @@ jobs:
           python3 scripts/process.py
 
       - uses: helaili/jekyll-action@v2
-        env:
-          JEKYLL_PAT: ${{ secrets.JEKYLL_PAT }}
         with:
+          token: ${{ secrets.JEKYLL_PAT }}
           target_branch: 'gh-pages'
