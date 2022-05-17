@@ -18,7 +18,7 @@
     <nav id="nav">
         <ul>
             <li><a href="/">Home</a></li>
-            <li><a href="/workflows/">Workflows</a></li>
+            <li><a href="/workflows">Workflows</a></li>
             <li><a href="/contribute">How to Contribute</a></li>
         </ul>
     </nav>
@@ -38,7 +38,10 @@
         </div>
     </ul>
     <script>
-        var exactMatch = $('#nav > ul > li > a[href="' + window.location.pathname + '"]'); 
+        var pathname = window.location.pathname;
+        console.log("Checking ", pathname, pathname.endsWith("/"))
+        if(pathname.endsWith("workflows/")) pathname = pathname.substring(0, pathname.length-1);
+        var exactMatch = $('#nav > ul > li > a[href="' + pathname + '"]'); 
         if (exactMatch.length) { 
             exactMatch.parents('li').addClass('active2'); 
         }
