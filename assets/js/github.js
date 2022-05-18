@@ -93,7 +93,7 @@ function getRepoInfo(organization, repo_name, default_branch) {
             // date
             let date = new Date(content.updated_at);
             $('#wf-month').html(date.toLocaleString('default', {month: 'short'}));
-            $('#wf-day').html(date.getDate());
+            $('#wf-day').html(date.getDate() < 10 ? "0"+date.getDate() : date.getDate());
             $('#wf-year').html(date.getFullYear());
 
             // releases
@@ -105,7 +105,7 @@ function getRepoInfo(organization, repo_name, default_branch) {
                     $('#wf-releases').html('<a href="https://github.com/' + organization + '/' + repo_name + '/releases" target="_blank" class="fab fa-github">' + data.length + '</a>');
                 } else {
                     $('#wf-release').html('No release available');
-                    $('#wf-releases').hide();
+                    // $('#wf-releases').hide();
                 }
             });
 
