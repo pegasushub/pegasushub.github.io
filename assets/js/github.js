@@ -59,7 +59,7 @@ function getRepoInfo(organization, repo_name, default_branch) {
                     version = '[' + content.pegasus.version.min + ', ' + content.pegasus.version.max + ']';
                 }
                 $('#wf-pegasus-version').html(version);
-                let dependencies = '';
+                let dependencies = 'No dependencies information available';
                 for (let dependency in content.dependencies) {
                     if (dependencies !== '') {
                         dependencies += ', ';
