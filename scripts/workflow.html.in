@@ -87,6 +87,6 @@ execution_sites: $execution_sites
 <script type="text/javascript">
     $$(function() {
         getRepoInfo('$organization', '$repo_name', '$default_branch');
-        getREADME('$organization', '$repo_name', '$default_branch');
+        // getREADME('$organization', '$repo_name', '$default_branch');
     });
 </script>
