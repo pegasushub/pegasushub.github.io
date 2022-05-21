@@ -1,4 +1,4 @@
-@import url("fontawesome-all.min.css");
+@import "./pegasushub/fontawesome-all.min.scss";
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,700|Open+Sans+Condensed:300,700");
 
 /*
@@ -183,7 +183,7 @@ p, ul, ol, dl {
 
 /* Row */
 
-.row {
+/* .row {
     display: flex;
     flex-wrap: wrap;
     box-sizing: border-box;
@@ -1647,7 +1647,7 @@ p, ul, ol, dl {
         padding-top: 100px;
     }
 
-}
+} */
 
 /* Table */
 
@@ -2293,12 +2293,12 @@ ol li {
 #sidebar {
     color: rgba(255, 255, 255, 0.55);
     text-shadow: -1px -1px 0px rgba(0, 0, 0, 0.5);
-    width: 20em;
+    /* width: 20em; */
     padding: 3em 1.35em 1em 1.15em;
     background: #364050;
      /* url("images/bg01.png"); */
     overflow-y: auto;
-    left: 0;
+    /* left: 0; */
     box-shadow: inset -0.1em 0em 0.35em 0em rgba(0, 0, 0, 0.15);
     -moz-order: -1;
     -webkit-order: -1;
@@ -2354,10 +2354,10 @@ ol li {
 /* Content */
 
 #content {
-    position: relative;
+    /* position: relative; */
     background-color: #fff;
     /* background-image: url("images/bg02.png"); */
-    width: 100%;
+    /* width: 100%; */
     -moz-flex-grow: 1;
     -webkit-flex-grow: 1;
     -ms-flex-grow: 1;
@@ -2671,7 +2671,7 @@ ol li {
     /* Content */
     #content {
         padding: 3em 5em 8em 5em;
-        margin-left: 7em;
+        // margin-left: 7em;
     }
 
 }

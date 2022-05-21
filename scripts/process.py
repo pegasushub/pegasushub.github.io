@@ -131,10 +131,13 @@ def get_metadata(w):
     r.raise_for_status()
     if r.ok:
         data = yaml.safe_load(r.text)
+
         try:
-            w['pegasus_version'] = data['pegasus']['version']['min'] 
-            if data['pegasus']['version']['min'] != data['pegasus']['version']['max']:
-                w['pegasus_version'] = '[{}, {}]'.format(data['pegasus']['version']['min'], data['pegasus']['version']['max'])
+            w['pegasus_version'] = ">= " + data['pegasus']['version']['min'] 
+            if data['pegasus']['version']['min'] == None and data['pegasus']['version']['max']:
+                w['pegasus_version'] = "<= " + data['pegasus']['version']['max'] 
+            elif data['pegasus']['version']['min']  != data['pegasus']['version']['max'] and data['pegasus']['version']['max']:
+                w['pegasus_version'] = '[' + data['pegasus']['version']['min']  + ', ' + data['pegasus']['version']['max']  + ']'
         except:
             pass
 

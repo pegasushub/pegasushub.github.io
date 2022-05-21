@@ -1,10 +1,13 @@
 function getREADME(organization, repo_name, default_branch) {
     $.get('https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/' + default_branch + '/README.md', function (data) {
         let converter = window.markdownit();
-        let base_url = 'https://github.com/' + organization + '/' + repo_name + '/raw/' + default_branch + '/';
-        let readme = converter.render(data).replaceAll(/<img src="\/|<img src="(?!.*(http:\/\/|https:\/\/))/g, '<img src="' + base_url);
-        console.log(readme);
-        $('#wf-readme').html(readme);
+        $('#wf-readme').html(converter.render(data));
+        $('#wf-readme').find("img").each(function () {
+            let src = $(this).attr("src");
+            if (!src.startsWith("http://") && !src.startsWith("https://")) {
+                $(this).attr("src", 'https://github.com/' + organization + '/' + repo_name + '/raw/' + default_branch + '/' + src);
+            }
+        });
     });
 }
 
@@ -59,7 +62,7 @@ function getRepoInfo(organization, repo_name, default_branch) {
                     version = '[' + content.pegasus.version.min + ', ' + content.pegasus.version.max + ']';
                 }
                 $('#wf-pegasus-version').html(version);
-                let dependencies = '';
+                let dependencies = 'No dependencies information available';
                 for (let dependency in content.dependencies) {
                     if (dependencies !== '') {
                         dependencies += ', ';
@@ -93,7 +96,7 @@ function getRepoInfo(organization, repo_name, default_branch) {
             // date
             let date = new Date(content.updated_at);
             $('#wf-month').html(date.toLocaleString('default', {month: 'short'}));
-            $('#wf-day').html(date.getDate());
+            $('#wf-day').html(date.getDate() < 10 ? "0"+date.getDate() : date.getDate());
             $('#wf-year').html(date.getFullYear());
 
             // releases
@@ -105,17 +108,20 @@ function getRepoInfo(organization, repo_name, default_branch) {
                     $('#wf-releases').html('<a href="https://github.com/' + organization + '/' + repo_name + '/releases" target="_blank" class="fab fa-github">' + data.length + '</a>');
                 } else {
                     $('#wf-release').html('No release available');
-                    $('#wf-releases').hide();
+                    // $('#wf-releases').hide();
                 }
             });
 
             // readme file
             $.get('https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/' + default_branch + '/README.md', function (data) {
                 let converter = window.markdownit();
-                let readme = converter.render(data).replaceAll('src="/', 'src="' + 'https://raw.githubusercontent.com/' + organization + '/' + repo_name + '/');
-                console.log('===================================');
-                console.log(readme);
-                $('#wf-readme').html(readme);
+                $('#wf-readme').html(converter.render(data));
+                $('#wf-readme').find("img").each(function () {
+                    let src = $(this).attr("src");
+                    if (!src.startsWith("http://") && !src.startsWith("https://")) {
+                        $(this).attr("src", 'https://github.com/' + organization + '/' + repo_name + '/raw/' + default_branch + '/' + src);
+                    }
+                });
             });
 
             // contributors
