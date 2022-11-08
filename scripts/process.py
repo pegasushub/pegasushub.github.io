@@ -16,7 +16,6 @@ import logging.config
 from jsonschema import validate, Draft7Validator
 from jsonschema.exceptions import ValidationError
 
-
 HEADERS = {
     'Accept': 'application/vnd.github.mercy-preview+json',
     'Authorization': 'token {}'.format(os.environ.get("PEGASUSHUB_TOKEN", ""))
@@ -182,7 +181,7 @@ def initiliaze_logger():
     if not os.path.exists('./logs/logs.txt'):
         with open("logs/logs.txt", 'w') as f:
             f.write("")
-    logging.basicConfig(filename="logs/logs.txt", format="%(asctime)s %(levelname)s %(message)s")
+    logging.basicConfig(filename="logs/logs.txt", format="%(asctime)s %(levelname)s %(message)s", level=logging.DEBUG)
     return logging.getLogger(__name__)
 
 if __name__ == "__main__":
@@ -196,11 +195,12 @@ if __name__ == "__main__":
     if validate_yaml(workflows):
         sys.exit()
 
-    for w in workflows: 
+    for w in workflows:
         try:   
             url = 'https://api.github.com/repos/{}/{}'.format(w['organization'], w['repo_name'])
             r = requests.get(url, headers=HEADERS)
             r.raise_for_status()
+            logger.info("Looking up repository %s", url)
             if r.status_code == 404:
                 #repo has been deleted / not found / is private
                 dt = datetime.datetime.now()
