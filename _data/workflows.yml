@@ -77,3 +77,6 @@
 
 - organization: pegasus-isi
   repo_name: molecular-transformer-workflow
+
+- organization: pegasus-isi
+  repo_name: variant-calling-pegasus-workflow
