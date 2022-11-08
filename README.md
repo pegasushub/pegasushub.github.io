@@ -14,7 +14,15 @@ to the `_data/workflows.yml` file as follows:
   highlight: true
   priority: 2
 ```
-The property `highlight` specifies wether the workflow is to be featured on the homepage. If highlight is set to true, the workflow must be given a priority number between 1 to 5 (5 being the most important and to be featured on top). 
+The property `highlight` specifies wether the workflow is to 
+be featured on the homepage. If highlight is set to true, the workflow
+must be given a priority number between 1 to 5 (5 being the most 
+important and to be featured on top). 
+
+The Hub only pulls in information from the **master** branch of
+a workflows repository. More details about how to add more information
+describing your repository by specifying a `.pegasushub.yml` can 
+be found at [here](contribute.md).
 
 The preferred way to submit your changes is via creating a 
 **pull request** with the changes.
