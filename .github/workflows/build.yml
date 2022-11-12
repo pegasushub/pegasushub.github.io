@@ -11,12 +11,12 @@ jobs:
   github-pages:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
       - name: Generate workflows pages
         env:
           PEGASUSHUB_TOKEN: ${{ secrets.JEKYLL_PAT }}
         run: |
-          rm -rf _workflows/*.html
           python3 scripts/process.py
 
       - uses: helaili/jekyll-action@v2
