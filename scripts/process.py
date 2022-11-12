@@ -227,6 +227,8 @@ def write_to_file(w):
 
 
 def initiliaze_logger():
+    if not os.path.exists("./_workflows"):
+        os.makedirs("./_workflows")
     if not os.path.exists("./logs"):
         os.makedirs("./logs")
     if not os.path.exists("./logs/logs.txt"):

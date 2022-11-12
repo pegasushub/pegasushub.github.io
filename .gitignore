@@ -1,3 +1,9 @@
+.bundle
+.mypy_cache
+.python-version
+Gemfile.lock
+logs
+vendor
 .jekyll-cache
 _site
-_workflows/*
+_workflows
