@@ -80,3 +80,6 @@
 
 - organization: pegasus-isi
   repo_name: variant-calling-pegasus-workflow
+
+- organization: pegasus-isi
+  repo_name: 1000genome-workflow
