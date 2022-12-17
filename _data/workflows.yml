@@ -69,6 +69,16 @@
     - SUMMIT_KUBERNETES
 
 - organization: pegasus-isi
+  repo_name: hierarichal-sample-wf
+  training: true
+  execution_sites:
+    - CONDORPOOL
+    - SLURM
+    - LSF
+    - SUMMIT_GLITE
+    - SUMMIT_KUBERNETES
+
+- organization: pegasus-isi
   repo_name: lung-instance-segmentation-workflow
 
 - organization: pegasus-isi
