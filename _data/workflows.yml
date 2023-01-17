@@ -9,6 +9,9 @@
 
 - organization: pegasus-isi
   repo_name: pegasus-fb-nlp
+  
+- organization: pegasus-isi
+  repo_name: orcasound-workflow
 
 - organization: pegasus-isi
   repo_name: diamond-workflow
