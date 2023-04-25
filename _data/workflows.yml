@@ -96,3 +96,7 @@
 
 - organization: pegasus-isi
   repo_name: 1000genome-workflow
+
+- organization: pegasus-isi
+  repo_name: rosetta-pegasus
+
