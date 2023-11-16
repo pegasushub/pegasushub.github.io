@@ -22,6 +22,7 @@
     - CONDORPOOL
     - SLURM
     - LSF
+    - SGE
     - SUMMIT_GLITE
     - SUMMIT_KUBERNETES
 
@@ -34,6 +35,7 @@
     - CONDORPOOL
     - SLURM
     - LSF
+    - SGE
     - SUMMIT_GLITE
     - SUMMIT_KUBERNETES
 
@@ -46,6 +48,7 @@
     - CONDORPOOL
     - SLURM
     - LSF
+    - SGE
     - SUMMIT_GLITE
     - SUMMIT_KUBERNETES
 
@@ -58,6 +61,7 @@
     - CONDORPOOL
     - SLURM
     - LSF
+    - SGE
     - SUMMIT_GLITE
     - SUMMIT_KUBERNETES
 
@@ -78,6 +82,7 @@
     - CONDORPOOL
     - SLURM
     - LSF
+    - SGE
     - SUMMIT_GLITE
     - SUMMIT_KUBERNETES
 
