@@ -42,6 +42,7 @@ SCHEMA = {
                         "SLURM",
                         "SUMMIT_GLITE",
                         "LSF",
+                        "SGE",
                         "SUMMIT_KUBERNETES",
                     ],
                 },
