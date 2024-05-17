@@ -105,3 +105,6 @@
 - organization: pegasus-isi
   repo_name: rosetta-pegasus
 
+- organization: pegasus-isi
+  repo_name: compare-large-language-models-workflow
+
