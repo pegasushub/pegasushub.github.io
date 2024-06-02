@@ -1,0 +1,199 @@
+[
+  
+    
+    {
+
+      "title"        : "Pegasus Isi 1000genome Workflow",
+      "url"          : "/workflows/pegasus-isi-1000genome-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "1000genome-workflow",
+      "last_update"  : "31 Dec 2023",
+      "tags"         : "1000genomes, pegasus-wms, scientific-workflows",
+      "description"  : "Bioinformatics workflow that identifies mutational overlaps using data from the 1000 genomes project",
+      "date"         : "2024-06-02 10:12:02 +0000" 
+    } 
+    ,
+  
+    
+    {
+
+      "title"        : "Pegasus Isi Compare Large Language Models Workflow",
+      "url"          : "/workflows/pegasus-isi-compare-large-language-models-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "compare-large-language-models-workflow",
+      "last_update"  : "17 May 2024",
+      "tags"         : "",
+      "description"  : "No description provided",
+      "date"         : "2024-06-02 10:12:02 +0000" 
+    } 
+    ,
+  
+    
+    {
+
+      "title"        : "Pegasus Isi Diamond Workflow",
+      "url"          : "/workflows/pegasus-isi-diamond-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "diamond-workflow",
+      "last_update"  : "26 Apr 2022",
+      "tags"         : "diamond-workflow, example-workflow, training-workflow",
+      "description"  : "Pegasus Diamond Workflow",
+      "date"         : "2024-06-02 10:12:02 +0000" 
+    } 
+    ,
+  
+    
+    {
+
+      "title"        : "Pegasus Isi Hierarichal Sample Wf",
+      "url"          : "/workflows/pegasus-isi-hierarichal-sample-wf",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "hierarichal-sample-wf",
+      "last_update"  : "12 Jan 2023",
+      "tags"         : ", training-workflow",
+      "description"  : "No description provided",
+      "date"         : "2024-06-02 10:12:02 +0000" 
+    } 
+    ,
+  
+    
+    {
+
+      "title"        : "Pegasus Isi Lung Instance Segmentation Workflow",
+      "url"          : "/workflows/pegasus-isi-lung-instance-segmentation-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "lung-instance-segmentation-workflow",
+      "last_update"  : "24 Apr 2024",
+      "tags"         : "cnn-keras, machine-learning, ray-tune",
+      "description"  : "Instance segmentation with U-Net/Mask R-CNN workflow using Keras & Ray Tune",
+      "date"         : "2024-06-02 10:12:02 +0000" 
+    } 
+    ,
+  
+    
+    {
+
+      "title"        : "Pegasus Isi Merge Workflow",
+      "url"          : "/workflows/pegasus-isi-merge-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "merge-workflow",
+      "last_update"  : "06 Jan 2023",
+      "tags"         : ", training-workflow",
+      "description"  : "Merge workflow example",
+      "date"         : "2024-06-02 10:12:02 +0000" 
+    } 
+    ,
+  
+    
+    {
+
+      "title"        : "Pegasus Isi Montage Workflow V3",
+      "url"          : "/workflows/pegasus-isi-montage-workflow-v3",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "montage-workflow-v3",
+      "last_update"  : "24 Apr 2024",
+      "tags"         : "astronomy",
+      "description"  : "A new Python DAX generator version of the classic Montage workflow. This workflow uses the Montage toolkit to re-project, background correct and add astronomical images into custom mosaics.",
+      "date"         : "2024-06-02 10:12:02 +0000" 
+    } 
+    ,
+  
+    
+    {
+
+      "title"        : "Pegasus Isi Orcasound Workflow",
+      "url"          : "/workflows/pegasus-isi-orcasound-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "orcasound-workflow",
+      "last_update"  : "24 Apr 2024",
+      "tags"         : "",
+      "description"  : "Pegasus workflow for the orca github actions workflow",
+      "date"         : "2024-06-02 10:12:02 +0000" 
+    } 
+    ,
+  
+    
+    {
+
+      "title"        : "Pegasus Isi Pegasus Fb Nlp",
+      "url"          : "/workflows/pegasus-isi-pegasus-fb-nlp",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "pegasus-fb-nlp",
+      "last_update"  : "12 Nov 2020",
+      "tags"         : "machine-learning, nlp",
+      "description"  : "Example of a Facebook NLP pipeline",
+      "date"         : "2024-06-02 10:12:02 +0000" 
+    } 
+    ,
+  
+    
+    {
+
+      "title"        : "Pegasus Isi Pipeline Workflow",
+      "url"          : "/workflows/pegasus-isi-pipeline-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "pipeline-workflow",
+      "last_update"  : "06 Jan 2023",
+      "tags"         : "example-workflow, pipeline, training-workflow",
+      "description"  : "Pipeline workflow example",
+      "date"         : "2024-06-02 10:12:02 +0000" 
+    } 
+    ,
+  
+    
+    {
+
+      "title"        : "Pegasus Isi Process Workflow",
+      "url"          : "/workflows/pegasus-isi-process-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "process-workflow",
+      "last_update"  : "28 Aug 2023",
+      "tags"         : ", training-workflow",
+      "description"  : "Process workflow example",
+      "date"         : "2024-06-02 10:12:02 +0000" 
+    } 
+    ,
+  
+    
+    {
+
+      "title"        : "Pegasus Isi Rosetta Pegasus",
+      "url"          : "/workflows/pegasus-isi-rosetta-pegasus",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "rosetta-pegasus",
+      "last_update"  : "01 May 2023",
+      "tags"         : "",
+      "description"  : "This is a Pegasus workflow for running Rosetta's De novo structure prediction on the OSG. The workflow predicts the 3-dimensional structure of a protein starting with an amino acid sequence, using the Abinitio Relax algorithm.",
+      "date"         : "2024-06-02 10:12:02 +0000" 
+    } 
+    ,
+  
+    
+    {
+
+      "title"        : "Pegasus Isi Split Workflow",
+      "url"          : "/workflows/pegasus-isi-split-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "split-workflow",
+      "last_update"  : "06 Jan 2023",
+      "tags"         : ", training-workflow",
+      "description"  : "Split workflow example",
+      "date"         : "2024-06-02 10:12:02 +0000" 
+    } 
+    ,
+  
+    
+    {
+
+      "title"        : "Pegasus Isi Variant Calling Pegasus Workflow",
+      "url"          : "/workflows/pegasus-isi-variant-calling-pegasus-workflow",
+      "organization" : "pegasus-isi",
+      "repo_name"    : "variant-calling-pegasus-workflow",
+      "last_update"  : "08 Nov 2022",
+      "tags"         : "bioinformatics, genomics, workflow",
+      "description"  : "A Pegasus Workflow for "Automating a Variant Calling Workflow" from Data Carpentry Lesson "Data Wrangling and Processing for Genomics"",
+      "date"         : "2024-06-02 10:12:02 +0000" 
+    } 
+    
+  
+]
