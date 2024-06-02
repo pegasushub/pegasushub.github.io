@@ -18,8 +18,3 @@ jobs:
           PEGASUSHUB_TOKEN: ${{ secrets.JEKYLL_PAT }}
         run: |
           python3 scripts/process.py
-
-      - uses: helaili/jekyll-action@v2
-        with:
-          token: ${{ secrets.JEKYLL_PAT }}
-          target_branch: 'gh-pages'
