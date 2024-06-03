@@ -11,13 +11,13 @@
 
       "title"        : "{{ workflow.title | escape }}",
       "url"          : "{{ workflow.baseurl }}{{ workflow.url }}",
-      "organization" : "{{ workflow.organization }}",
-      "repo_name"    : "{{ workflow.repo_name }}",
+      "organization" : "{{ workflow.organization | escape }}",
+      "repo_name"    : "{{ workflow.repo_name | escape }}",
       "last_update"  : "{{ workflow.last_update }}",
       "tags"         : "{{ workflow.tags | join: ', ' }}{{extras}}",
-      "description"  : "{{ workflow.description }}",
-      "date"         : "{{ workflow.date }}" 
-    } 
+      "description"  : "{{ workflow.description | escape }}",
+      "date"         : "{{ workflow.date }}"
+    }
     {% unless forloop.last %},{% endunless %}
   {% endfor %}
 ]
