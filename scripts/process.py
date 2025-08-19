@@ -40,6 +40,7 @@ SCHEMA = {
                     "enum": [
                         "CONDORPOOL",
                         "SLURM",
+                        "REMOTE_SLURM",
                         "SUMMIT_GLITE",
                         "LSF",
                         "SGE",
