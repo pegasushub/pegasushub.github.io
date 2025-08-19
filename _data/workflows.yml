@@ -113,3 +113,6 @@
 - organization: pegasus-isi
   repo_name: compare-large-language-models-workflow
 
+- organization: TauferLab
+  repo_name: SOMOSPIE
+
