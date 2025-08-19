@@ -92,7 +92,7 @@ def validate_yaml(data):
 
 
 def get_repo_info(w, response):
-    logger.info(f"{w['repo_name']} is being populated\n")
+    logger.info(f"{w['repo_name']} is being populated")
     # repo general information
     w["title"] = response["name"]
     w["stargazers"] = response["stargazers_count"]
@@ -164,7 +164,7 @@ def get_metadata(w, branch):
     )
     w["pegasus_version"] = "No version information available"
     w["dependencies"] = "No dependencies information available"
-    r.raise_for_status()
+    # .pegasushub.yml is optional
     if r.ok:
         data = yaml.safe_load(r.text)
 
@@ -197,6 +197,8 @@ def get_metadata(w, branch):
                 w["dependencies"] += dep
         except:
             w["dependencies"] = "No dependencies information available"
+    else:
+        logger.info("No .pegasushub.yml available for this repo")
 
     # metadata information
     if "training" not in w:
@@ -231,15 +233,10 @@ def write_to_file(w):
 def initiliaze_logger():
     if not os.path.exists("./_workflows"):
         os.makedirs("./_workflows")
-    if not os.path.exists("./logs"):
-        os.makedirs("./logs")
-    if not os.path.exists("./logs/logs.txt"):
-        with open("logs/logs.txt", "w") as f:
-            f.write("")
     logging.basicConfig(
-        filename="logs/logs.txt",
+        stream=sys.stdout,
         format="%(asctime)s %(levelname)s %(message)s",
-        level=logging.DEBUG,
+        level=logging.INFO,
     )
     return logging.getLogger(__name__)
 
@@ -262,6 +259,7 @@ if __name__ == "__main__":
             )
             r = requests.get(url, headers=HEADERS)
             r.raise_for_status()
+            logger.info("\n ")
             logger.info("Looking up repository %s", url)
             if r.status_code == 404:
                 # repo has been deleted / not found / is private

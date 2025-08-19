@@ -55,7 +55,6 @@ $ ./scripts/process.py
 404 Client Error: Not Found for url: https://raw.githubusercontent.com/pegasus-isi/molecular-transformer-workflow/master/.pegasushub.yml
 ```
 The workflow html pages get generated in the `_workflows` directory
-and the `_logs` directory will have logs from the process script
 
 #### Start the Jekyll Server
 
