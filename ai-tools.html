@@ -1,0 +1,594 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>PegasusHub | AI Tools</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #355872;
+            --surface: rgba(30, 41, 59, 0.4);
+            --border: rgba(148, 163, 184, 0.1);
+            --primary: #22d3ee;
+            --primary-glow: rgba(34, 211, 238, 0.2);
+            --secondary: #9CD5FF;
+            --text-main: #ffffff;
+            --text-muted: #9CD5FF;
+            --glass: rgba(2, 6, 23, 0.8);
+            --grad: radial-gradient(circle at 50% -10%, rgba(129, 140, 248, 0.2) 0%, transparent 60%);
+        }
+
+        body.light-mode {
+            --bg: #f8fafc; --surface: rgba(255, 255, 255, 0.7); --border: #e2e8f0;
+            --primary: #0284c7; --text-main: #0f172a; --text-muted: #64748b;
+            --glass: rgba(255, 255, 255, 0.8);
+            --grad: radial-gradient(circle at 50% -10%, rgba(2, 132, 199, 0.08) 0%, transparent 60%);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg); color: var(--text-main);
+            background-image: var(--grad); background-attachment: fixed;
+            min-height: 100vh; line-height: 1.6; overflow-x: hidden;
+            animation: pageFadeIn 0.4s ease forwards;
+        }
+        @keyframes pageFadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+        /* --- NAV --- */
+        nav {
+            height: 80px; padding: 0 5%; background: var(--glass);
+            backdrop-filter: blur(16px); border-bottom: 1px solid var(--border);
+            display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .nav-left { display: flex; align-items: center; justify-content: flex-start; }
+        .nav-center { display: flex; align-items: center; justify-content: center; }
+        .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
+        .nav-logo { font-weight: 800; font-size: 1.3rem; text-decoration: none; color: var(--text-main); letter-spacing: -1px; display: flex; align-items: center; gap: 10px; }
+        .nav-logo i, .nav-logo span { color: var(--primary); }
+        .nav-links { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; }
+        .nav-item { display: flex; align-items: center; position: relative; }
+        .nav-item:not(:last-child)::after {
+            content: ''; width: 25px; height: 2px; background: var(--border); margin: 0 10px; transition: 0.3s;
+        }
+        .nav-item:hover:not(:last-child)::after, .nav-item.active-path:not(:last-child)::after {
+            background: var(--primary); box-shadow: 0 0 10px var(--primary-glow);
+        }
+        .nav-link {
+            display: flex; align-items: center; gap: 8px; color: var(--text-muted);
+            text-decoration: none; font-weight: 700; font-size: 0.8rem;
+            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
+        }
+        .nav-link i {
+            background: var(--surface); border: 1px solid var(--border);
+            width: 34px; height: 34px; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; color: var(--primary);
+            transition: 0.3s; font-size: 0.85rem;
+        }
+        .nav-link:hover { color: var(--text-main); }
+        .nav-link:hover i, .nav-link.active i {
+            background: var(--primary-glow); border-color: var(--primary);
+            transform: scale(1.1); box-shadow: 0 0 15px var(--primary-glow); color: var(--text-main);
+        }
+        .nav-link.active { color: var(--text-main); }
+        .theme-toggle {
+            background: var(--surface); border: 1px solid var(--border); color: var(--text-muted);
+            width: 42px; height: 42px; border-radius: 12px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .theme-toggle:hover { color: var(--primary); border-color: var(--primary); }
+        @media (max-width: 1200px) {
+            nav { grid-template-columns: 1fr; gap: 15px; justify-items: center; height: auto; padding: 20px 5%; }
+            .nav-left, .nav-center, .nav-right { justify-content: center; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .nav-item:not(:last-child)::after { display: none; }
+        }
+
+        /* --- LAYOUT --- */
+        .container { max-width: 1400px; margin: 0 auto; padding: 0 40px 100px; }
+
+        /* --- HERO --- */
+        .hero { padding: 100px 20px 60px; text-align: center; animation: fade-up 0.8s forwards; }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--primary-glow); border: 1px solid rgba(34, 211, 238, 0.3);
+            color: var(--primary); font-size: 0.75rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 1.5px;
+            padding: 8px 18px; border-radius: 20px; margin-bottom: 28px;
+            text-decoration: none; transition: 0.2s;
+        }
+        .hero-badge:hover { background: rgba(34, 211, 238, 0.3); }
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 5rem); font-weight: 800; letter-spacing: -3px; margin-bottom: 22px; line-height: 1.1;
+            background: linear-gradient(to right, var(--text-main), var(--text-muted));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { color: var(--text-muted); max-width: 650px; margin: 0 auto; font-size: 1.2rem; }
+
+        /* --- WORKBENCH STRIP --- */
+        .workbench-strip {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+            margin: 50px 0 0; animation: fade-up 1s forwards; animation-delay: 0.3s; opacity: 0;
+        }
+        @media (max-width: 900px) { .workbench-strip { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 480px) { .workbench-strip { grid-template-columns: 1fr; } }
+        .wb-tile {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+            padding: 26px; backdrop-filter: blur(12px); text-align: center; transition: 0.3s;
+        }
+        .wb-tile:hover { transform: translateY(-4px); border-color: var(--primary); }
+        .wb-tile i { font-size: 1.8rem; margin-bottom: 12px; display: block; color: var(--primary); }
+        .wb-tile h4 { font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 5px; }
+        .wb-tile p { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* --- SECTION HEADER --- */
+        .section-header { margin: 80px 0 32px; display: flex; align-items: center; gap: 18px; }
+        .section-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;
+            padding: 6px 14px; border-radius: 20px; white-space: nowrap;
+        }
+        .section-header h2 { font-size: 2rem; font-weight: 800; letter-spacing: -1px; color: var(--text-main); }
+        .section-divider { flex: 1; height: 1px; background: var(--border); }
+
+        .badge-agent  { background: rgba(34, 197, 94, 0.2);  color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.4); }
+        .badge-skill  { background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.4); }
+        .badge-mcp    { background: var(--primary-glow);     color: var(--primary); border: 1px solid rgba(34, 211, 238, 0.4); }
+
+        /* --- TOOL CARDS --- */
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 22px; }
+
+        .tool-card {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 22px;
+            padding: 28px; backdrop-filter: blur(12px); display: flex; flex-direction: column;
+            transition: 0.3s; position: relative; overflow: hidden;
+        }
+        .tool-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .tool-card.agent::before { background: linear-gradient(90deg, #16a34a, #4ade80); }
+        .tool-card.skill::before { background: linear-gradient(90deg, #a855f7, #c084fc); }
+        .tool-card.mcp::before   { background: linear-gradient(90deg, #06b6d4, #22d3ee); }
+        .tool-card:hover { transform: translateY(-5px); }
+        .tool-card.agent:hover { border-color: #22c55e; box-shadow: 0 15px 40px rgba(34,197,94,0.1); }
+        .tool-card.skill:hover { border-color: #a855f7; box-shadow: 0 15px 40px rgba(168,85,247,0.1); }
+        .tool-card.mcp:hover   { border-color: var(--primary); box-shadow: 0 15px 40px var(--primary-glow); }
+        .tool-card:hover::before { opacity: 1; }
+
+        .tool-card-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 16px; }
+        .tool-icon {
+            width: 48px; height: 48px; border-radius: 14px; display: flex;
+            align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+        }
+        .tool-icon.agent { background: rgba(34, 197, 94, 0.2);  color: #4ade80; }
+        .tool-icon.skill { background: rgba(168, 85, 247, 0.2); color: #c084fc; }
+        .tool-icon.mcp   { background: var(--primary-glow);     color: var(--primary); }
+
+        .tool-meta h3 { font-size: 1rem; font-weight: 700; color: var(--text-main); margin-bottom: 4px; letter-spacing: -0.3px; }
+        .tool-trigger {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem; color: var(--text-muted);
+            background: rgba(0,0,0,0.2); border: 1px solid var(--border);
+            padding: 2px 8px; border-radius: 6px; display: inline-block; margin-top: 4px;
+        }
+        body.light-mode .tool-trigger { background: rgba(0,0,0,0.06); }
+
+        .tool-desc { color: var(--text-muted); font-size: 0.9rem; line-height: 1.65; margin-bottom: 20px; flex-grow: 1; }
+        .tool-desc code {
+            font-family: 'JetBrains Mono', monospace; font-size: 0.8em;
+            padding: 2px 6px; border-radius: 5px; border: 1px solid var(--border);
+            background: rgba(0,0,0,0.18);
+        }
+        body.light-mode .tool-desc code { background: rgba(0,0,0,0.05); }
+        .tool-card.skill .tool-desc code { color: #c084fc; }
+        .tool-card.agent .tool-desc code { color: #4ade80; }
+        .tool-card.mcp   .tool-desc code { color: var(--primary); }
+
+        .tool-tags { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 18px; }
+        .tag {
+            font-size: 0.67rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+            padding: 4px 9px; border-radius: 8px; background: rgba(0,0,0,0.18);
+            border: 1px solid var(--border); color: var(--text-muted);
+        }
+        body.light-mode .tag { background: rgba(0,0,0,0.04); }
+
+        .tool-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+        .tool-link {
+            font-size: 0.8rem; font-weight: 700; text-decoration: none; display: flex;
+            align-items: center; gap: 6px; transition: gap 0.2s;
+        }
+        .tool-link.agent { color: #4ade80; }
+        .tool-link.skill { color: #c084fc; }
+        .tool-link.mcp   { color: var(--primary); }
+        .tool-link:hover { gap: 10px; }
+
+        .status-pill {
+            font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+            padding: 4px 10px; border-radius: 20px;
+        }
+        .status-stable  { background: rgba(34,197,94,0.15);  color: #4ade80; border: 1px solid rgba(34,197,94,0.3); }
+        .status-beta    { background: rgba(251,146,60,0.15);  color: #fb923c; border: 1px solid rgba(251,146,60,0.3); }
+
+        /* Skills note callout */
+        .section-note {
+            display: flex; align-items: center; gap: 10px;
+            background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.25);
+            border-radius: 12px; padding: 12px 18px; margin-bottom: 28px;
+            font-size: 0.85rem; color: var(--text-muted);
+        }
+        .section-note i { color: #c084fc; flex-shrink: 0; }
+        .section-note strong { color: var(--text-main); }
+
+        @keyframes fade-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        footer { border-top: 1px solid var(--border); padding: 60px 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-top: 40px; }
+        #back-top { position:fixed; bottom:32px; right:32px; width:40px; height:40px; border-radius:50%; background:var(--primary); color:#000; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:0.9rem; opacity:0; transform:translateY(10px); transition:all 0.3s; z-index:999; box-shadow:0 4px 20px rgba(0,0,0,0.2); }
+        #back-top.visible { opacity:1; transform:translateY(0); }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-left">
+            <a href="index.html" class="nav-logo"><i class="fas fa-layer-group"></i> PEGASUS<span>HUB</span></a>
+        </div>
+        <div class="nav-center">
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="training.html" class="nav-link"><i class="fas fa-graduation-cap"></i> Academy</a>
+                </li>
+                <li class="nav-item">
+                    <a href="registry.html" class="nav-link"><i class="fas fa-book-atlas"></i> Examples</a>
+                </li>
+                <li class="nav-item">
+                    <a href="deployment.html" class="nav-link"><i class="fas fa-rocket"></i> Build & Run</a>
+                </li>
+                <li class="nav-item">
+                    <a href="ai-tools.html" class="nav-link active"><i class="fas fa-brain"></i> AI Tools</a>
+                </li>
+                <li class="nav-item">
+                    <a href="deployment.html#contribute" class="nav-link"><i class="fas fa-code-pull-request"></i> Contribute</a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <a href="https://github.com/kthare10/pegasus-ai-workbench" target="_blank" style="color: var(--text-muted); font-size: 1.2rem; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'"><i class="fab fa-github"></i></a>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme"><i class="fas fa-moon"></i></button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <a href="https://github.com/kthare10/pegasus-ai-workbench" target="_blank" class="hero-badge">
+            <i class="fab fa-github"></i> kthare10/pegasus-ai-workbench
+        </a>
+        <h1>AI-Powered Tools<br>for Pegasus.</h1>
+        <p>Agents, skills, and MCP servers built into the Pegasus AI Workbench — a containerized environment combining JupyterLab, Claude Code, and OpenCode for scientific workflow development.</p>
+    </header>
+
+    <div class="container">
+
+        <!-- WORKBENCH OVERVIEW -->
+        <div class="workbench-strip">
+            <div class="wb-tile">
+                <i class="fas fa-flask"></i>
+                <h4>JupyterLab</h4>
+                <p>Interactive notebooks and terminal with <code style="font-size:0.85em; font-family: 'JetBrains Mono', monospace;">%%ai</code> magic cells via Jupyter AI.</p>
+            </div>
+            <div class="wb-tile">
+                <i class="fas fa-brain"></i>
+                <h4>Claude Code</h4>
+                <p>AI coding agent with 7 Pegasus-specific skills and MCP server access.</p>
+            </div>
+            <div class="wb-tile">
+                <i class="fas fa-code"></i>
+                <h4>OpenCode</h4>
+                <p>Multi-provider AI coding agent with 3 domain agents and 7 slash-command skills.</p>
+            </div>
+            <div class="wb-tile">
+                <i class="fas fa-project-diagram"></i>
+                <h4>Pegasus WMS 5.1</h4>
+                <p>Full Pegasus and HTCondor stack for workflow submission and monitoring.</p>
+            </div>
+        </div>
+
+        <!-- ========== AGENTS ========== -->
+        <div class="section-header">
+            <span class="section-badge badge-agent"><i class="fas fa-robot"></i> OpenCode agents</span>
+            <h2>Agents</h2>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="tools-grid">
+
+            <div class="tool-card agent">
+                <div class="tool-card-header">
+                    <div class="tool-icon agent"><i class="fas fa-sitemap"></i></div>
+                    <div class="tool-meta">
+                        <h3>workflow-architect</h3>
+                        <span class="tool-trigger">opencode --agent workflow-architect</span>
+                    </div>
+                </div>
+                <p class="tool-desc">Specializes in designing Pegasus WMS DAGs. Guides you through all five workflow components — properties, site catalog, transformation catalog, replica catalog, and the Python API DAG — and implements per-sample, per-region, and fan-in parallelization patterns. Enforces that all files go to <code>/home/jovyan/work/</code> and references <code>pegasus-docs</code> for API lookups.</p>
+                <div class="tool-tags">
+                    <span class="tag">DAG Design</span><span class="tag">Catalogs</span><span class="tag">Parallelism</span>
+                </div>
+                <div class="tool-footer">
+                    <a href="https://github.com/kthare10/pegasus-ai-workbench/blob/main/ai-tools/opencode/agents/workflow-architect.md" target="_blank" class="tool-link agent">View Agent <i class="fas fa-arrow-right"></i></a>
+                    <span class="status-pill status-stable">Stable</span>
+                </div>
+            </div>
+
+            <div class="tool-card agent">
+                <div class="tool-card-header">
+                    <div class="tool-icon agent"><i class="fas fa-magnifying-glass-chart"></i></div>
+                    <div class="tool-meta">
+                        <h3>pipeline-debugger</h3>
+                        <span class="tool-trigger">opencode --agent pipeline-debugger</span>
+                    </div>
+                </div>
+                <p class="tool-desc">Expert at diagnosing Pegasus workflow failures. Follows a structured flow — check status, analyze logs with <code>pegasus-analyzer</code>, match against a built-in failure pattern database (file staging, containers, resources, argument parsing, dependencies, wrappers) — then delivers exact before/after code fixes with root-cause explanations.</p>
+                <div class="tool-tags">
+                    <span class="tag">Debugging</span><span class="tag">Log Analysis</span><span class="tag">Failure Patterns</span>
+                </div>
+                <div class="tool-footer">
+                    <a href="https://github.com/kthare10/pegasus-ai-workbench/blob/main/ai-tools/opencode/agents/pipeline-debugger.md" target="_blank" class="tool-link agent">View Agent <i class="fas fa-arrow-right"></i></a>
+                    <span class="status-pill status-stable">Stable</span>
+                </div>
+            </div>
+
+            <div class="tool-card agent">
+                <div class="tool-card-header">
+                    <div class="tool-icon agent"><i class="fas fa-database"></i></div>
+                    <div class="tool-meta">
+                        <h3>data-engineer</h3>
+                        <span class="tool-trigger">opencode --agent data-engineer</span>
+                    </div>
+                </div>
+                <p class="tool-desc">Handles data acquisition, preprocessing, and pipeline integration. Covers API-fetch patterns with rate limiting, local file registration in the replica catalog, support file management, external directory transfers via CondorIO, and fan-out/fan-in data processing. Enforces <code>argparse</code>, <code>subprocess.run()</code>, and explicit file paths throughout.</p>
+                <div class="tool-tags">
+                    <span class="tag">Data Staging</span><span class="tag">Replica Catalog</span><span class="tag">Fan-out / Fan-in</span>
+                </div>
+                <div class="tool-footer">
+                    <a href="https://github.com/kthare10/pegasus-ai-workbench/blob/main/ai-tools/opencode/agents/data-engineer.md" target="_blank" class="tool-link agent">View Agent <i class="fas fa-arrow-right"></i></a>
+                    <span class="status-pill status-stable">Stable</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ========== SKILLS ========== -->
+        <div class="section-header">
+            <span class="section-badge badge-skill"><i class="fas fa-wand-magic-sparkles"></i> shared skills</span>
+            <h2>Skills</h2>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="section-note">
+            <i class="fas fa-info-circle"></i>
+            <span>All 7 skills are shared between <strong>Claude Code</strong> (as <code style="font-family:'JetBrains Mono',monospace; font-size:0.85em;">/pegasus-*</code> commands) and <strong>OpenCode</strong> (as <code style="font-family:'JetBrains Mono',monospace; font-size:0.85em;">/scaffold</code>, <code style="font-family:'JetBrains Mono',monospace; font-size:0.85em;">/debug</code>, etc.).</span>
+        </div>
+
+        <div class="tools-grid">
+
+            <div class="tool-card skill">
+                <div class="tool-card-header">
+                    <div class="tool-icon skill"><i class="fas fa-seedling"></i></div>
+                    <div class="tool-meta">
+                        <h3>scaffold</h3>
+                        <span class="tool-trigger">/pegasus-scaffold &nbsp;·&nbsp; /scaffold</span>
+                    </div>
+                </div>
+                <p class="tool-desc">Generates a complete Pegasus workflow project from a plain-English description. Gathers 9 requirements, matches against reference patterns (tnseq, earthquake, mag, soilmoisture, airquality), and produces a <code>workflow_generator.py</code>, wrappers in <code>bin/</code>, a Dockerfile, README, and a <code>run_manual.sh</code> test script. Validates output against 15 checkpoints.</p>
+                <div class="tool-tags">
+                    <span class="tag">Scaffolding</span><span class="tag">DAG Generation</span><span class="tag">Python API</span>
+                </div>
+                <div class="tool-footer">
+                    <a href="https://github.com/kthare10/pegasus-ai-workbench/tree/main/ai-tools/opencode/skills/scaffold.md" target="_blank" class="tool-link skill">View Skill <i class="fas fa-arrow-right"></i></a>
+                    <span class="status-pill status-stable">Stable</span>
+                </div>
+            </div>
+
+            <div class="tool-card skill">
+                <div class="tool-card-header">
+                    <div class="tool-icon skill"><i class="fas fa-file-code"></i></div>
+                    <div class="tool-meta">
+                        <h3>wrapper</h3>
+                        <span class="tool-trigger">/pegasus-wrapper &nbsp;·&nbsp; /wrapper</span>
+                    </div>
+                </div>
+                <p class="tool-desc">Generates a production-ready wrapper script for a single pipeline step. Selects from 5 reference patterns — subprocess CLI, API fetch, shell with output flattening, ML training, fan-in merge — and outputs the matching Transformation Catalog and Job definitions ready to paste into your workflow generator.</p>
+                <div class="tool-tags">
+                    <span class="tag">Wrapper Scripts</span><span class="tag">Transformation Catalog</span>
+                </div>
+                <div class="tool-footer">
+                    <a href="https://github.com/kthare10/pegasus-ai-workbench/tree/main/ai-tools/opencode/skills/wrapper.md" target="_blank" class="tool-link skill">View Skill <i class="fas fa-arrow-right"></i></a>
+                    <span class="status-pill status-stable">Stable</span>
+                </div>
+            </div>
+
+            <div class="tool-card skill">
+                <div class="tool-card-header">
+                    <div class="tool-icon skill"><i class="fab fa-docker"></i></div>
+                    <div class="tool-meta">
+                        <h3>dockerfile</h3>
+                        <span class="tool-trigger">/pegasus-dockerfile &nbsp;·&nbsp; /dockerfile</span>
+                    </div>
+                </div>
+                <p class="tool-desc">Generates a production-ready Dockerfile for your workflow container. Selects between <code>python:3.8-slim</code>, <code>mambaorg/micromamba</code>, and <code>ubuntu:22.04</code> based on your dependency requirements. Pins versions, optimizes layer caching, sets <code>PYTHONUNBUFFERED=1</code>, and provides build and push commands.</p>
+                <div class="tool-tags">
+                    <span class="tag">Docker</span><span class="tag">Containers</span><span class="tag">Reproducibility</span>
+                </div>
+                <div class="tool-footer">
+                    <a href="https://github.com/kthare10/pegasus-ai-workbench/tree/main/ai-tools/opencode/skills/dockerfile.md" target="_blank" class="tool-link skill">View Skill <i class="fas fa-arrow-right"></i></a>
+                    <span class="status-pill status-stable">Stable</span>
+                </div>
+            </div>
+
+            <div class="tool-card skill">
+                <div class="tool-card-header">
+                    <div class="tool-icon skill"><i class="fas fa-shuffle"></i></div>
+                    <div class="tool-meta">
+                        <h3>convert</h3>
+                        <span class="tool-trigger">/pegasus-convert &nbsp;·&nbsp; /convert</span>
+                    </div>
+                </div>
+                <p class="tool-desc">Converts a Snakemake or Nextflow pipeline to Pegasus. Maps every rule/process to a Transformation + Job + wrapper script, resolves wildcards into Python loops, handles support files via the Replica Catalog, and presents a side-by-side rule-to-wrapper comparison for verification.</p>
+                <div class="tool-tags">
+                    <span class="tag">Snakemake</span><span class="tag">Nextflow</span><span class="tag">Migration</span>
+                </div>
+                <div class="tool-footer">
+                    <a href="https://github.com/kthare10/pegasus-ai-workbench/tree/main/ai-tools/opencode/skills/convert.md" target="_blank" class="tool-link skill">View Skill <i class="fas fa-arrow-right"></i></a>
+                    <span class="status-pill status-stable">Stable</span>
+                </div>
+            </div>
+
+            <div class="tool-card skill">
+                <div class="tool-card-header">
+                    <div class="tool-icon skill"><i class="fas fa-clipboard-check"></i></div>
+                    <div class="tool-meta">
+                        <h3>review</h3>
+                        <span class="tool-trigger">/pegasus-review &nbsp;·&nbsp; /review</span>
+                    </div>
+                </div>
+                <p class="tool-desc">Performs a structured 8-category audit of your workflow — catalog configuration, DAG structure, file I/O alignment, wrapper patterns, resource allocation, container setup, and CLI usability. Returns findings categorized as errors, warnings, or suggestions with exact file locations and remediation steps.</p>
+                <div class="tool-tags">
+                    <span class="tag">Code Review</span><span class="tag">Best Practices</span><span class="tag">8 Categories</span>
+                </div>
+                <div class="tool-footer">
+                    <a href="https://github.com/kthare10/pegasus-ai-workbench/tree/main/ai-tools/opencode/skills/review.md" target="_blank" class="tool-link skill">View Skill <i class="fas fa-arrow-right"></i></a>
+                    <span class="status-pill status-stable">Stable</span>
+                </div>
+            </div>
+
+            <div class="tool-card skill">
+                <div class="tool-card-header">
+                    <div class="tool-icon skill"><i class="fas fa-bug"></i></div>
+                    <div class="tool-meta">
+                        <h3>debug</h3>
+                        <span class="tool-trigger">/pegasus-debug &nbsp;·&nbsp; /debug</span>
+                    </div>
+                </div>
+                <p class="tool-desc">Diagnoses workflow failures from <code>pegasus-analyzer</code> output and job <code>.out</code>/<code>.err</code> files. Matches against a pattern database covering file staging, containers, resources, argument parsing, dependencies, and wrapper scripts — then proposes an exact code fix.</p>
+                <div class="tool-tags">
+                    <span class="tag">Debugging</span><span class="tag">Log Analysis</span><span class="tag">Failure Patterns</span>
+                </div>
+                <div class="tool-footer">
+                    <a href="https://github.com/kthare10/pegasus-ai-workbench/tree/main/ai-tools/opencode/skills/debug.md" target="_blank" class="tool-link skill">View Skill <i class="fas fa-arrow-right"></i></a>
+                    <span class="status-pill status-stable">Stable</span>
+                </div>
+            </div>
+
+            <div class="tool-card skill">
+                <div class="tool-card-header">
+                    <div class="tool-icon skill"><i class="fas fa-map-signs"></i></div>
+                    <div class="tool-meta">
+                        <h3>help</h3>
+                        <span class="tool-trigger">/pegasus-help &nbsp;·&nbsp; /help</span>
+                    </div>
+                </div>
+                <p class="tool-desc">Displays a navigation table mapping each workflow development task to the right skill. Whether you're starting fresh, adding a pipeline step, converting an existing workflow, or debugging a failure — <code>/help</code> points you to the correct command immediately.</p>
+                <div class="tool-tags">
+                    <span class="tag">Navigation</span><span class="tag">Getting Started</span>
+                </div>
+                <div class="tool-footer">
+                    <a href="https://github.com/kthare10/pegasus-ai-workbench/tree/main/ai-tools/opencode/skills/help.md" target="_blank" class="tool-link skill">View Skill <i class="fas fa-arrow-right"></i></a>
+                    <span class="status-pill status-stable">Stable</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ========== MCP SERVERS ========== -->
+        <div class="section-header">
+            <span class="section-badge badge-mcp"><i class="fas fa-server"></i> MCP servers</span>
+            <h2>MCP Servers</h2>
+            <div class="section-divider"></div>
+        </div>
+
+        <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 28px; max-width: 700px;">
+            Configured in <code style="font-family: 'JetBrains Mono', monospace; font-size: 0.85em; color: var(--primary); background: var(--primary-glow); padding: 2px 7px; border-radius: 5px; border: 1px solid rgba(34,211,238,0.3);">ai-tools/claude-code/mcp.json</code> and auto-registered on container startup for both Claude Code and OpenCode.
+        </p>
+
+        <div class="tools-grid">
+
+            <div class="tool-card mcp">
+                <div class="tool-card-header">
+                    <div class="tool-icon mcp"><i class="fas fa-book-open"></i></div>
+                    <div class="tool-meta">
+                        <h3>pegasus-docs</h3>
+                        <span class="tool-trigger">https://gitmcp.io/pegasus-isi/pegasus</span>
+                    </div>
+                </div>
+                <p class="tool-desc">Exposes the full Pegasus WMS source code and documentation as a searchable MCP resource via GitMCP. Agents and skills query it in real time for API references, configuration properties, catalog schemas, and workflow examples — grounding all answers in the actual Pegasus source.</p>
+                <div class="tool-tags">
+                    <span class="tag">Pegasus WMS</span><span class="tag">GitMCP</span><span class="tag">Live Docs</span>
+                </div>
+                <div class="tool-footer">
+                    <a href="https://github.com/pegasus-isi/pegasus" target="_blank" class="tool-link mcp">View Repository <i class="fas fa-arrow-right"></i></a>
+                    <span class="status-pill status-stable">Stable</span>
+                </div>
+            </div>
+
+            <div class="tool-card mcp">
+                <div class="tool-card-header">
+                    <div class="tool-icon mcp"><i class="fas fa-cloud-arrow-up"></i></div>
+                    <div class="tool-meta">
+                        <h3>kiso-docs</h3>
+                        <span class="tool-trigger">https://gitmcp.io/pegasus-isi/kiso</span>
+                    </div>
+                </div>
+                <p class="tool-desc">Exposes the Kiso infrastructure provisioning framework as an MCP resource. Agents query it when generating <code>experiment.yml</code> configurations for cloud and edge testbeds (Vagrant, Chameleon, FABRIC), ensuring generated configs align with the current Kiso schema and deployment patterns.</p>
+                <div class="tool-tags">
+                    <span class="tag">Kiso</span><span class="tag">GitMCP</span><span class="tag">Cloud Infra</span>
+                </div>
+                <div class="tool-footer">
+                    <a href="https://github.com/pegasus-isi/kiso" target="_blank" class="tool-link mcp">View Repository <i class="fas fa-arrow-right"></i></a>
+                    <span class="status-pill status-stable">Stable</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 PegasusHub. Maintained by the pegasus-wms team &middot; ISI-USC.</p>
+    </footer>
+
+    <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const icon = document.querySelector('.theme-toggle i');
+            body.classList.toggle('light-mode');
+            const mode = body.classList.contains('light-mode') ? 'light' : 'dark';
+            localStorage.setItem('theme', mode);
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+        }
+
+        (function initTheme() {
+            const saved = localStorage.getItem('theme');
+            if (saved !== 'dark') {
+                document.body.classList.add('light-mode');
+                document.querySelector('.theme-toggle i').classList.replace('fa-moon', 'fa-sun');
+            }
+        })();
+
+        window.addEventListener('scroll', () => {
+            document.getElementById('back-top').classList.toggle('visible', window.scrollY > 400);
+        });
+    </script>
+</body>
+</html>
