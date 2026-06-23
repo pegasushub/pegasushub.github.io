@@ -274,6 +274,7 @@
         </div>
 
         <div class="nav-right">
+            <a href="https://pegasus.isi.edu/" target="_blank" rel="noopener" title="Official Pegasus Site" style="display:flex; align-items:center; transition:0.3s;"><img src="https://avatars.githubusercontent.com/u/3019875?s=200&v=4" alt="Pegasus" width="22" height="22" style="border-radius:50%; border: 1px solid var(--border); background:#fff; transition:0.3s;" onmouseover="this.style.borderColor='var(--primary)'; this.style.boxShadow='0 0 8px var(--primary-glow)'" onmouseout="this.style.borderColor='var(--border)'; this.style.boxShadow='none'"></a>
             <a href="https://github.com/pegasus-isi" target="_blank" style="color: var(--text-muted); font-size: 1.2rem; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'"><i class="fab fa-github"></i></a>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
                 <i class="fas fa-moon"></i>
@@ -282,12 +283,12 @@
     </nav>
 
     <header class="hero">
-        <a href="pages/ai-tools.html" class="hero-badge"><i class="fas fa-brain"></i> New &rarr; AI Tools for Pegasus</a>
-        <h1>Orchestrate Science<br>at Scale.</h1>
+<h1>Orchestrate Science<br>at Scale.</h1>
         <p>The centralized ecosystem for discovering, learning, and deploying high-throughput computing workflows using Pegasus-WMS.</p>
         <div class="hero-actions">
             <a href="pages/academy.html" class="btn btn-primary"><i class="fas fa-graduation-cap"></i> Get Started</a>
             <a href="pages/workflows.html" class="btn btn-outline"><i class="fas fa-search"></i> Explore Workflows</a>
+            <a href="https://pegasus.isi.edu/" target="_blank" rel="noopener" class="btn btn-outline"><i class="fas fa-external-link-alt"></i> Official Pegasus Site</a>
         </div>
     </header>
 
@@ -315,7 +316,7 @@
             <h2>What is Pegasus-WMS?</h2>
             
             <p class="lead" style="margin-bottom: 0;">
-                The <b>Pegasus Workflow Management System</b> is an open-source framework that bridges the scientific domain and the execution environment. It automatically maps high-level abstract workflow descriptions onto distributed execution infrastructures like HTCondor pools, cloud providers, and supercomputers.
+                The <a href="https://pegasus.isi.edu/" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: none; font-weight: 700; border-bottom: 1px solid var(--primary);"><b>Pegasus Workflow Management System</b></a> is an open-source framework that bridges the scientific domain and the execution environment. It automatically maps high-level abstract workflow descriptions onto distributed execution infrastructures like HTCondor pools, cloud providers, and supercomputers.
             </p>
 
             <div class="feature-grid">
@@ -445,6 +446,7 @@
 
     <footer>
         <p>&copy; 2026 PegasusHub. Maintained by the pegasus-wms team · ISI-USC.</p>
+        <p style="margin-top: 10px;">Powered by <a href="https://pegasus.isi.edu/" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: none;">Pegasus WMS</a> &mdash; developed at the <a href="https://www.isi.edu/" target="_blank" rel="noopener" style="color: var(--primary); text-decoration: none;">USC Information Sciences Institute</a>.</p>
     </footer>
 
     <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
