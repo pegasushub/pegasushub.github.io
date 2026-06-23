@@ -447,7 +447,7 @@
             document.getElementById('hljs-theme-dark').disabled = isLight;
             document.getElementById('hljs-theme-light').disabled = !isLight;
         }
-        if (localStorage.getItem('theme') === 'light') {
+        if (localStorage.getItem('theme') !== 'dark') {
             document.body.classList.add('light-mode');
             document.querySelector('.theme-toggle i').className = 'fas fa-sun';
             document.getElementById('hljs-theme-dark').disabled = true;
