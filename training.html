@@ -468,7 +468,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="registry.html" class="nav-link">
-                        <i class="fas fa-book-atlas"></i> Examples
+                        <i class="fas fa-book-atlas"></i> Workflows
                     </a>
                 </li>
                 <li class="nav-item">
@@ -477,13 +477,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="ai-tools.html" class="nav-link">
-                        <i class="fas fa-brain"></i> AI Tools
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="deployment.html#contribute" class="nav-link">
-                        <i class="fas fa-code-pull-request"></i> Contribute
+                        <i class="fas fa-code-pull-request"></i> Registry
                     </a>
                 </li>
             </ul>
@@ -574,17 +569,26 @@
 
         function renderCourses(data, targetId) {
             const grid = document.getElementById(targetId);
-            grid.innerHTML = data.map(item => `
-                <a href="${item.url || '#'}" target="${item.url && item.url.startsWith('http') ? '_blank' : '_self'}" class="course-card">
+            grid.innerHTML = data.map(item => {
+                const isComingSoon = !!item.badge;
+                const tag = isComingSoon
+                    ? `<span style="position:absolute;top:16px;right:16px;background:rgba(251,146,60,0.15);color:#fb923c;border:1px solid rgba(251,146,60,0.4);font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:4px 10px;border-radius:20px;">${escapeHTML(item.badge)}</span>`
+                    : '';
+                const href = isComingSoon ? 'javascript:void(0)' : (item.url || '#');
+                const target = (!isComingSoon && item.url && item.url.startsWith('http')) ? '_blank' : '_self';
+                const cursor = isComingSoon ? 'style="cursor:default;opacity:0.7;"' : '';
+                return `
+                <a href="${href}" target="${target}" class="course-card" ${cursor} style="position:relative;">
+                    ${tag}
                     <span class="badge ${item.level}">${item.level}</span>
                     <h3>${escapeHTML(item.title)}</h3>
                     <p>${escapeHTML(item.desc)}</p>
                     <div class="meta-row">
                         <div class="meta-item"><i class="fas ${item.icon}"></i> ${item.time}</div>
-                        <span class="btn-start">START MODULE <i class="fas fa-arrow-right"></i></span>
+                        ${isComingSoon ? `<span style="color:var(--text-muted);font-size:0.85rem;font-weight:700;">Coming Soon</span>` : `<span class="btn-start">START MODULE <i class="fas fa-arrow-right"></i></span>`}
                     </div>
-                </a>
-            `).join('');
+                </a>`;
+            }).join('');
         }
 
         // --- VIDEO PLAYER LOGIC ---

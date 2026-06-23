@@ -244,7 +244,7 @@
                 </li>
                 <li class="nav-item active-path">
                     <a href="registry.html" class="nav-link">
-                        <i class="fas fa-book-atlas"></i> Examples
+                        <i class="fas fa-book-atlas"></i> Workflows
                     </a>
                 </li>
                 <li class="nav-item">
@@ -253,13 +253,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="ai-tools.html" class="nav-link">
-                        <i class="fas fa-brain"></i> AI Tools
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="#contribute" class="nav-link" id="nav-contribute">
-                        <i class="fas fa-code-pull-request"></i> Contribute
+                        <i class="fas fa-code-pull-request"></i> Registry
                     </a>
                 </li>
             </ul>
@@ -274,15 +269,15 @@
     </nav>
 
     <header class="hero">
-        <h1>Run & Contribute</h1>
+        <h1>Build & Run</h1>
         <p>The complete lifecycle: Scaffold your projects, Execute on grid resources, and Publish your workflows.</p>
     </header>
 
     <div class="container">
         
         <section class="about-card">
-            <span class="topic-badge"><i class="fas fa-bullseye"></i> Goal of Deployment</span>
-            <h2>Execute & Contribute</h2>
+            <span class="topic-badge"><i class="fas fa-bullseye"></i> Build & Run</span>
+            <h2>Build & Run</h2>
             <p class="lead" style="margin-bottom: 0;">
                 This page provides the necessary tools to take your workflow from a local concept to grid-scale execution. Use modern scaffolding templates to generate your project, choose your execution environment, and finally, share your scientifically verified workflow with the global PegasusHub community.
             </p>
@@ -359,30 +354,25 @@
         </section>
 
 
-        <section class="featured-section" style="flex-direction: column; align-items: flex-start; padding: 30px 50px 35px; gap: 0;">
-            <span class="topic-badge" style="margin-bottom: 8px;"><i class="fas fa-server"></i> Step 2: Execution Environments</span>
-            <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--text-main); margin: 0 0 20px; letter-spacing: -1px;">Choose Your Environment</h2>
-            <div class="grid" style="width: 100%; margin-bottom: 0;">
+        <section class="featured-section" style="flex-direction: column; align-items: stretch; padding: 50px;">
+            <span class="topic-badge" style="margin-bottom: 12px;"><i class="fas fa-server"></i> Step 2: Execution Environments</span>
+            <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--text-main); margin: 0 0 10px; letter-spacing: -1px;">Choose Your Environment</h2>
+            <p style="color: var(--text-muted); font-size: 1rem; margin-bottom: 35px; max-width: 600px;">Select the computing infrastructure that best matches your workflow scale and access requirements.</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
                 <div class="card">
-                    <span class="topic-badge">Local Sandbox</span>
-                    <h3>Docker Tutorial</h3>
-                    <p>Self-contained sandbox for testing workflows locally. Includes Pegasus 5.1.2 and HTCondor.</p>
-                    <div class="terminal terminal-standalone" style="margin: 0 0 25px 0;">docker run --privileged --rm -p 9999:8888 pegasus/tutorial:5.1.2</div>
-                    <a href="https://hub.docker.com/r/pegasus/tutorial" class="btn btn-outline" target="_blank"><i class="fab fa-docker"></i> Visit DockerHub</a>
-                </div>
-
-                <div class="card">
-                    <span class="topic-badge">Managed Cloud</span>
+                    <i class="fas fa-cloud card-icon" style="font-size: 1.8rem; margin-bottom: 16px;"></i>
+                    <span class="topic-badge" style="margin-bottom: 14px;">Managed Cloud</span>
                     <h3>ACCESS Pegasus</h3>
-                    <p>Connect directly to national cyberinfrastructure via Open OnDemand and Jupyter.</p>
-                    <a href="https://access.pegasus.isi.edu" class="btn btn-outline" style="margin-top: auto;" target="_blank">Login via ACCESS</a>
+                    <p>Connect directly to national cyberinfrastructure via Open OnDemand and Jupyter. Ideal for research projects needing managed resources without complex setup.</p>
+                    <a href="https://access.pegasus.isi.edu" class="btn btn-outline" style="margin-top: auto;" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i> Login via ACCESS</a>
                 </div>
 
                 <div class="card">
-                    <span class="topic-badge">Grid Computing</span>
+                    <i class="fas fa-network-wired card-icon" style="font-size: 1.8rem; margin-bottom: 16px;"></i>
+                    <span class="topic-badge" style="margin-bottom: 14px;">Grid Computing</span>
                     <h3>OSG OSPool</h3>
-                    <p>Execute massive high-throughput workloads across global resources on the Open Science Grid.</p>
-                    <a href="https://osg-htc.org/docs/" class="btn btn-outline" style="margin-top: auto;" target="_blank">View Documentation</a>
+                    <p>Execute massive high-throughput workloads across global distributed resources on the Open Science Grid. Best for large-scale computations with millions of jobs.</p>
+                    <a href="https://osg-htc.org/docs/" class="btn btn-outline" style="margin-top: auto;" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i> View Documentation</a>
                 </div>
             </div>
         </section>
@@ -633,8 +623,29 @@
             navRun.classList.remove('active');
         });
 
-        // Default: Run is active on load
-        navRun.classList.add('active');
+        // Set active nav based on URL hash on load
+        if (window.location.hash === '#contribute') {
+            navContribute.classList.add('active');
+        } else {
+            navRun.classList.add('active');
+        }
+
+        // Scroll spy: swap active nav as sections enter viewport
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                if (entry.target.id === 'contribute') {
+                    navContribute.classList.add('active');
+                    navRun.classList.remove('active');
+                } else if (entry.target.id === 'run') {
+                    navRun.classList.add('active');
+                    navContribute.classList.remove('active');
+                }
+            });
+        }, { rootMargin: '-100px 0px -40% 0px', threshold: 0 });
+
+        observer.observe(document.getElementById('run'));
+        observer.observe(document.getElementById('contribute'));
     </script>
 </body>
 </html>

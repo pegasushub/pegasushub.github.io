@@ -131,7 +131,19 @@
             background: var(--primary-glow); width: 80px; height: 80px; display: flex;
             align-items: center; justify-content: center; border-radius: 20px; border: 1px solid rgba(34, 211, 238, 0.2);
         }
+        .stat-number { font-size: 2.6rem; font-weight: 800; color: var(--text-main); letter-spacing: -2px; line-height: 1; }
         .stat-label { color: var(--text-muted); font-weight: 800; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; }
+
+        /* --- HERO BADGE --- */
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--primary-glow); border: 1px solid rgba(34, 211, 238, 0.3);
+            color: var(--primary); font-size: 0.75rem; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 1.5px;
+            padding: 8px 18px; border-radius: 20px; margin-bottom: 28px;
+            text-decoration: none; transition: 0.2s;
+        }
+        .hero-badge:hover { background: rgba(34, 211, 238, 0.3); }
 
         /* --- WHAT IS PEGASUS-WMS SECTION --- */
         .about-card {
@@ -245,7 +257,7 @@
                 </li>
                 <li class="nav-item">
                     <a href="registry.html" class="nav-link">
-                        <i class="fas fa-book-atlas"></i> Examples
+                        <i class="fas fa-book-atlas"></i> Workflows
                     </a>
                 </li>
                 <li class="nav-item">
@@ -254,13 +266,8 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="ai-tools.html" class="nav-link">
-                        <i class="fas fa-brain"></i> AI Tools
-                    </a>
-                </li>
-                <li class="nav-item">
                     <a href="deployment.html#contribute" class="nav-link">
-                        <i class="fas fa-code-pull-request"></i> Contribute
+                        <i class="fas fa-code-pull-request"></i> Registry
                     </a>
                 </li>
             </ul>
@@ -275,11 +282,12 @@
     </nav>
 
     <header class="hero">
+        <a href="ai-tools.html" class="hero-badge"><i class="fas fa-brain"></i> New &rarr; AI Tools for Pegasus</a>
         <h1>Orchestrate Science<br>at Scale.</h1>
         <p>The centralized ecosystem for discovering, learning, and deploying high-throughput computing workflows using Pegasus-WMS.</p>
         <div class="hero-actions">
             <a href="training.html" class="btn btn-primary"><i class="fas fa-graduation-cap"></i> Get Started</a>
-            <a href="registry.html" class="btn btn-outline"><i class="fas fa-search"></i> Explore Examples</a>
+            <a href="registry.html" class="btn btn-outline"><i class="fas fa-search"></i> Explore Workflows</a>
         </div>
     </header>
 
@@ -292,11 +300,11 @@
             </div>
             <div class="stat-item">
                 <div class="stat-icon"><i class="fas fa-database"></i></div>
-                <div class="stat-label">Petabytes Processed</div>
+                <div class="stat-label">Data Processed</div>
             </div>
             <div class="stat-item">
                 <div class="stat-icon"><i class="fas fa-users"></i></div>
-                <div class="stat-label">Global Community</div>
+                <div class="stat-label">Researchers Worldwide</div>
             </div>
         </div>
 
@@ -368,7 +376,7 @@
                                     <i class="fas fa-book-atlas"></i>
                                 </div>
                             </foreignObject>
-                            <text class="svg-text-title" x="300" y="155" text-anchor="middle">EXAMPLES</text>
+                            <text class="svg-text-title" x="300" y="155" text-anchor="middle">WORKFLOWS</text>
                             <text class="svg-text-sub" x="300" y="172" text-anchor="middle">Find Blueprints</text>
                         </g>
                     </a>
@@ -394,7 +402,7 @@
                                     <i class="fas fa-code-pull-request"></i>
                                 </div>
                             </foreignObject>
-                            <text class="svg-text-title" x="700" y="155" text-anchor="middle">CONTRIBUTE</text>
+                            <text class="svg-text-title" x="700" y="155" text-anchor="middle">REGISTRY</text>
                             <text class="svg-text-sub" x="700" y="172" text-anchor="middle">Share with Us</text>
                         </g>
                     </a>
@@ -413,9 +421,9 @@
 
             <a href="registry.html" class="card">
                 <i class="fas fa-book-atlas card-icon"></i>
-                <h3>2. Examples</h3>
+                <h3>2. Workflows</h3>
                 <p>Browse our curated collection of community-contributed workflows. Find ready-made blueprints for genomics, astrophysics, machine learning, and more.</p>
-                <div class="card-link">Discover <i class="fas fa-arrow-right"></i></div>
+                <div class="card-link">Explore <i class="fas fa-arrow-right"></i></div>
             </a>
 
             <a href="deployment.html" class="card">
@@ -427,7 +435,7 @@
 
             <a href="deployment.html#contribute" class="card">
                 <i class="fas fa-code-pull-request card-icon"></i>
-                <h3>4. Contribute</h3>
+                <h3>4. Registry</h3>
                 <p>Give back to the scientific community. Did you build something amazing? Follow our easy template to open a Pull Request and publish your workflow on PegasusHub.</p>
                 <div class="card-link">Publish <i class="fas fa-arrow-right"></i></div>
             </a>

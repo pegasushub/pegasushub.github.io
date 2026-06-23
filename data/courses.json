@@ -134,15 +134,6 @@
       "time": "25 min",
       "icon": "fa-cut",
       "url": "modules/split.html"
-    },
-    {
-      "id": "merge-workflow",
-      "title": "Result Merging",
-      "desc": "Learn how to aggregate outputs from thousands of parallel jobs.",
-      "level": "beginner",
-      "time": "20 min",
-      "icon": "fa-compress-arrows-alt",
-      "url": "merge.html"
     }
   ],
 
@@ -163,7 +154,8 @@
       "level": "expert",
       "time": "1 hr 20",
       "icon": "fa-layer-group",
-      "url": "https://pegasus.isi.edu/documentation/user-guide/ensemble-manager.html"
+      "url": "https://pegasus.isi.edu/documentation/user-guide/ensemble-manager.html",
+      "badge": "Coming Soon"
     }
   ]
 }
