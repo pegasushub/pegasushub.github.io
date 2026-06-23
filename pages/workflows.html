@@ -1,0 +1,257 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>PegasusHub | Scientific Registry</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css">
+
+    <style>
+        /* --- SEARCH BAR --- */
+        .search-container { max-width: 500px; margin: 0 auto 24px; position: relative; }
+        .search-input { width: 100%; padding: 18px 24px 18px 50px; border-radius: 16px; border: 1px solid var(--border); background: var(--surface); backdrop-filter: blur(10px); color: var(--text-main); font-size: 1rem; font-family: inherit; box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3); outline: none; transition: 0.3s; }
+        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-glow); }
+        .search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+
+        /* --- TAG FILTERS --- */
+        .filter-bar { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 900px; margin: 0 auto 48px; padding: 0 40px; }
+        .filter-tag { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; font-weight: 800; padding: 6px 14px; border-radius: 99px; letter-spacing: 0.5px; text-transform: uppercase; cursor: pointer; transition: transform 0.2s, opacity 0.2s; border: 1px solid transparent; opacity: 0.65; }
+        .filter-tag:hover { opacity: 1; transform: translateY(-2px); }
+        .filter-tag.active { opacity: 1; transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.2); }
+        .filter-tag.all { background: rgba(148,163,184,0.1); color: var(--text-muted); border-color: var(--border); }
+        .filter-tag.all.active { background: var(--primary-glow); color: var(--primary); border-color: var(--primary); opacity: 1; }
+
+        /* --- GRID --- */
+        .grid { max-width: 1400px; margin: 0 auto; padding: 0 40px 80px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 22px; cursor: pointer; transition: 0.4s cubic-bezier(0.2, 0, 0, 1); display: flex; flex-direction: column; position: relative; overflow: hidden; backdrop-filter: blur(12px); opacity: 0; animation: fade-up 0.6s forwards; }
+        .card:hover { border-color: var(--primary); transform: translateY(-5px); box-shadow: 0 16px 40px -10px var(--primary-glow); }
+        .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+        .card-icon { font-size: 1.2rem; color: var(--text-muted); opacity: 0.4; }
+        .card h3 { font-size: 1.15rem; margin-bottom: 8px; letter-spacing: -0.3px; color: var(--text-main); }
+        .card p  { color: var(--text-muted); font-size: 0.88rem; flex-grow: 1; margin-bottom: 14px; line-height: 1.65; }
+        .card-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+        .card-contrib { display: flex; align-items: center; gap: 7px; }
+        .card-contrib img { width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--border); }
+        .card-contrib span { font-size: 0.72rem; font-weight: 700; color: var(--text-muted); }
+        .contrib-placeholder { width: 24px; height: 24px; border-radius: 50%; background: var(--primary-glow); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 0.6rem; color: var(--primary); }
+        .card-meta-item { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; color: var(--text-muted); font-weight: 600; }
+        .card-meta-item i { color: var(--primary); font-size: 0.65rem; }
+        .card-footer { border-top: 1px solid var(--border); padding-top: 12px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); }
+        .card:hover .card-footer { color: var(--primary); }
+        .arrow-btn { transition: 0.3s; transform: translateX(0); }
+        .card:hover .arrow-btn { transform: translateX(5px); }
+
+        /* Multi-color tag palette */
+        .tag { display: inline-flex; align-items: center; gap: 4px; font-size: 0.68rem; font-weight: 800; padding: 4px 11px; border-radius: 99px; letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap; }
+        .tag-0 { background: rgba(34,211,238,0.12);  color: #22d3ee; border: 1px solid rgba(34,211,238,0.3); }
+        .tag-1 { background: rgba(129,140,248,0.12); color: #818cf8; border: 1px solid rgba(129,140,248,0.3); }
+        .tag-2 { background: rgba(167,139,250,0.12); color: #a78bfa; border: 1px solid rgba(167,139,250,0.3); }
+        .tag-3 { background: rgba(74,222,128,0.12);  color: #4ade80; border: 1px solid rgba(74,222,128,0.3); }
+        .tag-4 { background: rgba(251,146,60,0.12);  color: #fb923c; border: 1px solid rgba(251,146,60,0.3); }
+        .tag-5 { background: rgba(244,114,182,0.12); color: #f472b6; border: 1px solid rgba(244,114,182,0.3); }
+        .tag-6 { background: rgba(251,191,36,0.12);  color: #fbbf24; border: 1px solid rgba(251,191,36,0.3); }
+        .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+
+        /* Empty State */
+        .empty-state { grid-column: 1 / -1; text-align: center; padding: 80px 40px; color: var(--text-muted); }
+        .empty-state i { font-size: 3rem; margin-bottom: 20px; display: block; opacity: 0.4; }
+        .empty-state h3 { font-size: 1.3rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px; }
+        .empty-state p { font-size: 0.95rem; color: var(--text-muted); margin-bottom: 24px; }
+        .btn-clear-filter { display: inline-flex; align-items: center; gap: 8px; background: var(--primary-glow); color: var(--primary); border: 1px solid var(--primary); padding: 10px 22px; border-radius: 10px; font-weight: 800; font-size: 0.82rem; cursor: pointer; transition: 0.2s; letter-spacing: 0.5px; }
+        .btn-clear-filter:hover { background: var(--primary); color: #000; }
+
+        /* Count badge */
+        #wf-count { text-align: center; font-size: 0.78rem; font-weight: 700; color: var(--text-muted); margin-top: 10px; letter-spacing: 0.3px; }
+
+        .about-card { margin-bottom: 40px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-left">
+            <a href="../index.html" class="nav-logo"><i class="fas fa-layer-group"></i> PEGASUS<span>HUB</span></a>
+        </div>
+        <div class="nav-center">
+            <ul class="nav-links">
+                <li class="nav-item active-path">
+                    <a href="../index.html" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
+                </li>
+                <li class="nav-item active-path">
+                    <a href="academy.html" class="nav-link"><i class="fas fa-graduation-cap"></i> Academy</a>
+                </li>
+                <li class="nav-item active-path">
+                    <a href="workflows.html" class="nav-link active"><i class="fas fa-book-atlas"></i> Workflows</a>
+                </li>
+                <li class="nav-item">
+                    <a href="build.html" class="nav-link"><i class="fas fa-rocket"></i> Build &amp; Run</a>
+                </li>
+                <li class="nav-item">
+                    <a href="build.html#contribute" class="nav-link"><i class="fas fa-code-pull-request"></i> Registry</a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <a href="https://github.com/pegasus-isi" target="_blank" style="color: var(--text-muted); font-size: 1.2rem; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'"><i class="fab fa-github"></i></a>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div class="container" style="padding-top: 60px;">
+        <section class="about-card">
+            <span class="topic-badge"><i class="fas fa-bullseye"></i> Goal of the Registry</span>
+            <h2>Community-Driven Blueprints</h2>
+            <p class="lead" style="margin-bottom: 0;">
+                The <b>Scientific Registry</b> is a centralized repository of production-ready workflows contributed by researchers around the world. Instead of starting from scratch, you can search for a blueprint that matches your domain—whether it's machine learning, bioinformatics, or astrophysics—and adapt it to fit your own computational needs.
+            </p>
+        </section>
+
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" id="searchBar" placeholder="Search for genomics, astronomy, AI..." onkeyup="filterGrid()">
+            <div id="wf-count"></div>
+        </div>
+    </div>
+
+    <div class="filter-bar" id="filter-bar"></div>
+    <div class="grid" id="scientific-grid"></div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="#">Documentation</a>
+            <a href="#">API</a>
+            <a href="#">Privacy</a>
+            <a href="https://pegasus.isi.edu" target="_blank">Pegasus WMS</a>
+        </div>
+        <p>&copy; 2026 PegasusHub Registry. Maintained by the pegasus-wms team &middot; ISI-USC.</p>
+    </footer>
+
+    <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="../assets/js/main.js"></script>
+    <script>
+        const WORKFLOWS_INDEX = 'https://raw.githubusercontent.com/swarmourr/Pegasus-Hub/refs/heads/main/data/workflows.json';
+
+        const grid = document.getElementById('scientific-grid');
+        let allWorkflows = [];
+        let activeTag = 'all';
+
+        const TAG_COLORS = ['tag-0','tag-1','tag-2','tag-3','tag-4','tag-5','tag-6'];
+        const tagColorMap = {};
+
+        function buildFilterBar(workflows) {
+            const seen = new Set();
+            workflows.forEach(w => {
+                (w.topic || '').split(/[,;]/).map(t => t.trim().toLowerCase()).filter(Boolean).forEach(t => seen.add(t));
+            });
+            const tags = [...seen];
+            tags.forEach((t, i) => { tagColorMap[t] = TAG_COLORS[i % 7]; });
+
+            const bar = document.getElementById('filter-bar');
+            bar.innerHTML = `<span class="filter-tag all active" onclick="setFilter('all', this)"><i class="fas fa-border-all"></i> All</span>` +
+                tags.map(t => `<span class="filter-tag ${tagColorMap[t]}" onclick="setFilter('${t}', this)"><i class="fas fa-tag"></i> ${t}</span>`).join('');
+        }
+
+        function setFilter(tag, el) {
+            activeTag = tag;
+            document.querySelectorAll('.filter-tag').forEach(f => f.classList.remove('active'));
+            el.classList.add('active');
+            filterGrid();
+        }
+
+        function updateCount(shown) {
+            const total = allWorkflows.length;
+            const el = document.getElementById('wf-count');
+            if (!el) return;
+            if (total === 0) { el.textContent = ''; return; }
+            el.textContent = shown === total ? `${total} workflow${total !== 1 ? 's' : ''}` : `Showing ${shown} of ${total} workflows`;
+        }
+
+        function renderWorkflows(data) {
+            grid.innerHTML = '';
+            updateCount(data.length);
+            if (!data.length) {
+                grid.innerHTML = `<div class="empty-state"><i class="fas fa-search"></i><h3>No workflows found</h3><p>Try a different search or clear the filter</p><button class="btn-clear-filter" onclick="clearFilters()"><i class="fas fa-times-circle"></i> Clear filters</button></div>`;
+                return;
+            }
+            data.forEach((w, i) => {
+                const tags = (w.topic || 'Workflow').split(/[,;]/).map(t => t.trim().toLowerCase()).filter(Boolean);
+                const tagsHtml = tags.map((t, j) => `<span class="tag tag-${j % 7}"><i class="fas fa-tag"></i>${t}</span>`).join('');
+                const desc = w.description || 'A scientific workflow blueprint ready to adapt for your computational research needs.';
+
+                let repoOwner = '', repoName = '';
+                if (w.github_repo && w.github_repo.includes('github.com')) {
+                    try {
+                        const parts = new URL(w.github_repo).pathname.split('/').filter(Boolean);
+                        repoOwner = parts[0] || '';
+                        repoName  = parts.slice(0, 2).join('/');
+                    } catch(e) {}
+                }
+                if (!repoOwner && w.github_owner) repoOwner = w.github_owner;
+
+                const avatarHtml = repoOwner
+                    ? `<div class="card-contrib"><img src="https://github.com/${repoOwner}.png?size=48" alt="${repoOwner}" title="${repoOwner}" onerror="this.src='https://ui-avatars.com/api/?name=${encodeURIComponent(repoOwner)}&size=48&background=22d3ee&color=000&bold=true&length=1'"><span>${repoOwner}</span></div>`
+                    : `<div class="card-contrib"><div class="contrib-placeholder"><i class="fas fa-user"></i></div><span>pegasus-wms</span></div>`;
+
+                const metaHtml = `<div class="card-meta">
+                    ${w.pegasus_version ? `<span class="card-meta-item"><i class="fas fa-code-branch"></i> v${w.pegasus_version}</span>` : ''}
+                    ${w.last_verified   ? `<span class="card-meta-item"><i class="fas fa-calendar-check"></i> ${w.last_verified}</span>` : ''}
+                    ${repoName          ? `<span class="card-meta-item"><i class="fab fa-github"></i> ${repoName}</span>` : ''}
+                </div>`;
+
+                grid.innerHTML += `
+                    <div class="card" onclick="location.href='details.html?id=${w.id}'" style="animation-delay:${i * 0.07}s">
+                        <div class="card-top"><div class="card-tags">${tagsHtml}</div><i class="fas fa-diagram-project card-icon"></i></div>
+                        <h3>${w.name}</h3>
+                        <p>${desc}</p>
+                        ${metaHtml}
+                        <div class="card-footer">${avatarHtml}<i class="fas fa-arrow-right arrow-btn"></i></div>
+                    </div>`;
+            });
+        }
+
+        function clearFilters() {
+            document.getElementById('searchBar').value = '';
+            activeTag = 'all';
+            document.querySelectorAll('.filter-tag').forEach(f => f.classList.remove('active'));
+            const allTag = document.querySelector('.filter-tag.all');
+            if (allTag) allTag.classList.add('active');
+            renderWorkflows(allWorkflows);
+        }
+
+        function filterGrid() {
+            const q = document.getElementById('searchBar').value.toLowerCase();
+            const filtered = allWorkflows.filter(w => {
+                const matchSearch = !q ||
+                    (w.name        || '').toLowerCase().includes(q) ||
+                    (w.topic       || '').toLowerCase().includes(q) ||
+                    (w.description || '').toLowerCase().includes(q);
+                const matchTag = activeTag === 'all' ||
+                    (w.topic || '').split(/[,;]/).map(t => t.trim().toLowerCase()).includes(activeTag);
+                return matchSearch && matchTag;
+            });
+            renderWorkflows(filtered);
+        }
+
+        async function loadWorkflows() {
+            grid.innerHTML = '<p style="color:var(--text-muted);padding:40px;grid-column:1/-1;text-align:center;"><i class="fas fa-spinner fa-spin"></i> Loading workflows...</p>';
+            try {
+                const res  = await fetch(WORKFLOWS_INDEX);
+                const data = await res.json();
+                allWorkflows = data.workflows || [];
+                buildFilterBar(allWorkflows);
+                renderWorkflows(allWorkflows);
+            } catch (e) {
+                grid.innerHTML = '<p style="color:var(--text-muted);padding:40px;grid-column:1/-1;text-align:center;">Could not load workflows. Check your connection.</p>';
+            }
+        }
+
+        loadWorkflows();
+    </script>
+</body>
+</html>

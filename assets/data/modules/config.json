@@ -1,0 +1,63 @@
+{
+  "diamond": {
+    "title": "Pegasus Beginner Training | The Diamond Workflow",
+    "breadcrumb": "Level 1 • Fundamental Patterns",
+    "h1": "The Diamond Workflow",
+    "description": "A complete beginner's guide to high-throughput parallel computing. Learn how to split data, process it simultaneously across independent nodes, and merge the results back together.",
+    "toc": [
+      { "icon": "fas fa-gem", "label": "1. The Diamond Concept", "href": "#sec1" },
+      { "icon": "fas fa-code", "label": "2. Python Executables", "href": "#sec2" },
+      { "icon": "fas fa-project-diagram", "label": "3. Workflow Blueprint", "href": "#sec3" },
+      { "icon": "fas fa-terminal", "label": "4. Execution", "href": "#sec4" }
+    ],
+    "stackIcon": "fas fa-book",
+    "stackTitle": "CORE CONCEPTS",
+    "stack": ["Parallel Execution", "Dependency Edges", "Map-Reduce Architecture"]
+  },
+  "pegasus": {
+    "title": "Pegasus Beginner Training | The Masterclass",
+    "breadcrumb": "Level 1 • Fundamental Concepts",
+    "h1": "The Masterclass",
+    "description": "Understand the core architecture of Pegasus WMS: Catalogs, Abstraction, and the Directed Acyclic Graph. This is everything you need to build your first scientific workflow.",
+    "toc": [
+      { "icon": "fas fa-rocket", "label": "1. The Big Picture", "href": "#sec1" },
+      { "icon": "fas fa-database", "label": "2. Replica Catalog", "href": "#sec2" },
+      { "icon": "fas fa-microchip", "label": "3. Transform Catalog", "href": "#sec3" },
+      { "icon": "fas fa-server", "label": "4. Site Catalog", "href": "#sec4" },
+      { "icon": "fas fa-project-diagram", "label": "5. Building the DAG", "href": "#sec5" }
+    ],
+    "stackIcon": "fas fa-book",
+    "stackTitle": "CORE CONCEPTS",
+    "stack": ["Abstraction Layer", "Data Portability", "Fault Tolerance"]
+  },
+  "split": {
+    "title": "Pegasus Beginner Training | Data Splitting Pattern",
+    "breadcrumb": "Level 1 • Fundamental Patterns",
+    "h1": "Data Splitting (Scatter)",
+    "description": "Learn how to break massive datasets into manageable partitions to unlock massive parallel execution across distributed grid computing resources.",
+    "toc": [
+      { "icon": "fas fa-layer-group", "label": "1. Why Split Data?", "href": "#sec1" },
+      { "icon": "fas fa-project-diagram", "label": "2. Design & Architecture", "href": "#sec2" },
+      { "icon": "fas fa-cut", "label": "3. What is the Pattern?", "href": "#sec3" },
+      { "icon": "fas fa-code", "label": "4. Implementation Example", "href": "#sec4" }
+    ],
+    "stackIcon": "fas fa-book",
+    "stackTitle": "CORE CONCEPTS",
+    "stack": ["Data Parallelism", "Dynamic Job Generation", "Scatter Pattern"]
+  },
+  "hwf": {
+    "title": "Pegasus Advanced | Hierarchical Federated Learning",
+    "breadcrumb": "UseCase • Distributed AI • Pegasus 5.0+",
+    "h1": "Deep Dive: Hierarchical Workflows & FL",
+    "description": "A comprehensive guide on managing complex machine learning pipelines by nesting \"Round-Level\" execution graphs inside a \"Global-Level\" orchestrator.",
+    "toc": [
+      { "icon": "fas fa-layer-group", "label": "1. Why Hierarchical?", "href": "#sec1" },
+      { "icon": "fas fa-project-diagram", "label": "2. Design & Architecture", "href": "#sec2" },
+      { "icon": "fas fa-brain", "label": "3. What is Fed. Learning?", "href": "#sec3" },
+      { "icon": "fas fa-code", "label": "4. Implementation Example", "href": "#sec4" }
+    ],
+    "stackIcon": "fas fa-server",
+    "stackTitle": "TARGET ENVIRONMENT",
+    "stack": ["Main Workflow: <b>OSG / Submit Node</b>", "Sub Workflow: <b>Distributed Compute Nodes</b>", "Execution: <b>HTCondor Scheduler</b>"]
+  }
+}

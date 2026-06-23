@@ -391,9 +391,9 @@
 <body>
 
     <nav>
-        <a href="index.html" class="logo"><i class="fas fa-layer-group"></i> PEGASUS<span>HUB</span></a>
+        <a href="../index.html" class="logo"><i class="fas fa-layer-group"></i> PEGASUS<span>HUB</span></a>
         <div class="nav-right">
-            <a href="training.html" class="btn-back"><i class="fas fa-arrow-left"></i> Academy</a>
+            <a href="academy.html" class="btn-back"><i class="fas fa-arrow-left"></i> Academy</a>
             <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
         </div>
     </nav>
@@ -757,7 +757,7 @@
 
         async function loadCourses() {
             try {
-                const res = await fetch('data/courses.json');
+                const res = await fetch('../assets/data/courses.json');
                 const data = await res.json();
                 COURSES = data.tutorials;
             } catch(e) {}
@@ -812,7 +812,7 @@
                 <div class="error-state">
                     <i class="fas fa-exclamation-triangle"></i>
                     <p>${msg}</p>
-                    <a href="training.html" class="action-btn" style="margin-top:8px;"><i class="fas fa-arrow-left"></i> Return to Academy</a>
+                    <a href="academy.html" class="action-btn" style="margin-top:8px;"><i class="fas fa-arrow-left"></i> Return to Academy</a>
                 </div>`;
         }
 

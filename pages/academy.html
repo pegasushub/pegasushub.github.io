@@ -1,0 +1,230 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PegasusHub | Academy</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/main.css">
+
+    <style>
+        /* --- HERO --- */
+        .hero { padding: 80px 20px 40px; text-align: center; }
+        .hero h1 { font-size: clamp(3rem, 5vw, 4.5rem); font-weight: 800; letter-spacing: -2px; margin-bottom: 20px; background: linear-gradient(to right, var(--text-main), var(--text-muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero p { color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 1.2rem; }
+
+        /* --- SECTIONS --- */
+        .section-header { max-width: 1300px; margin: 0 auto 30px; padding: 0 40px; display: flex; align-items: center; gap: 15px; font-size: 1.5rem; font-weight: 700; color: var(--text-main); }
+        .section-header i { color: var(--secondary); }
+        .grid { max-width: 1400px; margin: 0 auto 80px; padding: 0 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 30px; }
+
+        /* --- VIDEO CARD --- */
+        .video-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; cursor: pointer; transition: 0.3s; position: relative; backdrop-filter: blur(12px); }
+        .video-card:hover { transform: translateY(-8px); border-color: var(--secondary); box-shadow: 0 20px 50px -10px var(--secondary-glow); }
+        .vid-thumbnail { height: 180px; background: #000; position: relative; display: flex; align-items: center; justify-content: center; background-size: cover; background-position: center; }
+        .play-btn { width: 50px; height: 50px; background: rgba(255,255,255,0.1); backdrop-filter: blur(4px); border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.2); transition: 0.3s; }
+        .play-btn i { color: #fff; font-size: 1.2rem; margin-left: 4px; }
+        .video-card:hover .play-btn { background: var(--secondary); transform: scale(1.1); border-color: var(--secondary); }
+        .vid-duration { position: absolute; bottom: 10px; right: 10px; background: rgba(0,0,0,0.8); color: #fff; font-size: 0.7rem; font-weight: 700; padding: 4px 8px; border-radius: 6px; }
+        .vid-content { padding: 25px; }
+        .vid-content h3 { font-size: 1.2rem; margin-bottom: 8px; color: var(--text-main); }
+        .vid-content p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+
+        /* --- CINEMA MODAL --- */
+        #cinema-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; backdrop-filter: blur(10px); align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; }
+        #cinema-modal.active { display: flex; opacity: 1; }
+        .modal-content { width: 90%; max-width: 1000px; aspect-ratio: 16/9; background: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 0 50px rgba(0,0,0,0.5); border: 1px solid var(--border); position: relative; }
+        .close-btn { position: absolute; top: -50px; right: 0; color: #fff; font-size: 2rem; cursor: pointer; transition: 0.2s; }
+        .close-btn:hover { color: var(--primary); transform: scale(1.1); }
+        iframe { width: 100%; height: 100%; border: none; }
+
+        /* --- COURSE CARD --- */
+        .course-card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 35px; cursor: pointer; transition: 0.4s; display: flex; flex-direction: column; backdrop-filter: blur(12px); text-decoration: none; color: inherit; }
+        .course-card:hover { transform: translateY(-8px); border-color: var(--secondary); box-shadow: 0 20px 50px -10px var(--secondary-glow); }
+        .badge { display: inline-block; font-size: 0.7rem; font-weight: 800; padding: 6px 12px; border-radius: 20px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 15px; width: fit-content; }
+        .badge.beginner    { background: rgba(34,211,238,0.15);  color: #22d3ee; }
+        .badge.intermediate{ background: rgba(56,189,248,0.15);  color: #38bdf8; }
+        .badge.advanced    { background: rgba(129,140,248,0.15); color: #818cf8; }
+        .badge.expert      { background: rgba(244,63,94,0.15);   color: #f43f5e; }
+        .course-card h3 { font-size: 1.4rem; margin-bottom: 12px; letter-spacing: -0.5px; }
+        .course-card p  { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 25px; flex-grow: 1; }
+        .meta-row { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 20px; font-size: 0.85rem; color: var(--text-muted); font-weight: 700; }
+        .btn-start { color: var(--text-main); transition: 0.2s; }
+        .course-card:hover .btn-start { color: var(--secondary); }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-left">
+            <a href="../index.html" class="nav-logo"><i class="fas fa-layer-group"></i> PEGASUS<span>HUB</span></a>
+        </div>
+        <div class="nav-center">
+            <ul class="nav-links">
+                <li class="nav-item active-path">
+                    <a href="../index.html" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
+                </li>
+                <li class="nav-item active-path">
+                    <a href="academy.html" class="nav-link active"><i class="fas fa-graduation-cap"></i> Academy</a>
+                </li>
+                <li class="nav-item">
+                    <a href="workflows.html" class="nav-link"><i class="fas fa-book-atlas"></i> Workflows</a>
+                </li>
+                <li class="nav-item">
+                    <a href="build.html" class="nav-link"><i class="fas fa-rocket"></i> Build &amp; Run</a>
+                </li>
+                <li class="nav-item">
+                    <a href="build.html#contribute" class="nav-link"><i class="fas fa-code-pull-request"></i> Registry</a>
+                </li>
+            </ul>
+        </div>
+        <div class="nav-right">
+            <a href="https://github.com/pegasus-isi" target="_blank" style="color: var(--text-muted); font-size: 1.2rem; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'"><i class="fab fa-github"></i></a>
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Master the Pipeline</h1>
+        <p>From local debugging to exascale deployment. Follow our structured learning paths or dive into quick video tutorials.</p>
+    </header>
+
+    <div class="container">
+        <section class="about-card">
+            <span class="topic-badge"><i class="fas fa-bullseye"></i> Goal of the Academy</span>
+            <h2>Interactive Learning Portal</h2>
+            <p class="lead" style="margin-bottom: 0;">
+                The <b>Academy</b> is designed to take you step-by-step through the process of writing, executing, and monitoring scientific workflows. Whether you are a visual learner looking for video walkthroughs, or a hands-on developer wanting to execute Jupyter Notebooks directly on ACCESS infrastructure, this curriculum bridges the gap between theory and practice.
+            </p>
+        </section>
+    </div>
+
+    <div class="section-header"><i class="fas fa-play-circle"></i> Video Walkthroughs</div>
+    <div class="grid" id="grid-videos"></div>
+
+    <div class="section-header"><i class="fas fa-list-ol"></i> ACCESS Core Tutorials</div>
+    <div class="grid" id="grid-access"></div>
+
+    <div class="section-header"><i class="fas fa-graduation-cap"></i> Core Curriculum</div>
+    <div class="grid" id="grid-basics"></div>
+
+    <div class="section-header"><i class="fas fa-code-branch"></i> Advanced Orchestration</div>
+    <div class="grid" id="grid-advanced"></div>
+
+    <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
+
+    <div id="cinema-modal" onclick="closeVideo()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="close-btn" onclick="closeVideo()">&times;</div>
+            <iframe id="youtube-frame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-links">
+            <a href="https://pegasus.isi.edu/documentation/" target="_blank">Documentation</a>
+            <a href="https://pegasus.isi.edu/documentation/reference-guide/api-reference.html" target="_blank">API</a>
+            <a href="#">Privacy</a>
+            <a href="https://pegasus.isi.edu" target="_blank">Pegasus WMS</a>
+        </div>
+        <p>&copy; 2026 PegasusHub Registry. Maintained by the pegasus-wms team &middot; ISI-USC.</p>
+    </footer>
+
+    <script src="../assets/js/main.js"></script>
+    <script>
+        // --- SECURITY ---
+        function escapeHTML(str) {
+            if (!str) return '';
+            return str.replace(/[&<>'"]/g, tag => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+            }[tag]));
+        }
+
+        // --- RENDERERS ---
+        function renderVideos(videos) {
+            const grid = document.getElementById('grid-videos');
+            grid.innerHTML = videos.map(v => `
+                <div class="video-card" onclick="openVideo('${escapeHTML(v.id)}')">
+                    <div class="vid-thumbnail" style="background-image: url('${escapeHTML(v.thumb)}')">
+                        <div class="play-btn"><i class="fas fa-play"></i></div>
+                        <span class="vid-duration">${escapeHTML(v.duration)}</span>
+                    </div>
+                    <div class="vid-content">
+                        <h3>${escapeHTML(v.title)}</h3>
+                        <p>${escapeHTML(v.desc)}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderCourses(data, targetId) {
+            const grid = document.getElementById(targetId);
+            grid.innerHTML = data.map(item => {
+                const isComingSoon = !!item.badge;
+                const tag = isComingSoon
+                    ? `<span style="position:absolute;top:16px;right:16px;background:rgba(251,146,60,0.15);color:#fb923c;border:1px solid rgba(251,146,60,0.4);font-size:0.65rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:4px 10px;border-radius:20px;">${escapeHTML(item.badge)}</span>`
+                    : '';
+                const href   = isComingSoon ? 'javascript:void(0)' : (item.url || '#');
+                const target = (!isComingSoon && item.url && item.url.startsWith('http')) ? '_blank' : '_self';
+                const cursor = isComingSoon ? 'style="cursor:default;opacity:0.7;"' : '';
+                return `
+                <a href="${href}" target="${target}" class="course-card" ${cursor} style="position:relative;">
+                    ${tag}
+                    <span class="badge ${item.level}">${item.level}</span>
+                    <h3>${escapeHTML(item.title)}</h3>
+                    <p>${escapeHTML(item.desc)}</p>
+                    <div class="meta-row">
+                        <div class="meta-item"><i class="fas ${item.icon}"></i> ${item.time}</div>
+                        ${isComingSoon
+                            ? `<span style="color:var(--text-muted);font-size:0.85rem;font-weight:700;">Coming Soon</span>`
+                            : `<span class="btn-start">START MODULE <i class="fas fa-arrow-right"></i></span>`}
+                    </div>
+                </a>`;
+            }).join('');
+        }
+
+        // --- VIDEO PLAYER ---
+        const modal  = document.getElementById('cinema-modal');
+        const iframe = document.getElementById('youtube-frame');
+
+        function openVideo(id) {
+            iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeVideo() {
+            modal.classList.remove('active');
+            iframe.src = '';
+            document.body.style.overflow = 'auto';
+        }
+        document.addEventListener('keydown', e => { if (e.key === 'Escape') closeVideo(); });
+
+        // --- INIT: load data ---
+        window.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const res  = await fetch('../assets/data/courses.json');
+                const data = await res.json();
+
+                const tutorials = data.tutorials.map(t => ({
+                    ...t,
+                    url: `lesson.html?title=${encodeURIComponent(t.title)}&notebook=${encodeURIComponent(t.notebook)}`
+                }));
+
+                renderVideos(data.videos);
+                renderCourses(tutorials,      'grid-access');
+                renderCourses(data.basics,    'grid-basics');
+                renderCourses(data.advanced,  'grid-advanced');
+            } catch (e) {
+                console.error('Failed to load courses.json:', e);
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -3,146 +3,32 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>PegasusHub | Build, Run & Contribute</title>
-    
+    <title>PegasusHub | Build, Run &amp; Contribute</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="../assets/css/main.css">
+
     <style>
-        :root {
-            /* EXACT MATCH DESIGN SYSTEM */
-            --bg: #355872;
-            --surface: rgba(30, 41, 59, 0.4);
-            --border: rgba(148, 163, 184, 0.1);
-            --primary: #22d3ee;
-            --primary-glow: rgba(34, 211, 238, 0.2);
-            --secondary: #9CD5FF;
-            --text-main: #ffffff;
-            --text-muted: #9CD5FF;
-            --glass: rgba(2, 6, 23, 0.8);
-            --grad: radial-gradient(circle at 50% -20%, rgba(129, 140, 248, 0.15) 0%, transparent 50%);
-        }
+        body { scroll-behavior: smooth; }
 
-        body.light-mode {
-            --bg: #f8fafc; --surface: rgba(255, 255, 255, 0.7); --border: #e2e8f0;
-            --primary: #0284c7; --text-main: #0f172a; --text-muted: #64748b;
-            --glass: rgba(255, 255, 255, 0.8);
-            --grad: radial-gradient(circle at 50% -20%, rgba(2, 132, 199, 0.08) 0%, transparent 60%);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.3s, border-color 0.3s, transform 0.3s; }
-        
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: var(--bg); color: var(--text-main);
-            background-image: var(--grad); background-attachment: fixed;
-            min-height: 100vh; line-height: 1.6; scroll-behavior: smooth;
-        }
-
-        /* --- ROADMAP NAVBAR (5 ITEMS) --- */
-        nav { 
-            height: 80px; padding: 0 5%; background: var(--glass); 
-            backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); 
-            display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; 
-            position: sticky; top: 0; z-index: 1000; 
-        }
-
-        .nav-left { display: flex; align-items: center; justify-content: flex-start; }
-        .nav-center { display: flex; align-items: center; justify-content: center; }
-        .nav-right { display: flex; align-items: center; justify-content: flex-end; gap: 20px; }
-
-        .nav-logo { font-weight: 800; font-size: 1.3rem; text-decoration: none; color: var(--text-main); letter-spacing: -1px; display: flex; align-items: center; gap: 10px; }
-        .nav-logo i, .nav-logo span { color: var(--primary); }
-
-        .nav-links { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; }
-        .nav-item { display: flex; align-items: center; position: relative; }
-        
-        .nav-item:not(:last-child)::after {
-            content: ''; width: 25px; height: 2px; background: var(--border); 
-            margin: 0 10px; transition: 0.3s;
-        }
-        .nav-item:hover:not(:last-child)::after, .nav-item.active-path:not(:last-child)::after { 
-            background: var(--primary); box-shadow: 0 0 10px var(--primary-glow); 
-        }
-
-        .nav-link { 
-            display: flex; align-items: center; gap: 8px; color: var(--text-muted); 
-            text-decoration: none; font-weight: 700; font-size: 0.8rem; 
-            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;
-        }
-        
-        .nav-link i { 
-            background: var(--surface); border: 1px solid var(--border);
-            width: 34px; height: 34px; border-radius: 50%; display: flex; 
-            align-items: center; justify-content: center; color: var(--primary); 
-            transition: 0.3s; font-size: 0.85rem;
-        }
-        
-        .nav-link:hover { color: var(--text-main); }
-        .nav-link:hover i, .nav-link.active i { 
-            background: var(--primary-glow); border-color: var(--primary); 
-            transform: scale(1.1); box-shadow: 0 0 15px var(--primary-glow); color: var(--text-main);
-        }
-        .nav-link.active { color: var(--text-main); }
-
-        .theme-toggle {
-            background: var(--surface); border: 1px solid var(--border); color: var(--text-muted);
-            width: 42px; height: 42px; border-radius: 12px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .theme-toggle:hover { color: var(--primary); border-color: var(--primary); }
-
-        @media (max-width: 1000px) {
-            nav { grid-template-columns: 1fr; gap: 15px; justify-items: center; height: auto; padding: 20px 5%; }
-            .nav-left, .nav-center, .nav-right { justify-content: center; }
-            .nav-links { flex-wrap: wrap; justify-content: center; gap: 10px; }
-            .nav-item:not(:last-child)::after { display: none; }
-        }
-
-        /* --- HERO SECTION --- */
+        /* --- HERO --- */
         .hero { padding: 80px 20px 40px; text-align: center; }
-        .hero h1 { 
-            font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 800; letter-spacing: -3px; margin-bottom: 20px; 
-            background: linear-gradient(to right, var(--text-main), var(--text-muted)); 
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-        }
+        .hero h1 { font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 800; letter-spacing: -3px; margin-bottom: 20px; background: linear-gradient(to right, var(--text-main), var(--text-muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .hero p { color: var(--text-muted); max-width: 600px; margin: 0 auto 20px; font-size: 1.2rem; }
 
         .container { max-width: 1400px; margin: 0 auto; padding: 0 40px 100px; }
-
-        /* --- EXPLANATION CARD (PURPOSE) --- */
-        .about-card {
-            background: var(--surface); border: 1px solid var(--border); border-radius: 32px;
-            padding: 50px; backdrop-filter: blur(15px); margin-bottom: 60px; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2); text-align: center;
-            position: relative; overflow: hidden;
-            animation: fade-up 0.8s forwards; opacity: 0;
-        }
-        .about-card::before {
-            content: ''; position: absolute; top: -50%; left: 50%; transform: translateX(-50%);
-            width: 600px; height: 600px; background: var(--primary-glow); filter: blur(100px); z-index: -1; pointer-events: none;
-        }
-        .topic-badge { 
-            font-size: 0.75rem; font-weight: 800; color: var(--primary); 
-            background: var(--primary-glow); padding: 8px 16px; border-radius: 20px;
-            letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 20px; display: inline-block;
-        }
-        .about-card h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 20px; color: var(--text-main); letter-spacing: -1px; }
-        .about-card p.lead { font-size: 1.15rem; color: rgba(255,255,255,0.85); max-width: 900px; margin: 0 auto; line-height: 1.8; }
-        body.light-mode .about-card p.lead { color: var(--text-main); opacity: 0.8; }
-
-        @keyframes fade-up { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         /* --- FEATURED SECTIONS --- */
         .featured-section {
             background: var(--surface); border: 1px solid var(--border); border-radius: 32px;
             padding: 50px; backdrop-filter: blur(15px); display: flex; align-items: center; gap: 50px;
             margin-bottom: 80px; box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            scroll-margin-top: 100px; /* Offset for sticky nav */
+            scroll-margin-top: 100px;
         }
         .featured-content { flex: 1; }
         .featured-terminal { flex: 1; min-width: 350px; display: flex; flex-direction: column; gap: 20px; }
-        
+
         @media (max-width: 1000px) {
             .featured-section { flex-direction: column; text-align: left; padding: 40px 30px; }
             .featured-terminal { width: 100%; }
@@ -150,116 +36,76 @@
 
         .section-header { font-size: 2rem; font-weight: 800; color: var(--text-main); margin-bottom: 30px; letter-spacing: -1px; }
 
-        .explanation-box {
-            background: rgba(0,0,0,0.1); border-left: 3px solid var(--primary);
-            padding: 20px; border-radius: 0 12px 12px 0; margin-bottom: 30px;
-        }
+        .explanation-box { background: rgba(0,0,0,0.1); border-left: 3px solid var(--primary); padding: 20px; border-radius: 0 12px 12px 0; margin-bottom: 30px; }
         body.light-mode .explanation-box { background: rgba(0,0,0,0.03); }
-        
         .explanation-item { display: flex; gap: 15px; align-items: flex-start; margin-bottom: 15px; }
         .explanation-item:last-child { margin-bottom: 0; }
         .explanation-item i { margin-top: 5px; font-size: 1.1rem; }
         .explanation-item h4 { color: var(--text-main); font-size: 1rem; margin-bottom: 4px; font-weight: 700; }
-        .explanation-item p { color: var(--text-muted); font-size: 0.9rem; margin: 0; line-height: 1.5; }
+        .explanation-item p  { color: var(--text-muted); font-size: 0.9rem; margin: 0; line-height: 1.5; }
 
-        /* --- STRICTLY DARK TERMINAL STYLES --- */
+        /* --- TERMINAL STYLES (strictly dark) --- */
         .tool-block { display: flex; flex-direction: column; }
-        .tool-header {
-            background: #1e293b; padding: 12px 20px; border-radius: 16px 16px 0 0;
-            border: 1px solid #334155; border-bottom: none; display: flex; justify-content: space-between; align-items: center;
-        }
+        .tool-header { background: #1e293b; padding: 12px 20px; border-radius: 16px 16px 0 0; border: 1px solid #334155; border-bottom: none; display: flex; justify-content: space-between; align-items: center; }
         .tool-header span.tool-title { font-weight: 700; color: #f8fafc; font-size: 0.95rem; display: flex; align-items: center; gap: 8px; }
         .tool-header a { color: #f8fafc; text-decoration: none; transition: 0.2s; }
         .tool-header a:hover { opacity: 0.8; }
-        
-        .terminal {
-            background: #0f172a; border-radius: 0 0 16px 16px; padding: 20px;
-            font-family: 'Fira Code', Consolas, monospace; font-size: 0.85rem; color: #e2e8f0;
-            border: 1px solid #334155; line-height: 1.6;
-            word-wrap: break-word; overflow-wrap: break-word; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
-        }
-        .terminal-standalone { border-radius: 16px; }
+        .terminal { background: #0f172a; border-radius: 0 0 16px 16px; padding: 20px; font-family: 'Fira Code', Consolas, monospace; font-size: 0.85rem; color: #e2e8f0; border: 1px solid #334155; line-height: 1.6; word-wrap: break-word; overflow-wrap: break-word; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); }
 
-        /* Markdown Syntax Highlight overrides */
-        .md-key { color: #38bdf8; font-weight: 600; } 
-        .md-string { color: #a3e635; } 
-        .md-comment { color: #64748b; font-style: italic; } 
-        .md-header { color: #fbbf24; font-weight: 700; } 
-        .md-text { color: #f8fafc; } 
-        .md-cmd { color: #e2e8f0; } 
+        /* Markdown Syntax */
+        .md-key     { color: #38bdf8; font-weight: 600; }
+        .md-string  { color: #a3e635; }
+        .md-comment { color: #64748b; font-style: italic; }
+        .md-header  { color: #fbbf24; font-weight: 700; }
+        .md-text    { color: #f8fafc; }
+        .md-cmd     { color: #e2e8f0; }
 
         .badge-recommended { background: #10b981; color: #000000; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; padding: 4px 10px; border-radius: 12px; }
-        .badge-classic { background: rgba(255, 255, 255, 0.1); color: var(--text-main); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; padding: 4px 10px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.2); }
+        .badge-classic { background: rgba(255,255,255,0.1); color: var(--text-main); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; padding: 4px 10px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.2); }
         body.light-mode .badge-classic { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); }
 
-        /* --- GRID (Environments) --- */
+        /* --- ENVIRONMENT GRID --- */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 30px; margin-bottom: 80px; }
-
-        .card { 
-            background: var(--surface); border: 1px solid var(--border); border-radius: 24px; 
-            padding: 35px; backdrop-filter: blur(12px); display: flex; flex-direction: column;
-        }
+        .card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 35px; backdrop-filter: blur(12px); display: flex; flex-direction: column; }
         .card:hover { border-color: var(--primary); transform: translateY(-8px); box-shadow: 0 20px 50px -10px var(--primary-glow); }
-
-        .topic-badge { 
-            font-size: 0.7rem; font-weight: 800; color: var(--primary); 
-            background: var(--primary-glow); padding: 6px 12px; border-radius: 20px;
-            letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; align-self: flex-start; display: inline-block;
-        }
-
+        .topic-badge { font-size: 0.7rem; font-weight: 800; color: var(--primary); background: var(--primary-glow); padding: 6px 12px; border-radius: 20px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; align-self: flex-start; display: inline-block; }
         h3 { font-size: 1.5rem; margin-bottom: 12px; color: var(--text-main); }
-        p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px; flex-grow: 1; }
+        p  { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 30px; flex-grow: 1; }
 
         /* Buttons */
-        .btn { 
-            background: var(--text-main); color: var(--bg); padding: 14px 28px; 
-            border-radius: 14px; font-weight: 700; text-decoration: none; 
-            font-size: 0.9rem; text-align: center; transition: 0.3s; display: inline-block;
-        }
+        .btn { background: var(--text-main); color: var(--bg); padding: 14px 28px; border-radius: 14px; font-weight: 700; text-decoration: none; font-size: 0.9rem; text-align: center; transition: 0.3s; display: inline-block; }
         .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px var(--primary-glow); }
         .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-main); }
         .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
 
-        footer { border-top: 1px solid var(--border); padding: 60px 0; text-align: center; color: var(--text-muted); font-size: 0.9rem; }
+        footer { margin-top: 0; }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="nav-left">
-            <a href="index.html" class="nav-logo"><i class="fas fa-layer-group"></i> PEGASUS<span>HUB</span></a>
+            <a href="../index.html" class="nav-logo"><i class="fas fa-layer-group"></i> PEGASUS<span>HUB</span></a>
         </div>
-        
         <div class="nav-center">
             <ul class="nav-links">
                 <li class="nav-item active-path">
-                    <a href="index.html" class="nav-link">
-                        <i class="fas fa-info-circle"></i> About
-                    </a>
+                    <a href="../index.html" class="nav-link"><i class="fas fa-info-circle"></i> About</a>
                 </li>
                 <li class="nav-item active-path">
-                    <a href="training.html" class="nav-link">
-                        <i class="fas fa-graduation-cap"></i> Academy
-                    </a>
+                    <a href="academy.html" class="nav-link"><i class="fas fa-graduation-cap"></i> Academy</a>
                 </li>
                 <li class="nav-item active-path">
-                    <a href="registry.html" class="nav-link">
-                        <i class="fas fa-book-atlas"></i> Workflows
-                    </a>
+                    <a href="workflows.html" class="nav-link"><i class="fas fa-book-atlas"></i> Workflows</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#run" class="nav-link" id="nav-run">
-                        <i class="fas fa-rocket"></i> Build & Run
-                    </a>
+                    <a href="#run" class="nav-link" id="nav-run"><i class="fas fa-rocket"></i> Build &amp; Run</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#contribute" class="nav-link" id="nav-contribute">
-                        <i class="fas fa-code-pull-request"></i> Registry
-                    </a>
+                    <a href="#contribute" class="nav-link" id="nav-contribute"><i class="fas fa-code-pull-request"></i> Registry</a>
                 </li>
             </ul>
         </div>
-
         <div class="nav-right">
             <a href="https://github.com/pegasus-isi" target="_blank" style="color: var(--text-muted); font-size: 1.2rem; transition: 0.3s;" onmouseover="this.style.color='var(--primary)'" onmouseout="this.style.color='var(--text-muted)'"><i class="fab fa-github"></i></a>
             <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Theme">
@@ -269,15 +115,15 @@
     </nav>
 
     <header class="hero">
-        <h1>Build & Run</h1>
+        <h1>Build &amp; Run</h1>
         <p>The complete lifecycle: Scaffold your projects, Execute on grid resources, and Publish your workflows.</p>
     </header>
 
     <div class="container">
-        
+
         <section class="about-card">
-            <span class="topic-badge"><i class="fas fa-bullseye"></i> Build & Run</span>
-            <h2>Build & Run</h2>
+            <span class="topic-badge"><i class="fas fa-bullseye"></i> Build &amp; Run</span>
+            <h2>Build &amp; Run</h2>
             <p class="lead" style="margin-bottom: 0;">
                 This page provides the necessary tools to take your workflow from a local concept to grid-scale execution. Use modern scaffolding templates to generate your project, choose your execution environment, and finally, share your scientifically verified workflow with the global PegasusHub community.
             </p>
@@ -292,7 +138,6 @@
                 <p style="font-size: 1.1rem; margin-bottom: 25px;">
                     Rapidly bootstrap a new Pegasus workflow project using our official generation templates.
                 </p>
-                
                 <div class="explanation-box">
                     <div class="explanation-item">
                         <i class="fas fa-magic" style="color: var(--primary);"></i>
@@ -306,20 +151,19 @@
                         <div>
                             <h4>Copier vs Cookiecutter</h4>
                             <p>
-                                <a href="https://cookiecutter.readthedocs.io/" target="_blank" style="color: #f59e0b; text-decoration: underline;"><b>Cookiecutter</b></a> is the classic one-time generator. 
+                                <a href="https://cookiecutter.readthedocs.io/" target="_blank" style="color: #f59e0b; text-decoration: underline;"><b>Cookiecutter</b></a> is the classic one-time generator.
                                 <a href="https://copier.readthedocs.io/" target="_blank" style="color: #10b981; text-decoration: underline;"><b>Copier</b></a> is recommended because it supports project lifecycle updates, allowing you to seamlessly pull upstream template improvements into your existing project later.
                             </p>
                         </div>
                     </div>
                 </div>
-
                 <div style="display: flex; gap: 15px; flex-wrap: wrap;">
                     <a href="https://github.com/swarmourr/pegasus-wms-template" class="btn" target="_blank">
                         <i class="fab fa-github"></i> View Template Repository
                     </a>
                 </div>
             </div>
-            
+
             <div class="featured-terminal">
                 <div class="tool-block">
                     <div class="tool-header">
@@ -335,7 +179,6 @@
                         <span class="md-cmd">copier copy https://github.com/swarmourr/pegasus-wms-template.git ./my-project</span>
                     </div>
                 </div>
-
                 <div class="tool-block">
                     <div class="tool-header">
                         <span class="tool-title">
@@ -353,7 +196,6 @@
             </div>
         </section>
 
-
         <section class="featured-section" style="flex-direction: column; align-items: stretch; padding: 50px;">
             <span class="topic-badge" style="margin-bottom: 12px;"><i class="fas fa-server"></i> Step 2: Execution Environments</span>
             <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--text-main); margin: 0 0 10px; letter-spacing: -1px;">Choose Your Environment</h2>
@@ -366,7 +208,6 @@
                     <p>Connect directly to national cyberinfrastructure via Open OnDemand and Jupyter. Ideal for research projects needing managed resources without complex setup.</p>
                     <a href="https://access.pegasus.isi.edu" class="btn btn-outline" style="margin-top: auto;" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i> Login via ACCESS</a>
                 </div>
-
                 <div class="card">
                     <i class="fas fa-network-wired card-icon" style="font-size: 1.8rem; margin-bottom: 16px;"></i>
                     <span class="topic-badge" style="margin-bottom: 14px;">Grid Computing</span>
@@ -379,9 +220,7 @@
 
         <section class="featured-section" id="contribute" style="background: rgba(16, 185, 129, 0.05); border-color: rgba(16, 185, 129, 0.2);">
             <div class="featured-content">
-                <span class="topic-badge">
-                    <i class="fas fa-code-pull-request"></i> Step 3: Share the Workflow
-                </span>
+                <span class="topic-badge"><i class="fas fa-code-pull-request"></i> Step 3: Share the Workflow</span>
                 <h2 style="font-size: 2.5rem; font-weight: 800; color: var(--text-main); margin: 15px 0; letter-spacing: -1px;">
                     Publish to Registry
                 </h2>
@@ -419,7 +258,7 @@
                         <span class="md-comment"># Generate and submit</span><br>
                         <span class="md-cmd">python3 generator.py</span><br>
                         <span class="md-comment">```</span><br><br>
-                        <span class="md-header">## THE WORKFLOW VISUALISATION</span><br>
+                        <span class="md-header">## THE WORKFLOW VISUALISATION</span>
                     </div>
                 </div>
             </div>
@@ -428,7 +267,7 @@
         <!-- CONTRIBUTE MODAL -->
         <div id="contribute-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.7); backdrop-filter:blur(8px); z-index:2000; align-items:center; justify-content:center; padding:20px;">
             <div style="background:var(--glass); border:1px solid var(--border); border-radius:24px; padding:40px; max-width:700px; width:100%; max-height:90vh; overflow-y:auto; position:relative;">
-                <button onclick="document.getElementById('contribute-modal').style.display='none'" style="position:absolute; top:20px; right:20px; background:var(--surface); border:1px solid var(--border); color:var(--text-muted); width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:1rem;">✕</button>
+                <button onclick="document.getElementById('contribute-modal').style.display='none'" style="position:absolute; top:20px; right:20px; background:var(--surface); border:1px solid var(--border); color:var(--text-muted); width:36px; height:36px; border-radius:50%; cursor:pointer; font-size:1rem;">&#x2715;</button>
                 <h3 style="font-size:1.6rem; font-weight:800; margin-bottom:6px; letter-spacing:-0.5px;">Submit Your Workflow</h3>
                 <p style="color:var(--text-muted); font-size:0.9rem; margin-bottom:24px;">Fill in all fields — we'll open a pre-filled GitHub issue. Just click Submit on GitHub to finish.</p>
 
@@ -457,57 +296,28 @@
                         <div>
                             <label style="font-size:0.72rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:6px;">Pegasus Version *</label>
                             <select id="cf-version" required style="width:100%; padding:10px 14px; border-radius:10px; border:1px solid var(--border); background:var(--surface); color:var(--text-main); font-family:inherit; font-size:0.9rem; outline:none; cursor:pointer;">
-                                <option value="" disabled selected>Select version…</option>
-                                <option>>= 5.2.0</option>
-                                <option>>= 5.1.3</option>
-                                <option>>= 5.1.2</option>
-                                <option>>= 5.1.1</option>
-                                <option>>= 5.1.0</option>
-                                <option>>= 5.0.9</option>
-                                <option>>= 5.0.8</option>
-                                <option>>= 5.0.7</option>
-                                <option>>= 5.0.6</option>
-                                <option>>= 5.0.5</option>
-                                <option>>= 5.0.4</option>
-                                <option>>= 5.0.3</option>
-                                <option>>= 5.0.2</option>
-                                <option>>= 5.0.1</option>
-                                <option>>= 5.0.0</option>
-                                <option>>= 4.9.3</option>
-                                <option>>= 4.9.2</option>
-                                <option>>= 4.9.1</option>
-                                <option>>= 4.9.0</option>
-                                <option>>= 4.8.5</option>
-                                <option>>= 4.8.4</option>
-                                <option>>= 4.8.3</option>
-                                <option>>= 4.8.2</option>
-                                <option>>= 4.8.1</option>
-                                <option>>= 4.8.0</option>
-                                <option>>= 4.7.5</option>
-                                <option>>= 4.7.4</option>
-                                <option>>= 4.7.3</option>
-                                <option>>= 4.7.2</option>
-                                <option>>= 4.7.1</option>
-                                <option>>= 4.7.0</option>
-                                <option>>= 4.6.2</option>
-                                <option>>= 4.6.1</option>
-                                <option>>= 4.6.0</option>
-                                <option>>= 4.5.4</option>
-                                <option>>= 4.5.3</option>
-                                <option>>= 4.5.2</option>
-                                <option>>= 4.5.1</option>
-                                <option>>= 4.5.0</option>
-                                <option>>= 4.4.2</option>
-                                <option>>= 4.4.1</option>
-                                <option>>= 4.4.0</option>
-                                <option>>= 4.3.2</option>
-                                <option>>= 4.3.0</option>
+                                <option value="" disabled selected>Select version&hellip;</option>
+                                <option>&gt;= 5.2.0</option><option>&gt;= 5.1.3</option><option>&gt;= 5.1.2</option>
+                                <option>&gt;= 5.1.1</option><option>&gt;= 5.1.0</option><option>&gt;= 5.0.9</option>
+                                <option>&gt;= 5.0.8</option><option>&gt;= 5.0.7</option><option>&gt;= 5.0.6</option>
+                                <option>&gt;= 5.0.5</option><option>&gt;= 5.0.4</option><option>&gt;= 5.0.3</option>
+                                <option>&gt;= 5.0.2</option><option>&gt;= 5.0.1</option><option>&gt;= 5.0.0</option>
+                                <option>&gt;= 4.9.3</option><option>&gt;= 4.9.2</option><option>&gt;= 4.9.1</option>
+                                <option>&gt;= 4.9.0</option><option>&gt;= 4.8.5</option><option>&gt;= 4.8.4</option>
+                                <option>&gt;= 4.8.3</option><option>&gt;= 4.8.2</option><option>&gt;= 4.8.1</option>
+                                <option>&gt;= 4.8.0</option><option>&gt;= 4.7.5</option><option>&gt;= 4.7.4</option>
+                                <option>&gt;= 4.7.3</option><option>&gt;= 4.7.2</option><option>&gt;= 4.7.1</option>
+                                <option>&gt;= 4.7.0</option><option>&gt;= 4.6.2</option><option>&gt;= 4.6.1</option>
+                                <option>&gt;= 4.6.0</option><option>&gt;= 4.5.4</option><option>&gt;= 4.5.3</option>
+                                <option>&gt;= 4.5.2</option><option>&gt;= 4.5.1</option><option>&gt;= 4.5.0</option>
+                                <option>&gt;= 4.4.2</option><option>&gt;= 4.4.1</option><option>&gt;= 4.4.0</option>
+                                <option>&gt;= 4.3.2</option><option>&gt;= 4.3.0</option>
                             </select>
                         </div>
                         <div>
                             <label style="font-size:0.72rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; display:block; margin-bottom:6px;">License *</label>
                             <select id="cf-license" required style="width:100%; padding:10px 14px; border-radius:10px; border:1px solid var(--border); background:var(--surface); color:var(--text-main); font-family:inherit; font-size:0.9rem; outline:none; cursor:pointer;">
-                                <option value="" disabled selected>Select license…</option>
+                                <option value="" disabled selected>Select license&hellip;</option>
                                 <option>MIT License</option>
                                 <option>Apache License 2.0</option>
                                 <option>GNU General Public License v3.0 (GPL-3.0)</option>
@@ -557,19 +367,11 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 PegasusHub. Maintained by the pegasus-wms team · ISI-USC.</p>
+        <p>&copy; 2026 PegasusHub. Maintained by the pegasus-wms team &middot; ISI-USC.</p>
     </footer>
 
+    <script src="../assets/js/main.js"></script>
     <script>
-        function toggleTheme() {
-            document.body.classList.toggle('light-mode');
-            const icon = document.querySelector('.theme-toggle i');
-            const mode = document.body.classList.contains('light-mode') ? 'light' : 'dark';
-            localStorage.setItem('theme', mode);
-            icon.className = mode === 'light' ? 'fas fa-sun' : 'fas fa-moon';
-        }
-        if (localStorage.getItem('theme') === 'light') toggleTheme();
-
         // Close modal on backdrop click
         document.getElementById('contribute-modal').addEventListener('click', function(e) {
             if (e.target === this) this.style.display = 'none';
@@ -579,17 +381,10 @@
         document.getElementById('contribute-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const v = id => document.getElementById(id).value.trim();
-            const name        = v('cf-name');
-            const topic       = v('cf-topic');
-            const owner       = v('cf-owner');
-            const repo        = v('cf-repo');
-            const version     = v('cf-version');
-            const license     = v('cf-license');
-            const date        = v('cf-date');
-            const image       = v('cf-image');
-            const desc        = v('cf-desc');
-            const files       = v('cf-files');
-            const run         = v('cf-run');
+            const name    = v('cf-name'),  topic   = v('cf-topic'), owner = v('cf-owner');
+            const repo    = v('cf-repo'),  version = v('cf-version'), license = v('cf-license');
+            const date    = v('cf-date'),  image   = v('cf-image'), desc = v('cf-desc');
+            const files   = v('cf-files'), run     = v('cf-run');
 
             const body = [
                 `### Workflow Name\n\n${name}`,
@@ -609,37 +404,26 @@
             window.open(url, '_blank');
         });
 
-        // Active nav link on click
+        // Active nav scroll spy
         const navRun = document.getElementById('nav-run');
         const navContribute = document.getElementById('nav-contribute');
 
-        navRun.addEventListener('click', () => {
-            navRun.classList.add('active');
-            navContribute.classList.remove('active');
-        });
+        navRun.addEventListener('click', () => { navRun.classList.add('active'); navContribute.classList.remove('active'); });
+        navContribute.addEventListener('click', () => { navContribute.classList.add('active'); navRun.classList.remove('active'); });
 
-        navContribute.addEventListener('click', () => {
-            navContribute.classList.add('active');
-            navRun.classList.remove('active');
-        });
-
-        // Set active nav based on URL hash on load
         if (window.location.hash === '#contribute') {
             navContribute.classList.add('active');
         } else {
             navRun.classList.add('active');
         }
 
-        // Scroll spy: swap active nav as sections enter viewport
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) return;
                 if (entry.target.id === 'contribute') {
-                    navContribute.classList.add('active');
-                    navRun.classList.remove('active');
+                    navContribute.classList.add('active'); navRun.classList.remove('active');
                 } else if (entry.target.id === 'run') {
-                    navRun.classList.add('active');
-                    navContribute.classList.remove('active');
+                    navRun.classList.add('active'); navContribute.classList.remove('active');
                 }
             });
         }, { rootMargin: '-100px 0px -40% 0px', threshold: 0 });

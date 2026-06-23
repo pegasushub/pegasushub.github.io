@@ -115,7 +115,7 @@
       "level": "beginner",
       "time": "15 min",
       "icon": "fa-laptop-code",
-      "url": "modules/pegasus.html"
+      "url": "../modules/module.html?module=pegasus"
     },
     {
       "id": "diamond-workflow",
@@ -124,7 +124,7 @@
       "level": "beginner",
       "time": "15 min",
       "icon": "fa-gem",
-      "url": "modules/diamond.html"
+      "url": "../modules/module.html?module=diamond"
     },
     {
       "id": "split-workflow",
@@ -133,7 +133,7 @@
       "level": "beginner",
       "time": "25 min",
       "icon": "fa-cut",
-      "url": "modules/split.html"
+      "url": "../modules/module.html?module=split"
     }
   ],
 
@@ -145,7 +145,7 @@
       "level": "advanced",
       "time": "45 min",
       "icon": "fa-sitemap",
-      "url": "modules/hwf.html"
+      "url": "../modules/module.html?module=hwf"
     },
     {
       "id": "ensemble-manager",

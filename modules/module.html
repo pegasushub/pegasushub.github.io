@@ -1,0 +1,352 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>PegasusHub | Module</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #020617;
+            --surface: #0f172a;
+            --border: rgba(148, 163, 184, 0.2);
+            --primary: #22d3ee;
+            --primary-glow: rgba(34, 211, 238, 0.3);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --glass: rgba(15, 23, 42, 0.9);
+            --code-bg: #010409;
+            --success: #10b981;
+            --code-text: #e2e8f0;
+            --syn-keyword: #c678dd;
+            --syn-func: #61afef;
+            --syn-string: #98c379;
+            --syn-comment: #5c6370;
+            --syn-class: #e5c07b;
+        }
+        body.light-mode {
+            --bg: #f8fafc; --surface: #ffffff; --border: #cbd5e1;
+            --primary: #0284c7; --primary-glow: rgba(8, 145, 178, 0.15);
+            --text-main: #0f172a; --text-muted: #64748b; --glass: rgba(255, 255, 255, 0.9);
+            --code-bg: #f1f5f9; --success: #059669;
+            --code-text: #383a42;
+            --syn-keyword: #a626a4; --syn-func: #4078f2; --syn-string: #50a14f;
+            --syn-comment: #a0a1a7; --syn-class: #c18401;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg); color: var(--text-main);
+            line-height: 1.7; transition: background 0.3s, color 0.3s;
+            animation: pageFadeIn 0.4s ease forwards;
+        }
+        @keyframes pageFadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+        /* NAV */
+        nav {
+            height: 80px; display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%; position: sticky; top: 0; background: var(--glass);
+            backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 1000;
+        }
+        .logo { font-weight: 800; font-size: 1.3rem; text-decoration: none; color: var(--text-main); letter-spacing: -1px; display: flex; align-items: center; gap: 10px; }
+        .logo i, .logo span { color: var(--primary); }
+        .theme-toggle {
+            background: var(--surface); border: 1px solid var(--border); color: var(--text-main);
+            width: 45px; height: 45px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+        }
+
+        /* HERO */
+        .hero { padding: 80px 5% 60px; background: radial-gradient(circle at 50% -20%, var(--primary-glow), transparent); }
+        .breadcrumb { font-size: 0.75rem; color: var(--primary); text-transform: uppercase; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 15px; }
+        .hero h1 { font-size: clamp(2.5rem, 5vw, 3.8rem); font-weight: 800; letter-spacing: -2px; margin-bottom: 20px; line-height: 1.1; }
+        .hero p { font-size: 1.15rem; color: var(--text-muted); max-width: 800px; }
+
+        /* LAYOUT */
+        .container { display: grid; grid-template-columns: 350px 1fr; gap: 50px; padding: 0 5% 100px; max-width: 1500px; margin: 0 auto; }
+
+        /* SIDEBAR */
+        .sidebar { display: flex; flex-direction: column; gap: 30px; }
+        .sidebar-card {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 24px;
+            padding: 30px; position: sticky; top: 120px;
+        }
+        .sidebar-card h4 { font-size: 0.85rem; margin-bottom: 20px; color: var(--primary); text-transform: uppercase; font-weight: 800; letter-spacing: 1px; }
+        .topic-item {
+            padding: 15px 0; border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; gap: 15px; font-size: 0.95rem; font-weight: 600;
+            text-decoration: none; color: var(--text-main); transition: 0.2s;
+        }
+        .topic-item:hover { color: var(--primary); padding-left: 5px; }
+        .topic-item i { color: var(--primary); font-size: 1.1rem; width: 20px; text-align: center; }
+        .topic-item.active { color: var(--primary) !important; padding-left: 10px !important; }
+        .tech-stack { margin-top: 30px; background: var(--code-bg); padding: 20px; border-radius: 16px; border: 1px solid var(--border); font-size: 0.85rem; }
+        .tech-stack span { color: var(--primary); font-weight: 800; display: block; margin-bottom: 10px; }
+
+        /* CONTENT BOX */
+        .content-box { background: var(--surface); border: 1px solid var(--border); border-radius: 32px; padding: 48px !important; }
+
+        /* SECTION TITLES */
+        .section-title {
+            font-size: 1.9rem !important; font-weight: 800 !important; letter-spacing: -1px !important;
+            margin: 2em 0 0.6em !important;
+            background: linear-gradient(135deg, var(--primary) 0%, #818cf8 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            padding-bottom: 0.5em !important; border-bottom: 1px solid var(--border) !important;
+            scroll-margin-top: 100px;
+        }
+        .section-title:first-child { margin-top: 0 !important; }
+
+        /* H3 */
+        .content-box h3 {
+            font-size: 0.8rem; font-weight: 700; letter-spacing: 1.5px;
+            margin: 1.8em 0 0.6em; color: var(--primary); text-transform: uppercase;
+        }
+        .highlight-box h3 {
+            font-size: 1.1rem !important; font-weight: 800 !important;
+            text-transform: none !important; letter-spacing: 0 !important;
+            color: var(--primary) !important; -webkit-text-fill-color: var(--primary) !important;
+        }
+
+        /* BODY TEXT */
+        .content-box p { color: var(--text-muted) !important; font-size: 1rem !important; line-height: 1.85 !important; margin-bottom: 1em !important; }
+        .content-box strong, .content-box b { color: var(--text-main); }
+        .content-box em, .content-box i:not(.fas):not(.fab):not(.far) { color: var(--primary); font-style: italic; }
+
+        /* UNORDERED LISTS */
+        .content-box ul { list-style: none !important; padding-left: 0 !important; margin-bottom: 1.2em; }
+        .content-box ul li { padding: 5px 0 5px 24px; position: relative; color: var(--text-muted); line-height: 1.75; font-size: 1rem; }
+        .content-box ul li::before { content: ''; position: absolute; left: 6px; top: 14px; width: 7px; height: 7px; border-radius: 50%; background: var(--primary); opacity: 0.7; }
+
+        /* ORDERED LISTS → card grid */
+        .content-box ol { list-style: none !important; padding: 0 !important; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-bottom: 1.4em; counter-reset: ol-counter; }
+        .content-box ol li { counter-increment: ol-counter; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 20px 20px 20px 62px; position: relative; color: var(--text-muted); line-height: 1.7; font-size: 0.96rem; transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
+        .content-box ol li:hover { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-glow), 0 8px 24px rgba(0,0,0,0.15); transform: translateY(-2px); }
+        .content-box ol li::before { content: counter(ol-counter); position: absolute; left: 18px; top: 18px; width: 30px; height: 30px; border-radius: 8px; background: var(--primary-glow); border: 1px solid var(--primary); color: var(--primary); font-size: 0.75rem; font-weight: 800; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; }
+
+        /* INLINE CODE */
+        .content-box p code, .content-box li code { font-family: 'JetBrains Mono', monospace; background: var(--surface) !important; color: var(--primary) !important; padding: 2px 7px; border-radius: 5px; font-size: 0.83em; border: 1px solid var(--border); }
+
+        /* SVG */
+        .svg-graphic { width: 100%; max-width: 800px; margin: 40px auto; display: block; border-radius: 16px; border: 1px solid var(--border); box-shadow: 0 10px 30px rgba(0,0,0,0.1); background: var(--code-bg); }
+
+        /* TABS */
+        .tab-system { margin: 40px 0; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+        .tab-nav { display: flex; background: var(--surface); border-bottom: 1px solid var(--border); }
+        .tab-btn { flex: 1; padding: 15px 20px; background: transparent; border: none; border-right: 1px solid var(--border); color: var(--text-muted); cursor: pointer; font-weight: 700; font-size: 0.9rem; transition: 0.2s; }
+        .tab-btn:last-child { border-right: none; }
+        .tab-btn:hover { background: rgba(255,255,255,0.05); }
+        .tab-btn.active { background: var(--code-bg); color: var(--primary); box-shadow: inset 0 3px 0 var(--primary); }
+        .code-container { background: var(--code-bg); padding: 30px; }
+        pre { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; overflow-x: auto; color: var(--code-text); line-height: 1.6; }
+
+        /* CODE BLOCKS */
+        .content-box pre { background: var(--code-bg); border-radius: 12px; border: 1px solid var(--border); padding: 24px; margin: 1.4em 0; }
+        .content-box pre code { background: none !important; color: var(--code-text) !important; padding: 0; border: none; font-size: 0.85rem; }
+
+        /* Highlight.js — mapped to existing CSS variable palette */
+        .hljs { background: transparent !important; color: var(--code-text) !important; }
+        .hljs-keyword, .hljs-operator, .hljs-selector-tag { color: var(--syn-keyword); }
+        .hljs-title.function_, .hljs-title, .hljs-built_in { color: var(--syn-func); }
+        .hljs-string, .hljs-number, .hljs-literal { color: var(--syn-string); }
+        .hljs-comment, .hljs-quote { color: var(--syn-comment); font-style: italic; }
+        .hljs-title.class_, .hljs-class .hljs-title, .hljs-type { color: var(--syn-class); }
+
+        /* HIGHLIGHT BOX */
+        .highlight-box { border-left: 3px solid var(--primary) !important; border-radius: 0 12px 12px 0 !important; padding: 20px 24px !important; margin: 1.6em 0 !important; background: var(--primary-glow) !important; }
+        .highlight-box ul li { color: var(--text-muted); }
+        .highlight-box ul li::before { background: var(--primary); }
+
+        /* COPY BUTTON */
+        .code-wrap { position: relative; }
+        .copy-btn { position: absolute; top: 10px; right: 12px; z-index: 10; background: var(--surface); border: 1px solid var(--border); color: var(--text-muted); font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 6px; cursor: pointer; font-family: inherit; display: flex; align-items: center; gap: 5px; opacity: 0; transition: opacity 0.2s, color 0.2s, border-color 0.2s; }
+        .code-wrap:hover .copy-btn { opacity: 1; }
+        .copy-btn:hover { color: var(--primary); border-color: var(--primary); }
+        .copy-btn.copied { color: #4ade80; border-color: #4ade80; }
+
+        /* PROGRESS BAR */
+        .progress-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--primary), #818cf8); z-index: 9999; transition: width 0.1s linear; box-shadow: 0 0 8px var(--primary); }
+
+        /* BACK TO TOP */
+        #back-top { position:fixed; bottom:32px; right:32px; width:40px; height:40px; border-radius:50%; background:var(--primary); color:#000; border:none; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:0.9rem; opacity:0; transform:translateY(10px); transition:all 0.3s; z-index:999; box-shadow:0 4px 20px rgba(0,0,0,0.2); }
+        #back-top.visible { opacity:1; transform:translateY(0); }
+
+        @media (max-width: 1100px) { .container { grid-template-columns: 1fr; } .sidebar { display: none; } .content-box { padding: 30px !important; } }
+    </style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress-bar"></div>
+
+<nav>
+    <a href="../index.html" class="logo"><i class="fas fa-layer-group"></i> PEGASUS<span>HUB</span></a>
+    <div style="display: flex; gap: 20px; align-items: center;">
+        <a href="../pages/academy.html" style="display:flex;align-items:center;gap:8px;color:var(--text-muted);text-decoration:none;font-size:0.82rem;font-weight:700;padding:8px 16px;border:1px solid var(--border);border-radius:10px;transition:0.2s;" onmouseover="this.style.color='var(--primary)';this.style.borderColor='var(--primary)'" onmouseout="this.style.color='var(--text-muted)';this.style.borderColor='var(--border)'"><i class="fas fa-arrow-left"></i> Academy</a>
+        <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon"></i></button>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="breadcrumb" id="hero-breadcrumb"></div>
+    <h1 id="hero-h1"></h1>
+    <p id="hero-desc"></p>
+</header>
+
+<div class="container">
+    <aside class="sidebar">
+        <div class="sidebar-card">
+            <h4>Table of Contents</h4>
+            <div class="topic-list" id="toc-list"></div>
+            <div class="tech-stack" id="tech-stack"></div>
+        </div>
+    </aside>
+    <main>
+        <div class="content-box" id="content-box">
+            <p style="color:var(--text-muted);text-align:center;padding:60px 0;font-size:1rem;">Loading module...</p>
+        </div>
+    </main>
+</div>
+
+<footer>
+    <div style="text-align: center; padding: 60px; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--border);">
+        &copy; 2026 PegasusHub &bull; pegasus-wms team &middot; ISI-USC
+    </div>
+</footer>
+
+<button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdn.jsdelivr.net/npm/marked@4/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>
+    const moduleId = new URLSearchParams(window.location.search).get('module') || 'diamond';
+
+    async function loadModule() {
+        try {
+            const [cfgRes, mdRes] = await Promise.all([
+                fetch('../assets/data/modules/config.json'),
+                fetch('../assets/data/modules/' + moduleId + '.md')
+            ]);
+            if (!cfgRes.ok || !mdRes.ok) throw new Error('fetch failed');
+
+            const cfg    = await cfgRes.json();
+            const mdText = await mdRes.text();
+            const meta   = cfg[moduleId];
+
+            if (!meta) {
+                document.getElementById('content-box').innerHTML =
+                    '<p style="color:var(--text-muted);text-align:center;padding:60px 0">Module not found.</p>';
+                return;
+            }
+
+            // Page metadata
+            document.title = meta.title;
+            document.getElementById('hero-breadcrumb').textContent = meta.breadcrumb;
+            document.getElementById('hero-h1').textContent         = meta.h1;
+            document.getElementById('hero-desc').textContent       = meta.description;
+
+            // TOC
+            document.getElementById('toc-list').innerHTML = meta.toc.map(function(t) {
+                return '<a href="' + t.href + '" class="topic-item"><i class="' + t.icon + '"></i> ' + t.label + '</a>';
+            }).join('');
+
+            // Tech stack
+            document.getElementById('tech-stack').innerHTML =
+                '<span><i class="' + meta.stackIcon + '"></i> ' + meta.stackTitle + '</span>' +
+                meta.stack.join('<br>');
+
+            // Markdown → HTML
+            var secN = 0;
+            var renderer = new marked.Renderer();
+            renderer.heading = function(text, level) {
+                if (level === 2) {
+                    secN++;
+                    var mt = secN === 1 ? ' style="margin-top:0"' : '';
+                    return '<h2 class="section-title" id="sec' + secN + '"' + mt + '>' + text + '</h2>\n';
+                }
+                return '<h' + level + '>' + text + '</h' + level + '>\n';
+            };
+            marked.use({ renderer: renderer });
+            document.getElementById('content-box').innerHTML = marked.parse(mdText);
+            document.querySelectorAll('#content-box pre code').forEach(function(block) {
+                hljs.highlightElement(block);
+            });
+
+        } catch (e) {
+            document.getElementById('content-box').innerHTML =
+                '<p style="color:var(--text-muted);text-align:center;padding:60px 0">Failed to load module content.</p>';
+        }
+
+        addCopyButtons();
+        initActiveTOC();
+    }
+
+    function switchTab(e, tabId) {
+        var system = e.currentTarget.closest('.tab-system');
+        system.querySelectorAll('.tab-content').forEach(function(c) { c.style.display = 'none'; });
+        system.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+        document.getElementById(tabId).style.display = 'block';
+        e.currentTarget.classList.add('active');
+    }
+
+    function toggleTheme() {
+        var isLight = document.body.classList.toggle('light-mode');
+        localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        document.querySelector('.theme-toggle i').className = isLight ? 'fas fa-sun' : 'fas fa-moon';
+    }
+
+    window.onload = async function() {
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-mode');
+            document.querySelector('.theme-toggle i').className = 'fas fa-sun';
+        }
+        await loadModule();
+    };
+
+    window.addEventListener('scroll', function() {
+        var scrollTop  = window.scrollY;
+        var docHeight  = document.documentElement.scrollHeight - window.innerHeight;
+        var pct        = docHeight > 0 ? (scrollTop / docHeight * 100) : 0;
+        document.getElementById('progress-bar').style.width = pct + '%';
+        document.getElementById('back-top').classList.toggle('visible', scrollTop > 300);
+    }, { passive: true });
+
+    function addCopyButtons() {
+        document.querySelectorAll('pre').forEach(function(pre) {
+            if (pre.closest('.code-wrap')) return;
+            var wrap = document.createElement('div');
+            wrap.className = 'code-wrap';
+            wrap.style.position = 'relative';
+            pre.parentNode.insertBefore(wrap, pre);
+            wrap.appendChild(pre);
+            var btn = document.createElement('button');
+            btn.className = 'copy-btn';
+            btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+            btn.onclick = function() {
+                navigator.clipboard.writeText(pre.innerText).then(function() {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Copied';
+                    btn.classList.add('copied');
+                    setTimeout(function() {
+                        btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            };
+            wrap.appendChild(btn);
+        });
+    }
+
+    function initActiveTOC() {
+        var sections = document.querySelectorAll('[id^="sec"]');
+        var tocItems = document.querySelectorAll('.topic-item');
+        if (!sections.length || !tocItems.length) return;
+        window.addEventListener('scroll', function() {
+            var current = 0;
+            sections.forEach(function(s, i) { if (s.getBoundingClientRect().top <= 120) current = i; });
+            tocItems.forEach(function(t, i) { t.classList.toggle('active', i === current); });
+        }, { passive: true });
+    }
+</script>
+</body>
+</html>
