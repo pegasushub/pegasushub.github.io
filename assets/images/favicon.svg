@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <rect width="32" height="32" rx="6" fill="#020617"/>
+  <!-- Layer group icon (fa-layer-group) -->
+  <g fill="#22d3ee">
+    <path d="M16 6L4 11.5l12 5.5 12-5.5L16 6z"/>
+    <path d="M4 16.5l12 5.5 12-5.5" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round"/>
+    <path d="M4 21l12 5.5 12-5.5" fill="none" stroke="#22d3ee" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+  </g>
+</svg>
